@@ -1238,6 +1238,9 @@ export default function SubscriptionPurchase() {
                               <button
                                 type="button"
                                 onClick={() => setUseCustomDays(!useCustomDays)}
+                                role="switch"
+                                aria-checked={useCustomDays}
+                                aria-label={t('subscription.customDays.title')}
                                 className={`relative h-6 w-10 rounded-full transition-colors ${
                                   useCustomDays ? 'bg-accent-500' : 'bg-dark-600'
                                 }`}
@@ -1346,6 +1349,9 @@ export default function SubscriptionPurchase() {
                               <button
                                 type="button"
                                 onClick={() => setUseCustomTraffic(!useCustomTraffic)}
+                                role="switch"
+                                aria-checked={useCustomTraffic}
+                                aria-label={t('subscription.customTraffic.selectVolume')}
                                 className={`relative h-6 w-10 rounded-full transition-colors ${
                                   useCustomTraffic ? 'bg-accent-500' : 'bg-dark-600'
                                 }`}
