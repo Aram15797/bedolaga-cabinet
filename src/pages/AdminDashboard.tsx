@@ -1,15 +1,8 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import {
-  statsApi,
-  type DashboardStats,
-  type NodeStatus,
-  type SystemInfo,
-  type TopReferrersResponse,
-  type TopCampaignsResponse,
-  type RecentPaymentsResponse,
-} from '../api/admin';
+import { useQuery } from '@tanstack/react-query';
+import { statsApi, type NodeStatus } from '../api/admin';
 import { formatUptime } from '../utils/format';
 
 const CABINET_VERSION = __APP_VERSION__;
@@ -370,67 +363,45 @@ export default function AdminDashboard() {
   const { formatAmount, currencySymbol } = useCurrency();
   const { capabilities } = usePlatform();
 
-  const [stats, setStats] = useState<DashboardStats | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [actionLoading, setActionLoading] = useState<string | null>(null);
   const [showAllNodes, setShowAllNodes] = useState(false);
-
-  // Extended stats
-  const [referrers, setReferrers] = useState<TopReferrersResponse | null>(null);
-  const [campaigns, setCampaigns] = useState<TopCampaignsResponse | null>(null);
-  const [payments, setPayments] = useState<RecentPaymentsResponse | null>(null);
   const [referrersTab, setReferrersTab] = useState<'earnings' | 'invited'>('earnings');
-  const [systemInfo, setSystemInfo] = useState<SystemInfo | null>(null);
 
-  const fetchStats = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const data = await statsApi.getDashboardStats();
-      setStats(data);
-    } catch (err) {
-      setError(t('adminDashboard.loadError'));
-      console.error('Failed to load dashboard stats:', err);
-    } finally {
-      setLoading(false);
-    }
-  }, [t]);
+  // Data fetching via React Query: caching, dedupe, and auto-refetch every 30s
+  // (replaces the manual setInterval + useState + console.error pattern).
+  const statsQuery = useQuery({
+    queryKey: ['admin-dashboard-stats'] as const,
+    queryFn: () => statsApi.getDashboardStats(),
+    refetchInterval: 30_000,
+  });
+  const stats = statsQuery.data ?? null;
+  const loading = statsQuery.isLoading;
+  const error = statsQuery.isError ? t('adminDashboard.loadError') : null;
 
-  const fetchExtendedStats = useCallback(async () => {
-    try {
-      const [referrersData, campaignsData, paymentsData, sysInfoData] = await Promise.all([
+  const extendedQuery = useQuery({
+    queryKey: ['admin-dashboard-extended'] as const,
+    queryFn: async () => {
+      const [topReferrers, topCampaigns, recentPayments, sysInfo] = await Promise.all([
         statsApi.getTopReferrers(10),
         statsApi.getTopCampaigns(10),
         statsApi.getRecentPayments(20),
         statsApi.getSystemInfo(),
       ]);
-      setReferrers(referrersData);
-      setCampaigns(campaignsData);
-      setPayments(paymentsData);
-      setSystemInfo(sysInfoData);
-    } catch (err) {
-      console.error('Failed to load extended stats:', err);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchStats();
-    fetchExtendedStats();
-    // Refresh every 30 seconds
-    const interval = setInterval(() => {
-      fetchStats();
-      fetchExtendedStats();
-    }, 30000);
-    return () => clearInterval(interval);
-  }, [fetchStats, fetchExtendedStats]);
+      return { topReferrers, topCampaigns, recentPayments, sysInfo };
+    },
+    refetchInterval: 30_000,
+  });
+  const referrers = extendedQuery.data?.topReferrers ?? null;
+  const campaigns = extendedQuery.data?.topCampaigns ?? null;
+  const payments = extendedQuery.data?.recentPayments ?? null;
+  const systemInfo = extendedQuery.data?.sysInfo ?? null;
 
   const handleRestartNode = async (uuid: string) => {
     try {
       setActionLoading(uuid);
       await statsApi.restartNode(uuid);
       // Refresh stats after action
-      setTimeout(fetchStats, 2000);
+      setTimeout(() => statsQuery.refetch(), 2000);
     } catch (err) {
       console.error('Failed to restart node:', err);
     } finally {
@@ -442,7 +413,7 @@ export default function AdminDashboard() {
     try {
       setActionLoading(uuid);
       await statsApi.toggleNode(uuid);
-      await fetchStats();
+      await statsQuery.refetch();
     } catch (err) {
       console.error('Failed to toggle node:', err);
     } finally {
@@ -462,7 +433,7 @@ export default function AdminDashboard() {
     return (
       <div className="flex h-64 flex-col items-center justify-center gap-4">
         <div className="text-error-400">{error}</div>
-        <button onClick={fetchStats} className="btn-primary">
+        <button onClick={() => statsQuery.refetch()} className="btn-primary">
           {t('common.loading')}
         </button>
       </div>
@@ -489,7 +460,7 @@ export default function AdminDashboard() {
           </div>
         </div>
         <button
-          onClick={fetchStats}
+          onClick={() => statsQuery.refetch()}
           disabled={loading}
           className="flex items-center gap-2 rounded-lg bg-dark-800 px-4 py-2 text-dark-300 transition-colors hover:bg-dark-700 hover:text-dark-100 disabled:opacity-50"
         >
