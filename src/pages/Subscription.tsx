@@ -17,7 +17,7 @@ import InsufficientBalancePrompt from '../components/InsufficientBalancePrompt';
 import { useCurrency } from '../hooks/useCurrency';
 import { useCloseOnSuccessNotification } from '../store/successNotification';
 import PurchaseCTAButton from '../components/subscription/PurchaseCTAButton';
-import { CopyIcon, CheckIcon } from '../components/icons';
+import { CopyIcon, CheckIcon, PauseIcon } from '../components/icons';
 import { useHaptic } from '../platform';
 import { resolveConnectionUrlForUi } from '../utils/connectionLink';
 import {
@@ -1240,9 +1240,10 @@ export default function Subscription() {
               }}
             >
               <div className="flex items-start gap-3">
-                <div className="text-lg" style={{ color: 'rgb(var(--color-urgent-400))' }}>
-                  ⏸️
-                </div>
+                <PauseIcon
+                  className="h-5 w-5 shrink-0"
+                  style={{ color: 'rgb(var(--color-urgent-400))' }}
+                />
                 <div>
                   <div
                     className="text-sm font-semibold"
