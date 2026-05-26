@@ -1023,6 +1023,7 @@ export default function Subscription() {
                         : `1px solid ${g.trackBg}`,
                       color: copied ? 'rgb(var(--color-accent-400))' : g.textMuted,
                     }}
+                    aria-label={t('subscription.copyLink')}
                     title={t('subscription.copyLink')}
                   >
                     {copied ? <CheckIcon /> : <CopyIcon />}
