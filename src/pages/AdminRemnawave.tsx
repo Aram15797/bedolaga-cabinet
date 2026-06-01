@@ -156,8 +156,8 @@ function NodeTrafficBreakdown({
             key={it.tag}
             className="flex items-center justify-between gap-3 rounded-lg bg-dark-900/50 px-2.5 py-1.5"
           >
-            <span className="truncate text-xs text-dark-200">{it.tag}</span>
-            <div className="flex shrink-0 gap-3 font-mono text-[11px] text-dark-400">
+            <span className="min-w-0 flex-1 truncate text-xs text-dark-200">{it.tag}</span>
+            <div className="flex shrink-0 gap-2.5 font-mono text-[11px] text-dark-400">
               <span>↓ {formatBytes(it.downloadBytes)}</span>
               <span>↑ {formatBytes(it.uploadBytes)}</span>
               <span className="font-medium text-dark-300">{formatBytes(it.totalBytes)}</span>
