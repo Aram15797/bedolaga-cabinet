@@ -24,7 +24,7 @@ export default function StatsGrid({
 
   return (
     <div className="grid grid-cols-2 gap-2.5">
-      <Link to="/balance" className="block" data-onboarding="balance">
+      <Link to="/balance" className="block h-full" data-onboarding="balance">
         <StatCard
           label={t('dashboard.stats.balance')}
           value={`${formatAmount(balanceRubles)} ${currencySymbol}`}
@@ -33,7 +33,7 @@ export default function StatsGrid({
           trailing={chevron}
         />
       </Link>
-      <Link to="/referral" className="block">
+      <Link to="/referral" className="block h-full">
         <StatCard
           label={t('dashboard.stats.referrals')}
           value={`${referralCount}`}
