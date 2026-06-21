@@ -75,6 +75,7 @@ export interface UserListItem {
   has_restrictions: boolean;
   restriction_topup: boolean;
   restriction_subscription: boolean;
+  is_recurrent: boolean;
   subscriptions?: UserListItemSubscription[];
 }
 
