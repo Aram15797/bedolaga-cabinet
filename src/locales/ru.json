@@ -3637,6 +3637,7 @@
         "total": "Всего",
         "active": "Активных",
         "withSubscription": "С подпиской",
+        "recurrentUsers": "С привязанной картой",
         "newToday": "Новых сегодня",
         "blocked": "Заблокировано"
       },
@@ -3650,6 +3651,9 @@
       },
       "filters": {
         "allStatuses": "Все статусы",
+        "allCards": "Все пользователи",
+        "hasCard": "С привязанной картой",
+        "noCard": "Без привязанной карты",
         "byDate": "По дате",
         "byBalance": "По балансу",
         "byActivity": "По активности",
@@ -3720,6 +3724,7 @@
         "firstConnection": "Первое подключение",
         "online": "Онлайн",
         "noVpnData": "Нет данных о подключении",
+        "recurrentCards": "Привязанные карты",
         "requestHistory": "История запросов подписки",
         "requestHistoryTotal": "Всего запросов",
         "requestAt": "Дата",

@@ -18,6 +18,7 @@ import {
   SubscriptionIcon,
   UserPlusIcon,
   BanIcon,
+  CreditCardIcon,
 } from '@/components/icons';
 
 function StatusBadge({ status }: { status: string }) {
@@ -95,6 +96,12 @@ function UserRow({ user, onClick, formatAmount }: UserRowProps) {
                     : t('admin.users.status.expired')}
             </span>
           )}
+          {user.is_recurrent && (
+            <span className="flex items-center gap-1 rounded-full border border-accent-500/30 bg-accent-500/20 px-2 py-0.5 text-xs text-accent-400">
+              <CreditCardIcon className="h-3.5 w-3.5" />
+              {t('admin.users.filters.hasCard')}
+            </span>
+          )}
         </div>
       </div>
 
@@ -124,18 +131,20 @@ export default function AdminUsers() {
   const [search, setSearch] = useState('');
   const [emailSearch, setEmailSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('');
+  const [recurrentFilter, setRecurrentFilter] = useState<string>('');
   const [sortBy, setSortBy] = useState<string>('created_at');
   const [offset, setOffset] = useState(0);
 
   const limit = 20;
 
   const usersQuery = useQuery({
-    queryKey: ['admin-users', offset, limit, sortBy, search, emailSearch, statusFilter] as const,
+    queryKey: ['admin-users', offset, limit, sortBy, search, emailSearch, statusFilter, recurrentFilter] as const,
     queryFn: () => {
       const params: Record<string, unknown> = { offset, limit, sort_by: sortBy };
       if (search) params.search = search;
       if (emailSearch) params.email = emailSearch;
       if (statusFilter) params.status = statusFilter;
+      if (recurrentFilter) params.is_recurrent = recurrentFilter === 'true';
       return adminUsersApi.getUsers(params as Parameters<typeof adminUsersApi.getUsers>[0]);
     },
   });
@@ -188,7 +197,7 @@ export default function AdminUsers() {
 
       {/* Stats */}
       {stats && (
-        <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
           <StatCard
             label={t('admin.users.stats.total')}
             value={stats.total_users}
@@ -212,6 +221,12 @@ export default function AdminUsers() {
             value={stats.new_today}
             icon={<UserPlusIcon className="h-5 w-5" />}
             tone="warning"
+          />
+          <StatCard
+            label={t('admin.users.stats.recurrentUsers')}
+            value={stats.recurrent_users_count ?? 0}
+            icon={<CreditCardIcon className="h-5 w-5" />}
+            tone="accent"
           />
           <StatCard
             label={t('admin.users.stats.blocked')}
@@ -275,6 +290,18 @@ export default function AdminUsers() {
             <option value="active">{t('admin.users.status.active')}</option>
             <option value="blocked">{t('admin.users.status.blocked')}</option>
             <option value="deleted">{t('admin.users.status.deleted')}</option>
+          </select>
+          <select
+            value={recurrentFilter}
+            onChange={(e) => {
+              setRecurrentFilter(e.target.value);
+              setOffset(0);
+            }}
+            className="rounded-xl border border-dark-700 bg-dark-800 px-3 py-2 text-dark-100"
+          >
+            <option value="">{t('admin.users.filters.allCards')}</option>
+            <option value="true">{t('admin.users.filters.hasCard')}</option>
+            <option value="false">{t('admin.users.filters.noCard')}</option>
           </select>
           <select
             value={sortBy}

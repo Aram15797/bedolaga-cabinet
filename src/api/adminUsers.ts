@@ -141,6 +141,7 @@ export interface UserDetailResponse {
   promo_offer_discount_expires_at: string | null;
   recent_transactions: UserTransactionItem[];
   remnawave_uuid: string | null;
+  recurrent_cards?: string[];
 }
 
 export interface UserPanelInfo {
@@ -198,6 +199,7 @@ export interface UsersStatsResponse {
   users_with_active_subscription: number;
   users_with_trial: number;
   users_with_expired_subscription: number;
+  recurrent_users_count: number;
   total_balance_kopeks: number;
   total_balance_rubles: number;
   avg_balance_kopeks: number;
@@ -430,6 +432,7 @@ export const adminUsersApi = {
       promo_group_id?: number;
       campaign_id?: number;
       partner_id?: number;
+      is_recurrent?: boolean;
       sort_by?:
         | 'created_at'
         | 'balance'

@@ -3230,6 +3230,7 @@
         "total": "Total",
         "active": "Active",
         "withSubscription": "With subscription",
+        "recurrentUsers": "With recurrent card",
         "newToday": "New today",
         "blocked": "Blocked"
       },
@@ -3243,6 +3244,9 @@
       },
       "filters": {
         "allStatuses": "All statuses",
+        "allCards": "All users",
+        "hasCard": "With recurrent card",
+        "noCard": "Without recurrent card",
         "byDate": "By date",
         "byBalance": "By balance",
         "byActivity": "By activity",
@@ -3313,6 +3317,7 @@
         "firstConnection": "First connection",
         "online": "Online",
         "noVpnData": "No connection data available",
+        "recurrentCards": "Linked recurrent cards",
         "requestHistory": "Subscription request history",
         "requestHistoryTotal": "Total requests",
         "requestAt": "Date",

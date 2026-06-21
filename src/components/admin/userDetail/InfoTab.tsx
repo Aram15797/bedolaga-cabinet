@@ -9,7 +9,7 @@ import type {
   UserSubscriptionInfo,
 } from '../../../api/adminUsers';
 import type { PromoGroup } from '../../../api/promocodes';
-import { ServerIcon } from '@/components/icons';
+import { ServerIcon, CreditCardIcon } from '@/components/icons';
 
 // ──────────────────────────────────────────────────────────────────
 // Local status badge (parent has its own — duplicating here to keep
@@ -273,6 +273,32 @@ export function InfoTab(props: InfoTabProps) {
               {t('admin.users.detail.noVpnData')}
             </div>
           )}
+        </div>
+      )}
+
+      {/* Recurrent Cards */}
+      {user.recurrent_cards && user.recurrent_cards.length > 0 && (
+        <div className="rounded-xl border border-dark-700/30 bg-dark-800/50 p-4">
+          <div className="mb-3 flex items-center gap-2 text-sm font-medium text-dark-200">
+            <CreditCardIcon className="h-4 w-4 text-accent-400" />
+            <span>{t('admin.users.detail.recurrentCards')}</span>
+          </div>
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+            {user.recurrent_cards.map((card, idx) => (
+              <div
+                key={idx}
+                className="flex items-center justify-between rounded-lg bg-dark-700/30 p-3 text-sm text-dark-100"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="text-dark-400">💳</span>
+                  <span className="font-mono">{card}</span>
+                </div>
+                <span className="rounded-full bg-accent-500/10 px-2 py-0.5 text-xs font-medium text-accent-400">
+                  Active
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
