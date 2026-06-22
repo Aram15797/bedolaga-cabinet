@@ -54,7 +54,7 @@ export interface SalesByTariffItem {
 }
 
 export interface SalesByPeriodItem {
-  period_days: number;
+  period_days: string;
   count: number;
 }
 
