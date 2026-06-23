@@ -4048,6 +4048,8 @@
         "linkedCards": "Linked cards",
         "trialCards": "Trial cards (10₽)",
         "regularCards": "Regular cards",
+        "renewalsCount": "Renewals",
+        "renewalsRate": "Renewal Rate",
         "dailyChart": "Purchases & Revenue by Day",
         "tariffChart": "Tariff Distribution",
         "giftBreakdown": "Gifts vs Regular",

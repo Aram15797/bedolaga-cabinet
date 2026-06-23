@@ -425,6 +425,22 @@ export default function AdminLandingStats() {
           />
         </div>
 
+        {/* Renewals Stats */}
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-2">
+          <StatCard
+            label={t('admin.landings.stats.renewalsCount')}
+            value={stats.renewals_count ?? 0}
+            icon={<ArrowRightIcon className="h-5 w-5" />}
+            tone="success"
+          />
+          <StatCard
+            label={t('admin.landings.stats.renewalsRate')}
+            value={`${stats.renewals_rate ?? 0}%`}
+            icon={<PercentIcon className="h-5 w-5" />}
+            tone="accent"
+          />
+        </div>
+
         {/* Funnel + gift activation */}
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           <div className="bento-card">

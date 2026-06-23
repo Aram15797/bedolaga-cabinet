@@ -351,6 +351,8 @@ export interface LandingStatsResponse {
   linked_cards_count?: number;
   trial_cards_count?: number;
   regular_cards_count?: number;
+  renewals_count?: number;
+  renewals_rate?: number;
   total_created: number;
   total_successful: number;
   conversion_rate: number;

@@ -4593,6 +4593,8 @@
         "linkedCards": "Привязанные карты",
         "trialCards": "Пробные (10₽)",
         "regularCards": "Обычные карты",
+        "renewalsCount": "Продления",
+        "renewalsRate": "Процент продлений",
         "dailyChart": "Покупки и доход по дням",
         "tariffChart": "Распределение по тарифам",
         "giftBreakdown": "Подарки vs обычные",
