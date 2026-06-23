@@ -139,7 +139,23 @@ function SortableLandingCard({
                   <span className="ml-1 text-dark-600">
                     {t('admin.landings.stats.paid', 'paid')}
                   </span>
+                  {landing.purchase_stats.active_cards !== undefined && (
+                    <>
+                      <span className="mx-1 text-dark-600">/</span>
+                      <span className="text-accent-400 font-medium">
+                        {landing.purchase_stats.active_cards}
+                      </span>
+                      <span className="ml-1 text-dark-600">
+                        {t('admin.landings.stats.activeCards', 'cards')}
+                      </span>
+                    </>
+                  )}
                 </span>
+                {landing.referrer_id && (
+                  <div className="mt-1 text-xs text-dark-500">
+                    {t('admin.landings.referrer', 'Referrer ID')}: <span className="text-dark-300 font-mono">{landing.referrer_id}</span>
+                  </div>
+                )}
               </div>
             </div>
 

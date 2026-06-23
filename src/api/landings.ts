@@ -194,7 +194,9 @@ export interface LandingListItem {
     pending_activation: number;
     failed: number;
     expired: number;
+    active_cards?: number;
   };
+  referrer_id?: number | null;
   created_at: string | null;
   updated_at: string | null;
   has_active_discount: boolean;
@@ -206,6 +208,7 @@ export interface LandingDetail {
   title: LocaleDict;
   subtitle: LocaleDict | null;
   is_active: boolean;
+  referrer_id?: number | null;
   features: AdminLandingFeature[];
   footer_text: LocaleDict | null;
   allowed_tariff_ids: number[];
@@ -236,6 +239,7 @@ export interface LandingCreateRequest {
   title: LocaleDict;
   subtitle?: LocaleDict;
   is_active?: boolean;
+  referrer_id?: number | null;
   features?: AdminLandingFeature[];
   footer_text?: LocaleDict;
   allowed_tariff_ids?: number[];
