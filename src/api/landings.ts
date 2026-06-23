@@ -348,6 +348,9 @@ export interface LandingStatsResponse {
   total_gifts_claimed: number;
   total_regular: number;
   avg_purchase_kopeks: number;
+  linked_cards_count?: number;
+  trial_cards_count?: number;
+  regular_cards_count?: number;
   total_created: number;
   total_successful: number;
   conversion_rate: number;

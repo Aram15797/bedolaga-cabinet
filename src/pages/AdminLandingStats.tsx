@@ -403,6 +403,28 @@ export default function AdminLandingStats() {
           />
         </div>
 
+        {/* Cards Stats */}
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <StatCard
+            label={t('admin.landings.stats.linkedCards')}
+            value={stats.linked_cards_count ?? 0}
+            icon={<CardIcon className="h-5 w-5" />}
+            tone="accent"
+          />
+          <StatCard
+            label={t('admin.landings.stats.trialCards')}
+            value={stats.trial_cards_count ?? 0}
+            icon={<TicketIcon className="h-5 w-5" />}
+            tone="warning"
+          />
+          <StatCard
+            label={t('admin.landings.stats.regularCards')}
+            value={stats.regular_cards_count ?? 0}
+            icon={<CheckCircleIcon className="h-5 w-5" />}
+            tone="success"
+          />
+        </div>
+
         {/* Funnel + gift activation */}
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           <div className="bento-card">
