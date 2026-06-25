@@ -1367,7 +1367,12 @@
         "currentPeriod": "Current Period",
         "previousPeriod": "Previous Period",
         "dailyChart": "Daily Renewals",
-        "renewals": "Renewals"
+        "renewals": "Renewals",
+        "regularChart": "Regular",
+        "trialsChart": "Trials",
+        "renewalsChart": "Renewals",
+        "dailyBreakdownChart": "Daily Purchases & Renewals",
+        "dailyPercentageChart": "Daily Renewal Rate (%)"
       },
       "addons": {
         "totalPurchases": "Total Purchases",
@@ -4069,7 +4074,13 @@
         "loadError": "Failed to load statistics",
         "noPurchases": "No purchases",
         "paid": "paid",
-        "dailyPurchases": "Purchases per day"
+        "dailyPurchases": "Purchases per day",
+        "dailyPurchaseTypes": "Purchases & renewals",
+        "dailyRenewalRate": "Renewal rate (%)",
+        "renewalRateLabel": "Renewal rate",
+        "regularLabelChart": "Regular",
+        "trialsLabelChart": "Trials",
+        "renewalsLabelChart": "Renewals"
       },
       "purchases": {
         "title": "Purchases",

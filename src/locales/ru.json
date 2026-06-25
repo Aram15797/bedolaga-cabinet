@@ -1389,7 +1389,12 @@
         "currentPeriod": "Текущий период",
         "previousPeriod": "Предыдущий период",
         "dailyChart": "Продления по дням",
-        "renewals": "Продления"
+        "renewals": "Продления",
+        "regularChart": "Обычные",
+        "trialsChart": "Пробные",
+        "renewalsChart": "Продления",
+        "dailyBreakdownChart": "Покупки и продления по дням",
+        "dailyPercentageChart": "Процент продлений по дням (%)"
       },
       "addons": {
         "totalPurchases": "Всего покупок",
@@ -4614,7 +4619,13 @@
         "loadError": "Не удалось загрузить статистику",
         "noPurchases": "Нет покупок",
         "paid": "оплачено",
-        "dailyPurchases": "Покупок в день"
+        "dailyPurchases": "Покупок в день",
+        "dailyPurchaseTypes": "Покупки и продления",
+        "dailyRenewalRate": "Процент продлений (%)",
+        "renewalRateLabel": "Процент продлений",
+        "regularLabelChart": "Обычные",
+        "trialsLabelChart": "Пробные",
+        "renewalsLabelChart": "Продления"
       },
       "purchases": {
         "title": "Покупки",

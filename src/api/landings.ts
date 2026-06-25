@@ -321,6 +321,9 @@ export interface LandingDailyStat {
   purchases: number;
   revenue_kopeks: number;
   gifts: number;
+  trials?: number;
+  regular?: number;
+  renewals?: number;
 }
 
 export interface LandingTariffStat {

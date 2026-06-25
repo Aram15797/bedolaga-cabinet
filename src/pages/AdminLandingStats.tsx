@@ -250,6 +250,29 @@ export default function AdminLandingStats() {
     return stats.daily_stats.map((d) => ({ date: d.date, value: d.revenue_kopeks / divisor }));
   }, [stats, divisor]);
 
+  // Daily purchase types breakdown
+  const dailyPurchaseTypes = useMemo(() => {
+    if (!stats) return [];
+    const regularLabel = t('admin.landings.stats.regularLabelChart', 'Regular');
+    const trialsLabel = t('admin.landings.stats.trialsLabelChart', 'Trials');
+    const renewalsLabel = t('admin.landings.stats.renewalsLabelChart', 'Renewals');
+    return stats.daily_stats.flatMap((d) => [
+      { date: d.date, key: regularLabel, value: d.regular ?? 0 },
+      { date: d.date, key: trialsLabel, value: d.trials ?? 0 },
+      { date: d.date, key: renewalsLabel, value: d.renewals ?? 0 },
+    ]);
+  }, [stats, t]);
+
+  // Daily renewal percentage trend
+  const dailyRenewalPercentage = useMemo(() => {
+    if (!stats) return [];
+    return stats.daily_stats.map((d) => {
+      const total = (d.regular ?? 0) + (d.trials ?? 0) + (d.renewals ?? 0);
+      const rate = total > 0 ? Math.round(((d.renewals ?? 0) / total) * 1000) / 10 : 0;
+      return { date: d.date, value: rate };
+    });
+  }, [stats]);
+
   // Tariff breakdown (by revenue)
   const tariffItems = useMemo(
     () =>
@@ -524,6 +547,22 @@ export default function AdminLandingStats() {
             title={t('admin.landings.stats.dailyRevenue', 'Daily revenue')}
             chartId={`landing-revenue-${numericId}`}
             valueLabel={t('admin.landings.stats.revenueLabel', 'Revenue')}
+          />
+        </div>
+
+        {/* Daily purchase types and renewal rate */}
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          <MultiSeriesAreaChart
+            data={dailyPurchaseTypes}
+            title={t('admin.landings.stats.dailyPurchaseTypes', 'Purchases and renewals')}
+            chartId={`landing-purchase-types-${numericId}`}
+          />
+          <SimpleAreaChart
+            data={dailyRenewalPercentage}
+            title={t('admin.landings.stats.dailyRenewalRate', 'Renewal rate (%)')}
+            chartId={`landing-renewal-rate-${numericId}`}
+            valueLabel={t('admin.landings.stats.renewalRateLabel', 'Renewal rate')}
+            valueFormatter={(v) => `${v}%`}
           />
         </div>
 

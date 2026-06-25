@@ -1240,7 +1240,12 @@
         "currentPeriod": "دوره فعلی",
         "previousPeriod": "دوره قبلی",
         "dailyChart": "تمدید روزانه",
-        "renewals": "تمدید"
+        "renewals": "تمدید",
+        "regularChart": "عادی",
+        "trialsChart": "آزمایشی",
+        "renewalsChart": "تمدیدها",
+        "dailyBreakdownChart": "خریدها و تمدیدهای روزانه",
+        "dailyPercentageChart": "نرخ تمدید روزانه (%)"
       },
       "addons": {
         "totalPurchases": "کل خرید",
@@ -3775,7 +3780,13 @@
         "loadError": "بارگذاری آمار ناموفق بود",
         "noPurchases": "خریدی وجود ندارد",
         "paid": "پرداخت شده",
-        "dailyPurchases": "خریدهای روزانه"
+        "dailyPurchases": "خریدهای روزانه",
+        "dailyPurchaseTypes": "خریدها و تمدیدها",
+        "dailyRenewalRate": "نرخ تمدید (%)",
+        "renewalRateLabel": "نرخ تمدید",
+        "regularLabelChart": "عادی",
+        "trialsLabelChart": "آزمایشی",
+        "renewalsLabelChart": "تمدیدها"
       },
       "purchases": {
         "title": "خریدها",

@@ -1240,7 +1240,12 @@
         "currentPeriod": "当前期间",
         "previousPeriod": "上一期间",
         "dailyChart": "每日续订",
-        "renewals": "续订"
+        "renewals": "续订",
+        "regularChart": "普通",
+        "trialsChart": "试用",
+        "renewalsChart": "续订",
+        "dailyBreakdownChart": "每日购买与续订",
+        "dailyPercentageChart": "每日续订率 (%)"
       },
       "addons": {
         "totalPurchases": "购买总数",
@@ -3774,7 +3779,13 @@
         "loadError": "加载统计失败",
         "noPurchases": "无购买记录",
         "paid": "已支付",
-        "dailyPurchases": "每日购买量"
+        "dailyPurchases": "每日购买量",
+        "dailyPurchaseTypes": "购买与续期",
+        "dailyRenewalRate": "续期率 (%)",
+        "renewalRateLabel": "续期率",
+        "regularLabelChart": "普通",
+        "trialsLabelChart": "试用",
+        "renewalsLabelChart": "续期"
       },
       "purchases": {
         "title": "购买记录",

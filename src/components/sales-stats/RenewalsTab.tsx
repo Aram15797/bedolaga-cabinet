@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 
@@ -10,6 +11,7 @@ import { StatCard } from '../stats';
 import { TREND_STYLES } from '../stats/constants';
 
 import { SimpleAreaChart } from './SimpleAreaChart';
+import { MultiSeriesAreaChart } from './MultiSeriesAreaChart';
 
 interface RenewalsTabProps {
   params: SalesStatsParams;
@@ -40,10 +42,27 @@ export function RenewalsTab({ params }: RenewalsTabProps) {
     return <div className="py-8 text-center text-error-400">{t('admin.salesStats.loadError')}</div>;
   }
 
-  const dailyData = data.daily.map((item) => ({
-    date: item.date,
-    value: item.count,
-  }));
+  // Daily breakdown (Regular / Trials / Renewals) for MultiSeriesAreaChart
+  const dailyBreakdown = useMemo(() => {
+    if (!data) return [];
+    const regularLabel = t('admin.salesStats.renewals.regularChart', 'Regular');
+    const trialsLabel = t('admin.salesStats.renewals.trialsChart', 'Trials');
+    const renewalsLabel = t('admin.salesStats.renewals.renewalsChart', 'Renewals');
+    return data.daily.flatMap((d) => [
+      { date: d.date, key: regularLabel, value: d.regular ?? 0 },
+      { date: d.date, key: trialsLabel, value: d.trials ?? 0 },
+      { date: d.date, key: renewalsLabel, value: d.count },
+    ]);
+  }, [data, t]);
+
+  // Daily renewal percentage trend
+  const dailyRenewalPercentage = useMemo(() => {
+    if (!data) return [];
+    return data.daily.map((d) => ({
+      date: d.date,
+      value: d.rate ?? 0,
+    }));
+  }, [data]);
 
   const trendStyle = TREND_STYLES[data.change.trend] ?? TREND_STYLES.stable;
 
@@ -99,13 +118,20 @@ export function RenewalsTab({ params }: RenewalsTabProps) {
         </div>
       </div>
 
-      <SimpleAreaChart
-        data={dailyData}
-        title={t('admin.salesStats.renewals.dailyChart')}
-        chartId="renewals-daily"
-        valueLabel={t('admin.salesStats.renewals.renewals')}
-        color={SALES_STATS.BAR_COLORS[2]}
-      />
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <MultiSeriesAreaChart
+          data={dailyBreakdown}
+          title={t('admin.salesStats.renewals.dailyBreakdownChart', 'Purchases and renewals')}
+          chartId="renewals-daily-breakdown"
+        />
+        <SimpleAreaChart
+          data={dailyRenewalPercentage}
+          title={t('admin.salesStats.renewals.dailyPercentageChart', 'Renewal rate (%)')}
+          chartId="renewals-daily-percentage"
+          valueLabel={t('admin.salesStats.renewals.rate')}
+          valueFormatter={(v) => `${v}%`}
+        />
+      </div>
     </div>
   );
 }

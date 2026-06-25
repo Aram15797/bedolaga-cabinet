@@ -97,6 +97,9 @@ export interface RenewalChange {
 export interface DailyRenewalItem {
   date: string;
   count: number;
+  trials?: number;
+  regular?: number;
+  rate?: number;
 }
 
 export interface RenewalsStats {
