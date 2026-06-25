@@ -562,7 +562,7 @@ export default function AdminLandingStats() {
             title={t('admin.landings.stats.dailyRenewalRate', 'Renewal rate (%)')}
             chartId={`landing-renewal-rate-${numericId}`}
             valueLabel={t('admin.landings.stats.renewalRateLabel', 'Renewal rate')}
-            valueFormatter={(v) => `${v}%`}
+            valueFormatter={(v: number) => `${v}%`}
           />
         </div>
 

@@ -20,6 +20,7 @@ interface SimpleAreaChartProps {
   chartId: string;
   valueLabel?: string;
   height?: number;
+  valueFormatter?: (value: number) => string;
 }
 
 export function SimpleAreaChart({
@@ -29,6 +30,7 @@ export function SimpleAreaChart({
   chartId,
   valueLabel,
   height = SALES_STATS.CHART.HEIGHT,
+  valueFormatter,
 }: SimpleAreaChartProps) {
   const { t, i18n } = useTranslation();
   const colors = useChartColors();
@@ -88,7 +90,8 @@ export function SimpleAreaChart({
             tickLine={false}
             axisLine={false}
             width={SALES_STATS.AXIS.WIDTH}
-            allowDecimals={false}
+            allowDecimals={valueFormatter ? true : false}
+            tickFormatter={valueFormatter}
           />
           <Tooltip
             contentStyle={{
@@ -100,7 +103,10 @@ export function SimpleAreaChart({
             }}
             labelStyle={{ color: colors.label }}
             itemStyle={{ color: colors.label }}
-            formatter={(value: number | undefined) => [value ?? 0, valueLabel || '']}
+            formatter={(value: number | undefined) => [
+              valueFormatter && value !== undefined ? valueFormatter(value) : (value ?? 0),
+              valueLabel || '',
+            ]}
           />
           <Area
             type="monotone"

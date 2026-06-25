@@ -129,7 +129,7 @@ export function RenewalsTab({ params }: RenewalsTabProps) {
           title={t('admin.salesStats.renewals.dailyPercentageChart', 'Renewal rate (%)')}
           chartId="renewals-daily-percentage"
           valueLabel={t('admin.salesStats.renewals.rate')}
-          valueFormatter={(v) => `${v}%`}
+          valueFormatter={(v: number) => `${v}%`}
         />
       </div>
     </div>
