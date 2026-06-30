@@ -2902,6 +2902,7 @@
       "reminderCooldownDesc": "Минимальное время между напоминаниями (1-120 минут)",
       "settingsUpdateError": "Ошибка сохранения настроек",
       "copyTelegramId": "Нажмите чтобы скопировать Telegram ID",
+      "copyEmail": "Нажмите чтобы скопировать почту",
       "viewUser": "Карточка",
       "cabinetNotifications": "Уведомления в кабинете",
       "userNotificationsEnabled": "Уведомления для пользователей",

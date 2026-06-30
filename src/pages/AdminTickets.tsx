@@ -268,9 +268,10 @@ export default function AdminTickets() {
 
   const formatUser = (ticket: AdminTicket | AdminTicketDetail) => {
     if (!ticket.user) return 'Unknown';
-    const { first_name, last_name, username } = ticket.user;
+    const { first_name, last_name, username, email } = ticket.user;
     if (first_name || last_name) return `${first_name || ''} ${last_name || ''}`.trim();
     if (username) return `@${username}`;
+    if (email) return email;
     return 'User';
   };
 
@@ -406,6 +407,18 @@ export default function AdminTickets() {
                       >
                         (TG: {ticket.user!.telegram_id})
                       </button>
+                    )}
+                    {ticket.user?.email && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          copyToClipboard(ticket.user!.email!);
+                        }}
+                        className="ml-1 text-dark-600 transition-colors hover:text-accent-400"
+                        title={t('admin.tickets.copyEmail', 'Click to copy email')}
+                      >
+                        {formatUser(ticket) === ticket.user.email ? '(Copy)' : `(Email: ${ticket.user.email})`}
+                      </button>
                     )}{' '}
                     | {new Date(ticket.updated_at).toLocaleDateString()}
                   </div>
@@ -492,6 +505,15 @@ export default function AdminTickets() {
                         title={t('admin.tickets.copyTelegramId')}
                       >
                         TG: {selectedTicket.user!.telegram_id}
+                      </button>
+                    )}
+                    {selectedTicket.user?.email && (
+                      <button
+                        onClick={() => copyToClipboard(selectedTicket.user!.email!)}
+                        className="ml-1 rounded bg-dark-700 px-2 py-0.5 text-xs transition-colors hover:bg-dark-600"
+                        title={t('admin.tickets.copyEmail', 'Click to copy email')}
+                      >
+                        {formatUser(selectedTicket) === selectedTicket.user.email ? 'Copy' : `Email: ${selectedTicket.user.email}`}
                       </button>
                     )}{' '}
                     | {t('admin.tickets.created')}:{' '}

@@ -2506,6 +2506,7 @@
       "reminderCooldownDesc": "Minimum time between reminders (1-120 minutes)",
       "settingsUpdateError": "Error saving settings",
       "copyTelegramId": "Click to copy Telegram ID",
+      "copyEmail": "Click to copy email",
       "viewUser": "Profile",
       "cabinetNotifications": "Cabinet Notifications",
       "userNotificationsEnabled": "User Notifications",

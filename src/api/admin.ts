@@ -2,10 +2,11 @@ import apiClient from './client';
 
 export interface AdminTicketUser {
   id: number;
-  telegram_id: number;
+  telegram_id: number | null;
   username: string | null;
   first_name: string | null;
   last_name: string | null;
+  email?: string | null;
 }
 
 export interface AdminTicketMediaItem {
