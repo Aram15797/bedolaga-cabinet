@@ -3786,7 +3786,13 @@
         "renewalRateLabel": "续期率",
         "regularLabelChart": "普通",
         "trialsLabelChart": "试用",
-        "renewalsLabelChart": "续期"
+        "renewalsLabelChart": "续期",
+        "renewalsCount": "续期",
+        "renewalsRate": "续期率",
+        "renewalsRegularCount": "普通续期",
+        "renewalsTrialCount": "试用续期",
+        "renewalsRegularLabelChart": "普通续期",
+        "renewalsTrialLabelChart": "试用续期"
       },
       "purchases": {
         "title": "购买记录",

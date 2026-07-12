@@ -255,11 +255,13 @@ export default function AdminLandingStats() {
     if (!stats) return [];
     const regularLabel = t('admin.landings.stats.regularLabelChart', 'Regular');
     const trialsLabel = t('admin.landings.stats.trialsLabelChart', 'Trials');
-    const renewalsLabel = t('admin.landings.stats.renewalsLabelChart', 'Renewals');
+    const renewalsRegularLabel = t('admin.landings.stats.renewalsRegularLabelChart', 'Regular Renewals');
+    const renewalsTrialLabel = t('admin.landings.stats.renewalsTrialLabelChart', 'Trial Renewals');
     return stats.daily_stats.flatMap((d) => [
       { date: d.date, key: regularLabel, value: d.regular ?? 0 },
       { date: d.date, key: trialsLabel, value: d.trials ?? 0 },
-      { date: d.date, key: renewalsLabel, value: d.renewals ?? 0 },
+      { date: d.date, key: renewalsRegularLabel, value: d.renewals_regular ?? 0 },
+      { date: d.date, key: renewalsTrialLabel, value: d.renewals_trial ?? 0 },
     ]);
   }, [stats, t]);
 
@@ -449,12 +451,27 @@ export default function AdminLandingStats() {
         </div>
 
         {/* Renewals Stats */}
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-2">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           <StatCard
             label={t('admin.landings.stats.renewalsCount')}
             value={stats.renewals_count ?? 0}
+            subValue={money(stats.renewals_revenue_kopeks ?? 0)}
             icon={<ArrowRightIcon className="h-5 w-5" />}
             tone="success"
+          />
+          <StatCard
+            label={t('admin.landings.stats.renewalsRegularCount')}
+            value={stats.renewals_regular_count ?? 0}
+            subValue={money(stats.renewals_regular_revenue_kopeks ?? 0)}
+            icon={<CheckCircleIcon className="h-5 w-5" />}
+            tone="success"
+          />
+          <StatCard
+            label={t('admin.landings.stats.renewalsTrialCount')}
+            value={stats.renewals_trial_count ?? 0}
+            subValue={money(stats.renewals_trial_revenue_kopeks ?? 0)}
+            icon={<TicketIcon className="h-5 w-5" />}
+            tone="warning"
           />
           <StatCard
             label={t('admin.landings.stats.renewalsRate')}

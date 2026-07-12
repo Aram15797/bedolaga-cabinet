@@ -4056,6 +4056,8 @@
         "regularCards": "Regular cards",
         "renewalsCount": "Renewals",
         "renewalsRate": "Renewal Rate",
+        "renewalsRegularCount": "Regular renewals",
+        "renewalsTrialCount": "Trial renewals",
         "dailyChart": "Purchases & Revenue by Day",
         "tariffChart": "Tariff Distribution",
         "giftBreakdown": "Gifts vs Regular",
@@ -4081,7 +4083,9 @@
         "renewalRateLabel": "Renewal rate",
         "regularLabelChart": "Regular",
         "trialsLabelChart": "Trials",
-        "renewalsLabelChart": "Renewals"
+        "renewalsLabelChart": "Renewals",
+        "renewalsRegularLabelChart": "Renewals (regular)",
+        "renewalsTrialLabelChart": "Renewals (trial)"
       },
       "purchases": {
         "title": "Purchases",

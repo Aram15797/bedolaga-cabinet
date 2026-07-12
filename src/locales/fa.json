@@ -3787,7 +3787,13 @@
         "renewalRateLabel": "نرخ تمدید",
         "regularLabelChart": "عادی",
         "trialsLabelChart": "آزمایشی",
-        "renewalsLabelChart": "تمدیدها"
+        "renewalsLabelChart": "تمدیدها",
+        "renewalsCount": "تمدیدها",
+        "renewalsRate": "نرخ تمدید",
+        "renewalsRegularCount": "تمدیدها (عادی)",
+        "renewalsTrialCount": "تمدیدها (آزمایشی)",
+        "renewalsRegularLabelChart": "تمدیدها (عادی)",
+        "renewalsTrialLabelChart": "تمدیدها (آزمایشی)"
       },
       "purchases": {
         "title": "خریدها",
