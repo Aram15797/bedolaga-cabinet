@@ -324,10 +324,6 @@ export interface LandingDailyStat {
   trials?: number;
   regular?: number;
   renewals?: number;
-  renewals_regular?: number;
-  renewals_trial?: number;
-  renewals_regular_revenue_kopeks?: number;
-  renewals_trial_revenue_kopeks?: number;
 }
 
 export interface LandingTariffStat {
@@ -360,11 +356,6 @@ export interface LandingStatsResponse {
   regular_cards_count?: number;
   renewals_count?: number;
   renewals_rate?: number;
-  renewals_regular_count?: number;
-  renewals_trial_count?: number;
-  renewals_revenue_kopeks?: number;
-  renewals_regular_revenue_kopeks?: number;
-  renewals_trial_revenue_kopeks?: number;
   total_created: number;
   total_successful: number;
   conversion_rate: number;

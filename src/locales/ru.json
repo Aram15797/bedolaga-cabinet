@@ -4601,8 +4601,6 @@
         "regularCards": "Обычные карты",
         "renewalsCount": "Продления",
         "renewalsRate": "Процент продлений",
-        "renewalsRegularCount": "Продления (обычные)",
-        "renewalsTrialCount": "Продления (пробные)",
         "dailyChart": "Покупки и доход по дням",
         "tariffChart": "Распределение по тарифам",
         "giftBreakdown": "Подарки vs обычные",
@@ -4628,9 +4626,7 @@
         "renewalRateLabel": "Процент продлений",
         "regularLabelChart": "Обычные",
         "trialsLabelChart": "Пробные",
-        "renewalsLabelChart": "Продления",
-        "renewalsRegularLabelChart": "Продления (обычные)",
-        "renewalsTrialLabelChart": "Продления (пробные)"
+        "renewalsLabelChart": "Продления"
       },
       "purchases": {
         "title": "Покупки",
