@@ -81,9 +81,7 @@ export function SimpleBarChart({
             }}
             labelStyle={{ color: colors.label }}
             itemStyle={{ color: colors.label }}
-            formatter={(value: any) => [
-              valueFormatter ? valueFormatter(value ?? 0) : (value ?? 0),
-            ]}
+            formatter={(value: any) => [valueFormatter ? valueFormatter(value ?? 0) : (value ?? 0)]}
           />
           <Bar dataKey="value" radius={[4, 4, 0, 0]}>
             {data.map((entry, index) => (

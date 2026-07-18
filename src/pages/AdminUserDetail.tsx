@@ -141,12 +141,15 @@ export default function AdminUserDetail() {
   });
 
   useEffect(() => {
-    if (userQuery.data) setUser(userQuery.data);
+    if (userQuery.data) {
+      setUser(userQuery.data);
+      setLoading(false);
+    }
   }, [userQuery.data]);
 
   useEffect(() => {
-    setLoading(userQuery.isFetching);
-  }, [userQuery.isFetching]);
+    setLoading(userQuery.isLoading);
+  }, [userQuery.isLoading]);
 
   useEffect(() => {
     if (userQuery.isError) {
