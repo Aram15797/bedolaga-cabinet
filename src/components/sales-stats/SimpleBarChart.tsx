@@ -81,7 +81,7 @@ export function SimpleBarChart({
             }}
             labelStyle={{ color: colors.label }}
             itemStyle={{ color: colors.label }}
-            formatter={(value: number | undefined) => [
+            formatter={(value: any) => [
               valueFormatter ? valueFormatter(value ?? 0) : (value ?? 0),
             ]}
           />

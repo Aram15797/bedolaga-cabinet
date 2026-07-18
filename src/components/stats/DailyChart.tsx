@@ -115,7 +115,7 @@ export function DailyChart({ data, chartId, title, earningsLabel, countLabel }: 
             }}
             labelStyle={{ color: colors.label }}
             itemStyle={{ color: colors.label }}
-            formatter={(value: number | undefined, name: string | undefined) => {
+            formatter={(value: any, name: any) => {
               const displayValue = value ?? 0;
               if (name === 'earnings_display') {
                 return [formatWithCurrency(displayValue), resolvedEarningsLabel];

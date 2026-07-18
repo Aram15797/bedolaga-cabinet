@@ -132,7 +132,7 @@ export function MultiSeriesAreaChart({
             }}
             labelStyle={{ color: colors.label }}
             itemStyle={{ color: colors.label }}
-            formatter={(value: number | undefined, name: string | undefined) => [
+            formatter={(value: any, name: any) => [
               valueFormatter ? valueFormatter(value ?? 0) : (value ?? 0),
               name || valueLabel || '',
             ]}
