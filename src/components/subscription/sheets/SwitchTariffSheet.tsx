@@ -35,8 +35,7 @@ import type { Tariff } from '../../../types';
 function shouldUsePurchaseFlow(error: unknown): boolean {
   if (!(error instanceof AxiosError)) return false;
   const detail = error.response?.data?.detail as
-    | { code?: string; error_code?: string; use_purchase_flow?: boolean }
-    | undefined;
+    { code?: string; error_code?: string; use_purchase_flow?: boolean } | undefined;
   if (!detail || typeof detail !== 'object') return false;
   const code = detail.code ?? detail.error_code;
   return (

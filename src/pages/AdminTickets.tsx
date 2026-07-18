@@ -417,7 +417,9 @@ export default function AdminTickets() {
                         className="ml-1 text-dark-600 transition-colors hover:text-accent-400"
                         title={t('admin.tickets.copyEmail', 'Click to copy email')}
                       >
-                        {formatUser(ticket) === ticket.user.email ? '(Copy)' : `(Email: ${ticket.user.email})`}
+                        {formatUser(ticket) === ticket.user.email
+                          ? '(Copy)'
+                          : `(Email: ${ticket.user.email})`}
                       </button>
                     )}{' '}
                     | {new Date(ticket.updated_at).toLocaleDateString()}
@@ -513,7 +515,9 @@ export default function AdminTickets() {
                         className="ml-1 rounded bg-dark-700 px-2 py-0.5 text-xs transition-colors hover:bg-dark-600"
                         title={t('admin.tickets.copyEmail', 'Click to copy email')}
                       >
-                        {formatUser(selectedTicket) === selectedTicket.user.email ? 'Copy' : `Email: ${selectedTicket.user.email}`}
+                        {formatUser(selectedTicket) === selectedTicket.user.email
+                          ? 'Copy'
+                          : `Email: ${selectedTicket.user.email}`}
                       </button>
                     )}{' '}
                     | {t('admin.tickets.created')}:{' '}

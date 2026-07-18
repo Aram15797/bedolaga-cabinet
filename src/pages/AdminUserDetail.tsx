@@ -683,6 +683,47 @@ export default function AdminUserDetail() {
     }
   };
 
+  const handleResetPassword = async (): Promise<string> => {
+    if (!userId) return '';
+    setActionLoading(true);
+    try {
+      const result = await adminUsersApi.resetPassword(userId);
+      if (result.success && result.new_password) {
+        notify.success(t('admin.users.userActions.success.resetPassword'), t('common.success'));
+        await loadUser();
+        return result.new_password;
+      } else {
+        notify.error(result.message || t('admin.users.userActions.error'), t('common.error'));
+        return '';
+      }
+    } catch {
+      notify.error(t('admin.users.userActions.error'), t('common.error'));
+      return '';
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  const handleGenerateLoginLink = async (): Promise<string> => {
+    if (!userId) return '';
+    setActionLoading(true);
+    try {
+      const result = await adminUsersApi.generateLoginLink(userId);
+      if (result.success && result.login_link) {
+        notify.success(t('admin.users.userActions.success.generateLoginLink'), t('common.success'));
+        return result.login_link;
+      } else {
+        notify.error(result.message || t('admin.users.userActions.error'), t('common.error'));
+        return '';
+      }
+    } catch {
+      notify.error(t('admin.users.userActions.error'), t('common.error'));
+      return '';
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
   const formatDate = (date: string | null) => {
     if (!date) return '-';
     return new Date(date).toLocaleDateString(locale, {
@@ -838,6 +879,8 @@ export default function AdminUserDetail() {
             onResetSubscription={handleResetSubscription}
             onDisableUser={handleDisableUser}
             onFullDeleteUser={handleFullDeleteUser}
+            onResetPassword={handleResetPassword}
+            onGenerateLoginLink={handleGenerateLoginLink}
           />
         )}
 

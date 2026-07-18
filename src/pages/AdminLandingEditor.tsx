@@ -657,7 +657,10 @@ export default function AdminLandingEditor() {
                 className="w-full rounded-lg border border-dark-700 bg-dark-800 px-3 py-2 text-sm text-dark-100 outline-none focus:border-accent-500"
               />
               <p className="mt-1 text-xs text-dark-500">
-                {t('admin.landings.referrerHint', 'All purchases made from this landing will refer to this user ID')}
+                {t(
+                  'admin.landings.referrerHint',
+                  'All purchases made from this landing will refer to this user ID',
+                )}
               </p>
             </div>
 

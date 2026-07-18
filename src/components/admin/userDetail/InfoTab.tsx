@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { useCurrency } from '../../../hooks/useCurrency';
 import { createNumberInputHandler } from '../../../utils/inputHelpers';
+import { copyToClipboard } from '../../../utils/clipboard';
 import type {
   UserDetailResponse,
   UserListItem,
@@ -86,6 +88,8 @@ export interface InfoTabProps {
   onResetSubscription: () => Promise<void>;
   onDisableUser: () => Promise<void>;
   onFullDeleteUser: () => Promise<void>;
+  onResetPassword: () => Promise<string>;
+  onGenerateLoginLink: () => Promise<string>;
 }
 
 export function InfoTab(props: InfoTabProps) {
@@ -122,10 +126,75 @@ export function InfoTab(props: InfoTabProps) {
     onResetSubscription,
     onDisableUser,
     onFullDeleteUser,
+    onResetPassword,
+    onGenerateLoginLink,
   } = props;
+
+  const [credentials, setCredentials] = useState<{
+    type: 'password' | 'link';
+    value: string;
+  } | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async (text: string) => {
+    try {
+      await copyToClipboard(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleResetPasswordClick = async () => {
+    const password = await onResetPassword();
+    if (password) {
+      setCredentials({ type: 'password', value: password });
+    }
+  };
+
+  const handleGenerateLoginLinkClick = async () => {
+    const link = await onGenerateLoginLink();
+    if (link) {
+      setCredentials({ type: 'link', value: link });
+    }
+  };
 
   return (
     <div className="space-y-4">
+      {credentials && (
+        <div className="relative animate-fade-in rounded-xl border border-accent-500/30 bg-accent-500/10 p-4">
+          <button
+            onClick={() => setCredentials(null)}
+            className="absolute right-3 top-3 text-sm font-medium text-dark-400 hover:text-dark-200"
+          >
+            ✕
+          </button>
+          <div className="mb-2 flex items-center gap-2 text-sm font-medium text-accent-400">
+            <span>🔐</span>
+            <span>{t('admin.users.detail.generatedCredentialsTitle')}</span>
+          </div>
+          <div className="mt-1 flex items-end justify-between gap-3 rounded-lg bg-dark-900/50 p-3">
+            <div className="min-w-0 flex-1">
+              <div className="text-xs text-dark-500">
+                {credentials.type === 'password'
+                  ? t('admin.users.detail.tempPasswordLabel')
+                  : t('admin.users.detail.loginLinkLabel')}
+              </div>
+              <div className="mt-1 select-all break-all font-mono text-sm text-dark-100">
+                {credentials.value}
+              </div>
+            </div>
+            <button
+              onClick={() => handleCopy(credentials.value)}
+              className="shrink-0 rounded-lg bg-accent-500 px-3 py-1.5 text-xs font-semibold text-on-accent transition-colors hover:bg-accent-600"
+            >
+              {copied ? t('admin.users.detail.copied') : t('admin.users.detail.copy')}
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Status */}
       <div className="flex items-center justify-between rounded-xl bg-dark-800/50 p-3">
         <span className="text-dark-400">{t('admin.users.detail.status')}</span>
@@ -521,6 +590,32 @@ export function InfoTab(props: InfoTabProps) {
             {confirmingAction === 'resetSubscription'
               ? t('admin.users.detail.actions.areYouSure')
               : t('admin.users.userActions.resetSubscription')}
+          </button>
+          <button
+            onClick={() => onInlineConfirm('resetPassword', handleResetPasswordClick)}
+            disabled={actionLoading}
+            className={`rounded-lg px-3 py-2 text-sm font-medium transition-all disabled:opacity-50 ${
+              confirmingAction === 'resetPassword'
+                ? 'bg-indigo-500 text-white'
+                : 'bg-indigo-500/15 text-indigo-400 hover:bg-indigo-500/25'
+            }`}
+          >
+            {confirmingAction === 'resetPassword'
+              ? t('admin.users.detail.actions.areYouSure')
+              : t('admin.users.userActions.resetPassword')}
+          </button>
+          <button
+            onClick={() => onInlineConfirm('generateLoginLink', handleGenerateLoginLinkClick)}
+            disabled={actionLoading}
+            className={`rounded-lg px-3 py-2 text-sm font-medium transition-all disabled:opacity-50 ${
+              confirmingAction === 'generateLoginLink'
+                ? 'bg-emerald-500 text-white'
+                : 'bg-emerald-500/15 text-emerald-400 hover:bg-emerald-500/25'
+            }`}
+          >
+            {confirmingAction === 'generateLoginLink'
+              ? t('admin.users.detail.actions.areYouSure')
+              : t('admin.users.userActions.generateLoginLink')}
           </button>
           <button
             onClick={() => onInlineConfirm('disable', onDisableUser)}

@@ -567,47 +567,42 @@ export default function AdminTrafficUsage() {
         },
       },
       // ---- Dynamic node columns ----
-      ...displayNodes.map(
-        (node): ColumnDef<UserTrafficItem> => ({
-          id: `node_${node.node_uuid}`,
-          accessorFn: (row) => row.node_traffic[node.node_uuid] || 0,
-          header: `${getFlagEmoji(node.country_code)} ${node.node_name}`,
-          enableSorting: true,
-          size: 110,
-          minSize: 80,
-          meta: { align: 'center' as const },
-          cell: ({ getValue }) => {
-            const bytes = getValue() as number;
-            if (bytes <= 0) {
-              return <span className="text-xs text-dark-300">{'\u2014'}</span>;
-            }
-            const dailyNode = bytesToGbPerDay(bytes, periodDays);
-            const nodeRatio = hasNodeThreshold ? getRatio(dailyNode, nodeThresholdNum) : 0;
-            const textColor = hasNodeThreshold ? getNodeTextColor(nodeRatio) : undefined;
-            return (
-              <div className="flex flex-col items-center">
-                <span
-                  className="text-xs text-dark-300"
-                  style={{
-                    color: textColor,
-                    fontWeight: nodeRatio > 0.8 ? 600 : undefined,
-                  }}
-                >
-                  {formatBytes(bytes)}
+      ...displayNodes.map((node): ColumnDef<UserTrafficItem> => ({
+        id: `node_${node.node_uuid}`,
+        accessorFn: (row) => row.node_traffic[node.node_uuid] || 0,
+        header: `${getFlagEmoji(node.country_code)} ${node.node_name}`,
+        enableSorting: true,
+        size: 110,
+        minSize: 80,
+        meta: { align: 'center' as const },
+        cell: ({ getValue }) => {
+          const bytes = getValue() as number;
+          if (bytes <= 0) {
+            return <span className="text-xs text-dark-300">{'\u2014'}</span>;
+          }
+          const dailyNode = bytesToGbPerDay(bytes, periodDays);
+          const nodeRatio = hasNodeThreshold ? getRatio(dailyNode, nodeThresholdNum) : 0;
+          const textColor = hasNodeThreshold ? getNodeTextColor(nodeRatio) : undefined;
+          return (
+            <div className="flex flex-col items-center">
+              <span
+                className="text-xs text-dark-300"
+                style={{
+                  color: textColor,
+                  fontWeight: nodeRatio > 0.8 ? 600 : undefined,
+                }}
+              >
+                {formatBytes(bytes)}
+              </span>
+              {hasNodeThreshold && (
+                <span className="text-[9px] leading-tight opacity-60" style={{ color: textColor }}>
+                  {formatGbPerDay(dailyNode)} GB/d
                 </span>
-                {hasNodeThreshold && (
-                  <span
-                    className="text-[9px] leading-tight opacity-60"
-                    style={{ color: textColor }}
-                  >
-                    {formatGbPerDay(dailyNode)} GB/d
-                  </span>
-                )}
-              </div>
-            );
-          },
-        }),
-      ),
+              )}
+            </div>
+          );
+        },
+      })),
     ];
 
     // Risk column — insert before total when any threshold is set

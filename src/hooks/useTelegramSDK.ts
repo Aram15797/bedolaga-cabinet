@@ -138,15 +138,7 @@ export function getTelegramLanguageCode(): string | null {
 }
 
 export type TelegramPlatform =
-  | 'android'
-  | 'ios'
-  | 'tdesktop'
-  | 'macos'
-  | 'weba'
-  | 'webk'
-  | 'unigram'
-  | 'unknown'
-  | undefined;
+  'android' | 'ios' | 'tdesktop' | 'macos' | 'weba' | 'webk' | 'unigram' | 'unknown' | undefined;
 
 const defaultInsets = { top: 0, bottom: 0, left: 0, right: 0 };
 

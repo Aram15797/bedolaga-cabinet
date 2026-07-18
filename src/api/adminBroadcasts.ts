@@ -101,13 +101,7 @@ export interface Broadcast {
   failed_count: number;
   blocked_count: number;
   status:
-    | 'queued'
-    | 'in_progress'
-    | 'completed'
-    | 'partial'
-    | 'failed'
-    | 'cancelled'
-    | 'cancelling';
+    'queued' | 'in_progress' | 'completed' | 'partial' | 'failed' | 'cancelled' | 'cancelling';
   admin_id: number | null;
   admin_name: string | null;
   created_at: string;

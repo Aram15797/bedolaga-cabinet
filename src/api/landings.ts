@@ -366,12 +366,7 @@ export interface LandingStatsResponse {
 }
 
 export type PurchaseItemStatus =
-  | 'pending'
-  | 'paid'
-  | 'delivered'
-  | 'pending_activation'
-  | 'failed'
-  | 'expired';
+  'pending' | 'paid' | 'delivered' | 'pending_activation' | 'failed' | 'expired';
 
 export interface LandingPurchaseItem {
   id: number;

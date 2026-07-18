@@ -3275,12 +3275,16 @@
         "resetTrial": "Reset trial",
         "resetSubscription": "Reset subscription",
         "disable": "Disable user",
+        "resetPassword": "Reset password",
+        "generateLoginLink": "Generate login link",
         "error": "Failed to perform action",
         "success": {
           "delete": "User successfully deleted",
           "resetTrial": "Trial successfully reset",
           "resetSubscription": "Subscription successfully reset",
-          "disable": "User successfully disabled"
+          "disable": "User successfully disabled",
+          "resetPassword": "Password successfully reset",
+          "generateLoginLink": "Login link successfully generated"
         },
         "confirmDelete": {
           "title": "Delete user?",
@@ -3297,6 +3301,14 @@
         "confirmDisable": {
           "title": "Disable user?",
           "message": "The user will not be able to use the service until reactivated."
+        },
+        "confirmResetPassword": {
+          "title": "Reset password?",
+          "message": "Are you sure you want to reset the user's password? This will generate a new random password."
+        },
+        "confirmGenerateLoginLink": {
+          "title": "Generate login link?",
+          "message": "This will create a temporary token and generate a secure auto-login URL."
         }
       },
       "detail": {
@@ -3350,6 +3362,10 @@
         "lifetime": "Lifetime",
         "nodeUsage": "Node usage",
         "copied": "Copied",
+        "copy": "Copy",
+        "generatedCredentialsTitle": "Generated Credentials",
+        "tempPasswordLabel": "Temporary Password",
+        "loginLinkLabel": "Auto-Login Link",
         "panelNotFound": "User not found in panel",
         "devices": {
           "title": "Devices",

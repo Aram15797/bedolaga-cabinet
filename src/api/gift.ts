@@ -63,12 +63,7 @@ export interface GiftPurchaseResponse {
 }
 
 export type GiftPurchaseStatusValue =
-  | 'pending'
-  | 'paid'
-  | 'delivered'
-  | 'pending_activation'
-  | 'failed'
-  | 'expired';
+  'pending' | 'paid' | 'delivered' | 'pending_activation' | 'failed' | 'expired';
 
 export interface GiftPurchaseStatus {
   status: GiftPurchaseStatusValue;

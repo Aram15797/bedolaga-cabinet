@@ -138,7 +138,16 @@ export default function AdminUsers() {
   const limit = 20;
 
   const usersQuery = useQuery({
-    queryKey: ['admin-users', offset, limit, sortBy, search, emailSearch, statusFilter, recurrentFilter] as const,
+    queryKey: [
+      'admin-users',
+      offset,
+      limit,
+      sortBy,
+      search,
+      emailSearch,
+      statusFilter,
+      recurrentFilter,
+    ] as const,
     queryFn: () => {
       const params: Record<string, unknown> = { offset, limit, sort_by: sortBy };
       if (search) params.search = search;

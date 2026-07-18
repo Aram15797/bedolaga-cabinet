@@ -435,12 +435,7 @@ export const adminUsersApi = {
       partner_id?: number;
       is_recurrent?: boolean;
       sort_by?:
-        | 'created_at'
-        | 'balance'
-        | 'traffic'
-        | 'last_activity'
-        | 'total_spent'
-        | 'purchase_count';
+        'created_at' | 'balance' | 'traffic' | 'last_activity' | 'total_spent' | 'purchase_count';
     } = {},
   ): Promise<UsersListResponse> => {
     const response = await apiClient.get('/cabinet/admin/users', { params });
@@ -778,6 +773,22 @@ export const adminUsersApi = {
   // Get user gifts
   getUserGifts: async (userId: number): Promise<AdminUserGiftsResponse> => {
     const response = await apiClient.get(`/cabinet/admin/users/${userId}/gifts`);
+    return response.data;
+  },
+
+  // Reset password
+  resetPassword: async (
+    userId: number,
+  ): Promise<{ success: boolean; message: string; new_password?: string }> => {
+    const response = await apiClient.post(`/cabinet/admin/users/${userId}/reset-password`);
+    return response.data;
+  },
+
+  // Generate login link
+  generateLoginLink: async (
+    userId: number,
+  ): Promise<{ success: boolean; message: string; login_link?: string }> => {
+    const response = await apiClient.post(`/cabinet/admin/users/${userId}/generate-login-link`);
     return response.data;
   },
 };

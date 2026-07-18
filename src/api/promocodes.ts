@@ -3,11 +3,7 @@ import apiClient from './client';
 // ============== Types ==============
 
 export type PromoCodeType =
-  | 'balance'
-  | 'subscription_days'
-  | 'trial_subscription'
-  | 'promo_group'
-  | 'discount';
+  'balance' | 'subscription_days' | 'trial_subscription' | 'promo_group' | 'discount';
 
 export interface PromoCode {
   id: number;
