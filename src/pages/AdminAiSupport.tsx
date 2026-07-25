@@ -90,7 +90,8 @@ export default function AdminAiSupport() {
       if (fileInputRef.current) fileInputRef.current.value = '';
     },
     onError: (err: any) => {
-      setError(err?.response?.data?.detail || 'Ошибка загрузки файла базы знаний');
+      const serverMsg = err?.response?.data?.detail;
+      setError(serverMsg ? `Ошибка: ${serverMsg}` : 'Ошибка загрузки файла базы знаний');
     },
   });
 
