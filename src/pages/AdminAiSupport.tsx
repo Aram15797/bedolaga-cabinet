@@ -26,6 +26,11 @@ const EDITABLE_FIELDS = [
   { key: 'MIN_SCORE', label: 'Мин. релевантность (0-1)', type: 'text' },
   { key: 'CONTEXT_MESSAGES', label: 'Сообщений в контексте', type: 'number' },
   { key: 'HISTORY_LIMIT', label: 'Лимит истории (сообщений)', type: 'number' },
+  {
+    key: 'DAILY_MESSAGE_LIMIT',
+    label: 'Лимит сообщений на пользователя в день (0 = без лимита)',
+    type: 'number',
+  },
   { key: 'VISION_ENABLED', label: 'Анализ фото (1 / 0)', type: 'text' },
   { key: 'INCLUDE_REMNAWAVE_DATA', label: 'Данные Remnawave (1 / 0)', type: 'text' },
 ];

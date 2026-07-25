@@ -10,6 +10,7 @@ export interface AiSupportSettings {
   MIN_SCORE?: string;
   CONTEXT_MESSAGES?: string;
   HISTORY_LIMIT?: string;
+  DAILY_MESSAGE_LIMIT?: string;
   VISION_ENABLED?: string;
   INCLUDE_REMNAWAVE_DATA?: string;
   [key: string]: string | undefined;
