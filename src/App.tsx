@@ -79,6 +79,7 @@ const MergeAccounts = lazyWithRetry(() => import('./pages/MergeAccounts'));
 // Admin pages - lazy load (only for admins)
 const AdminPanel = lazyWithRetry(() => import('./pages/AdminPanel'));
 const AdminTickets = lazyWithRetry(() => import('./pages/AdminTickets'));
+const AdminAiSupport = lazyWithRetry(() => import('./pages/AdminAiSupport'));
 const AdminTicketSettings = lazyWithRetry(() => import('./pages/AdminTicketSettings'));
 const AdminSettings = lazyWithRetry(() => import('./pages/AdminSettings'));
 const AdminApps = lazyWithRetry(() => import('./pages/AdminApps'));
@@ -618,6 +619,16 @@ function App() {
             <PermissionRoute permission="tickets:read">
               <LazyPage>
                 <AdminTickets />
+              </LazyPage>
+            </PermissionRoute>
+          }
+        />
+        <Route
+          path="/admin/ai-support"
+          element={
+            <PermissionRoute permission="tickets:read">
+              <LazyPage>
+                <AdminAiSupport />
               </LazyPage>
             </PermissionRoute>
           }

@@ -167,6 +167,12 @@ const sections: AdminSection[] = [
         permission: 'tickets:read',
       },
       {
+        name: 'admin.nav.aiSupport',
+        icon: 'sparkle',
+        to: '/admin/ai-support',
+        permission: 'tickets:read',
+      },
+      {
         name: 'admin.nav.banSystem',
         icon: 'shield-alert',
         to: '/admin/ban-system',
