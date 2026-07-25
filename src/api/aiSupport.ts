@@ -31,6 +31,26 @@ export interface KnowledgeSummary {
   message_total: number;
 }
 
+export interface ConversationItem {
+  id: number;
+  telegram_id: number;
+  escalated: boolean;
+  created_at: string;
+  updated_at: string;
+  message_count: number;
+  last_message: string;
+  last_message_role: string;
+  last_message_at: string;
+}
+
+export interface AiConversationsResponse {
+  conversations: ConversationItem[];
+  page: number;
+  per_page: number;
+  total: number;
+  has_next: boolean;
+}
+
 export interface AiMessageItem {
   id: number;
   conversation_id: number;
@@ -96,9 +116,16 @@ export const aiSupportApi = {
     return response.data;
   },
 
-  getHistory: async (page = 1, perPage = 50): Promise<AiHistoryResponse> => {
-    const response = await apiClient.get('/ai-support/history', {
+  getConversations: async (page = 1, perPage = 50): Promise<AiConversationsResponse> => {
+    const response = await apiClient.get('/ai-support/conversations', {
       params: { page, per_page: perPage },
+    });
+    return response.data;
+  },
+
+  getHistory: async (page = 1, perPage = 50, telegramId?: number): Promise<AiHistoryResponse> => {
+    const response = await apiClient.get('/ai-support/history', {
+      params: { page, per_page: perPage, telegram_id: telegramId },
     });
     return response.data;
   },

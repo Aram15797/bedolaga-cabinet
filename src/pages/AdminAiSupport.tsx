@@ -54,11 +54,7 @@ export default function AdminAiSupport() {
     queryFn: aiSupportApi.getKnowledgeSummary,
   });
 
-  const { data: historyData, isLoading: isHistoryLoading } = useQuery({
-    queryKey: ['ai-support-history', page],
-    queryFn: () => aiSupportApi.getHistory(page, 50),
-    enabled: activeTab === 'history',
-  });
+
 
   // Local settings state
   const [formSettings, setFormSettings] = useState<Record<string, string>>({});
@@ -133,6 +129,21 @@ export default function AdminAiSupport() {
     }
   };
 
+  const [selectedTelegramId, setSelectedTelegramId] = useState<number | null>(null);
+  const [convPage, setConvPage] = useState(1);
+
+  const { data: conversationsData, isLoading: isConversationsLoading } = useQuery({
+    queryKey: ['ai-support-conversations', convPage],
+    queryFn: () => aiSupportApi.getConversations(convPage, 30),
+    enabled: activeTab === 'history',
+  });
+
+  const { data: historyData, isLoading: isHistoryLoading } = useQuery({
+    queryKey: ['ai-support-history', page, selectedTelegramId],
+    queryFn: () => aiSupportApi.getHistory(page, 50, selectedTelegramId ?? undefined),
+    enabled: activeTab === 'history',
+  });
+
   return (
     <div className="relative flex min-h-0 flex-1 flex-col">
       <div
@@ -153,7 +164,7 @@ export default function AdminAiSupport() {
                 ИИ Бот Поддержки
               </h1>
               <p className="text-xs text-dark-400 light:text-champagne-600">
-                Управление моделями, промптами, RAG базой знаний и историей ответов
+                Управление моделями, промптами, RAG базой знаний и диалогами поддержки
               </p>
             </div>
           </div>
@@ -225,7 +236,7 @@ export default function AdminAiSupport() {
             )}
           >
             <HistoryIcon className="h-4 w-4" />
-            История ответов
+            Диалоги и Чаты ИИ
           </button>
         </div>
 
@@ -381,15 +392,115 @@ export default function AdminAiSupport() {
             </div>
           )}
 
-          {/* TAB 3: HISTORY */}
+          {/* TAB 3: HISTORY & CHATS */}
           {activeTab === 'history' && (
-            <div className="space-y-4">
-              <div className="rounded-2xl border border-dark-700/50 bg-dark-800/30 overflow-hidden backdrop-blur-xl light:border-champagne-300/50 light:bg-champagne-100/40">
-                <div className="px-4 py-3 border-b border-dark-700/30 flex items-center justify-between light:border-champagne-300/30">
-                  <h3 className="text-xs font-bold text-dark-100 light:text-champagne-900">
-                    История сообщений ({historyData?.total ?? 0})
-                  </h3>
-                  {/* Pagination */}
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
+              {/* Left Column: Conversations List */}
+              <div className="lg:col-span-5 flex flex-col rounded-2xl border border-dark-700/50 bg-dark-800/30 overflow-hidden backdrop-blur-xl light:border-champagne-300/50 light:bg-champagne-100/40">
+                <div className="p-3.5 border-b border-dark-700/30 flex items-center justify-between light:border-champagne-300/30">
+                  <div>
+                    <h3 className="text-xs font-bold text-dark-100 light:text-champagne-900">
+                      Чаты пользователей ({conversationsData?.total ?? 0})
+                    </h3>
+                    <p className="text-2xs text-dark-400">Выберите диалог для просмотра</p>
+                  </div>
+                  {selectedTelegramId !== null && (
+                    <button
+                      onClick={() => {
+                        setSelectedTelegramId(null);
+                        setPage(1);
+                      }}
+                      className="rounded-lg bg-dark-700/50 px-2.5 py-1 text-2xs font-semibold text-dark-200 hover:bg-dark-700"
+                    >
+                      Показать все
+                    </button>
+                  )}
+                </div>
+
+                <div className="divide-y divide-dark-700/20 overflow-y-auto max-h-[600px] light:divide-champagne-300/30">
+                  {isConversationsLoading ? (
+                    <div className="py-8 text-center text-xs text-dark-400">Загрузка диалогов...</div>
+                  ) : !conversationsData?.conversations?.length ? (
+                    <div className="py-8 text-center text-xs text-dark-400">Диалогов пока нет</div>
+                  ) : (
+                    conversationsData.conversations.map((conv) => (
+                      <div
+                        key={conv.id}
+                        onClick={() => {
+                          setSelectedTelegramId(conv.telegram_id);
+                          setPage(1);
+                        }}
+                        className={cn(
+                          'p-3.5 cursor-pointer transition-colors hover:bg-dark-700/20 light:hover:bg-champagne-200/40',
+                          selectedTelegramId === conv.telegram_id
+                            ? 'bg-accent-500/10 border-l-4 border-accent-500'
+                            : '',
+                        )}
+                      >
+                        <div className="flex items-center justify-between mb-1">
+                          <div className="flex items-center gap-2">
+                            <span className="font-mono text-xs font-bold text-dark-100 light:text-champagne-900">
+                              TG: {conv.telegram_id}
+                            </span>
+                            {conv.escalated && (
+                              <span className="rounded bg-error-400/20 border border-error-400/30 px-1.5 py-0.5 text-2xs font-bold text-error-400 animate-pulse">
+                                Требует оператора
+                              </span>
+                            )}
+                          </div>
+                          <span className="text-2xs text-dark-500">
+                            {conv.last_message_at ? new Date(conv.last_message_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}
+                          </span>
+                        </div>
+
+                        <p className="text-xs text-dark-300 light:text-champagne-700 line-clamp-2 mb-1.5 font-sans">
+                          {conv.last_message_role === 'assistant' ? '🤖 ' : '👤 '}
+                          {conv.last_message || 'Нет сообщений'}
+                        </p>
+
+                        <div className="flex items-center justify-between text-2xs text-dark-500">
+                          <span>Сообщений: {conv.message_count}</span>
+                          <span>{conv.updated_at ? new Date(conv.updated_at).toLocaleDateString() : ''}</span>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
+
+                {/* Pagination for conversations */}
+                {conversationsData && conversationsData.total > 30 && (
+                  <div className="p-3 border-t border-dark-700/30 flex items-center justify-between light:border-champagne-300/30">
+                    <button
+                      disabled={convPage <= 1}
+                      onClick={() => setConvPage((p) => Math.max(p - 1, 1))}
+                      className="rounded-lg border border-dark-700/50 px-2 py-1 text-2xs text-dark-300 disabled:opacity-40"
+                    >
+                      Назад
+                    </button>
+                    <span className="text-2xs font-mono text-dark-400">Стр. {convPage}</span>
+                    <button
+                      disabled={!conversationsData.has_next}
+                      onClick={() => setConvPage((p) => p + 1)}
+                      className="rounded-lg border border-dark-700/50 px-2 py-1 text-2xs text-dark-300 disabled:opacity-40"
+                    >
+                      Вперед
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* Right Column: Messenger Chat Flow */}
+              <div className="lg:col-span-7 flex flex-col rounded-2xl border border-dark-700/50 bg-dark-800/30 overflow-hidden backdrop-blur-xl light:border-champagne-300/50 light:bg-champagne-100/40">
+                <div className="p-3.5 border-b border-dark-700/30 flex items-center justify-between light:border-champagne-300/30">
+                  <div>
+                    <h3 className="text-xs font-bold text-dark-100 light:text-champagne-900">
+                      {selectedTelegramId ? `Чат с пользователем TG ID: ${selectedTelegramId}` : 'Все сообщения (общий лог)'}
+                    </h3>
+                    <p className="text-2xs text-dark-400">
+                      {selectedTelegramId ? 'История вопросов и ответов ИИ в реальном времени' : 'Общий поток всех сообщений сервиса'}
+                    </p>
+                  </div>
+
                   {historyData && (
                     <div className="flex items-center gap-2">
                       <button
@@ -411,63 +522,63 @@ export default function AdminAiSupport() {
                   )}
                 </div>
 
-                {isHistoryLoading ? (
-                  <div className="py-12 text-center text-xs text-dark-400">Загрузка истории...</div>
-                ) : !historyData?.messages?.length ? (
-                  <div className="py-12 text-center text-xs text-dark-400">Сообщения отсутствуют</div>
-                ) : (
-                  <div className="divide-y divide-dark-700/20 light:divide-champagne-300/30">
-                    {historyData.messages.map((msg: AiMessageItem) => (
-                      <div key={msg.id} className="p-4 hover:bg-dark-700/10 light:hover:bg-champagne-200/30">
-                        <div className="flex items-center justify-between mb-1.5">
-                          <div className="flex items-center gap-2">
-                            <span
-                              className={cn(
-                                'rounded px-2 py-0.5 text-2xs font-bold uppercase',
-                                msg.role === 'user'
-                                  ? 'bg-accent-500/10 text-accent-400 border border-accent-500/20'
-                                  : 'bg-success-400/10 text-success-400 border border-success-400/20',
-                              )}
-                            >
-                              {msg.role === 'user' ? 'Пользователь' : 'ИИ Бот'}
-                            </span>
-                            <span className="font-mono text-2xs text-dark-400">
-                              TG ID: {msg.telegram_id}
-                            </span>
-                            {msg.model && (
-                              <span className="font-mono text-2xs text-dark-500">
-                                {msg.model}
-                              </span>
-                            )}
-                          </div>
+                <div className="p-4 space-y-4 overflow-y-auto max-h-[600px]">
+                  {isHistoryLoading ? (
+                    <div className="py-12 text-center text-xs text-dark-400">Загрузка сообщений...</div>
+                  ) : !historyData?.messages?.length ? (
+                    <div className="py-12 text-center text-xs text-dark-400">Сообщения отсутствуют</div>
+                  ) : (
+                    historyData.messages.map((msg: AiMessageItem) => (
+                      <div
+                        key={msg.id}
+                        className={cn(
+                          'flex flex-col max-w-[85%]',
+                          msg.role === 'user' ? 'self-start' : 'self-end items-end',
+                        )}
+                      >
+                        {/* Message Bubble Header */}
+                        <div className="flex items-center gap-2 mb-1 px-1">
+                          <span className="font-mono text-2xs font-bold text-dark-400">
+                            {msg.role === 'user' ? `👤 Пользователь (${msg.telegram_id})` : '🤖 ИИ Бот'}
+                          </span>
                           <span className="text-2xs text-dark-500">
                             {msg.created_at ? new Date(msg.created_at).toLocaleString() : ''}
                           </span>
                         </div>
-                        <p className="text-xs text-dark-100 light:text-champagne-900 whitespace-pre-wrap">
-                          {msg.content}
-                        </p>
 
-                        {/* Tokens & Context metadata */}
-                        {(msg.tokens_prompt || msg.tokens_completion || msg.used_context) && (
-                          <div className="mt-2 flex flex-wrap items-center gap-3 pt-1 border-t border-dark-700/20 text-2xs text-dark-400 light:border-champagne-300/30">
+                        {/* Message Content Bubble */}
+                        <div
+                          className={cn(
+                            'rounded-2xl p-3.5 text-xs text-dark-100 whitespace-pre-wrap leading-relaxed shadow-sm',
+                            msg.role === 'user'
+                              ? 'bg-dark-700/60 border border-dark-600/50 rounded-tl-none light:bg-champagne-200/70 light:border-champagne-300/80 light:text-champagne-900'
+                              : 'bg-accent-500/15 border border-accent-500/30 text-dark-50 rounded-tr-none light:bg-accent-500/10 light:text-champagne-900',
+                          )}
+                        >
+                          {msg.content}
+                        </div>
+
+                        {/* Metadata Footer for Assistant */}
+                        {msg.role === 'assistant' && (msg.tokens_prompt || msg.tokens_completion || msg.used_context) && (
+                          <div className="mt-1 flex flex-wrap items-center gap-2.5 px-1 text-2xs text-dark-400 light:text-champagne-600">
+                            {msg.model && <span className="font-mono text-dark-500">{msg.model}</span>}
                             {msg.tokens_prompt !== null && (
-                              <span>Промпт токенов: {msg.tokens_prompt}</span>
+                              <span>Промпт: <strong className="text-dark-300">{msg.tokens_prompt}</strong></span>
                             )}
                             {msg.tokens_completion !== null && (
-                              <span>Ответ токенов: {msg.tokens_completion}</span>
+                              <span>Ответ: <strong className="text-dark-300">{msg.tokens_completion}</strong></span>
                             )}
                             {msg.used_context && msg.used_context.length > 0 && (
-                              <span className="text-accent-400">
-                                Использовано чанков RAG: {msg.used_context.length}
+                              <span className="text-accent-400 font-semibold">
+                                RAG чанков: {msg.used_context.length}
                               </span>
                             )}
                           </div>
                         )}
                       </div>
-                    ))}
-                  </div>
-                )}
+                    ))
+                  )}
+                </div>
               </div>
             </div>
           )}
@@ -476,3 +587,4 @@ export default function AdminAiSupport() {
     </div>
   );
 }
+
