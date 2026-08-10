@@ -113,7 +113,7 @@ export default function Wheel() {
       } else if (res.payment_url) {
         setShowStarsQuantityModal(false);
         setShowUsernameModal(false);
-        setPaymentModalUrl(res.payment_url);
+        window.open(res.payment_url, '_blank');
       } else if (res.error) {
         notify.error(res.error);
       }
