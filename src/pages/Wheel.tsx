@@ -97,6 +97,7 @@ export default function Wheel() {
   const [showUsernameModal, setShowUsernameModal] = useState(false);
   const [inputUsername, setInputUsername] = useState('');
   const [isBuyingExternalStars, setIsBuyingExternalStars] = useState(false);
+  const [paymentModalUrl, setPaymentModalUrl] = useState<string | null>(null);
 
   const handleExternalStarsBuy = async (customUsername?: string) => {
     setIsBuyingExternalStars(true);
@@ -108,7 +109,7 @@ export default function Wheel() {
         notify.info('Пожалуйста, укажите ваш Telegram @username для покупки Stars');
       } else if (res.payment_url) {
         setShowUsernameModal(false);
-        window.open(res.payment_url, '_blank');
+        setPaymentModalUrl(res.payment_url);
       } else if (res.error) {
         notify.error(res.error);
       }
@@ -902,6 +903,57 @@ export default function Wheel() {
                 className="rounded-xl bg-accent-500 px-4 py-2 text-sm font-medium text-white hover:bg-accent-600 disabled:opacity-50"
               >
                 {isBuyingExternalStars ? 'Загрузка...' : 'Купить Stars'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Embedded Stars Payment Modal */}
+      {paymentModalUrl && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-3 sm:p-6 backdrop-blur-sm animate-fade-in">
+          <div className="relative flex h-[85vh] max-h-[680px] w-full max-w-xl flex-col overflow-hidden rounded-2xl border border-dark-700 bg-dark-900 shadow-2xl">
+            {/* Header */}
+            <div className="flex items-center justify-between border-b border-dark-800 px-5 py-3.5 bg-dark-900">
+              <div className="flex items-center gap-2 font-semibold">
+                <StarIcon className="h-5 w-5 text-accent-400" />
+                <h3 className="font-bold text-dark-100 text-base">Оплата Telegram Stars</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setPaymentModalUrl(null)}
+                className="rounded-lg p-1.5 text-dark-400 hover:bg-dark-800 hover:text-dark-200 transition-colors"
+              >
+                <CloseIcon className="h-5 w-5" />
+              </button>
+            </div>
+
+            {/* Iframe content */}
+            <div className="relative flex-1 w-full bg-dark-950">
+              <iframe
+                src={paymentModalUrl}
+                className="h-full w-full border-0"
+                title="Оплата Telegram Stars"
+                allow="payment"
+              />
+            </div>
+
+            {/* Footer */}
+            <div className="flex items-center justify-between border-t border-dark-800 bg-dark-900 px-5 py-3 text-xs text-dark-400">
+              <a
+                href={paymentModalUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="text-accent-400 hover:text-accent-300 hover:underline inline-flex items-center gap-1 font-medium"
+              >
+                Открыть в новом окне ↗
+              </a>
+              <button
+                type="button"
+                onClick={() => setPaymentModalUrl(null)}
+                className="rounded-xl bg-dark-800 px-4 py-2 font-medium text-dark-200 hover:bg-dark-700 transition-colors"
+              >
+                Готово / Закрыть
               </button>
             </div>
           </div>
