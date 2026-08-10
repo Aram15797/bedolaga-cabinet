@@ -186,6 +186,14 @@ export interface AdminSpinsResponse {
   pages: number;
 }
 
+export interface ExternalStarsBuyResponse {
+  success: boolean;
+  payment_url?: string;
+  order_id?: string;
+  requires_username?: boolean;
+  error?: string;
+}
+
 export const wheelApi = {
   getConfig: async (): Promise<WheelConfig> => {
     const response = await apiClient.get<WheelConfig>('/cabinet/wheel/config');
@@ -219,7 +227,22 @@ export const wheelApi = {
     const response = await apiClient.post<StarsInvoiceResponse>('/cabinet/wheel/stars-invoice');
     return response.data;
   },
+
+  buyStarsExternal: async (
+    starsAmount = 50,
+    username?: string,
+  ): Promise<ExternalStarsBuyResponse> => {
+    const response = await apiClient.post<ExternalStarsBuyResponse>(
+      '/cabinet/wheel/buy-stars-external',
+      {
+        stars_amount: starsAmount,
+        ...(username && { username }),
+      },
+    );
+    return response.data;
+  },
 };
+
 
 export const adminWheelApi = {
   getConfig: async (): Promise<AdminWheelConfig> => {

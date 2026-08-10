@@ -94,6 +94,32 @@ export default function Wheel() {
   const [selectedSubscriptionId, setSelectedSubscriptionId] = useState<number | null>(null);
   const paymentTypeInitialized = useRef(false);
 
+  const [showUsernameModal, setShowUsernameModal] = useState(false);
+  const [inputUsername, setInputUsername] = useState('');
+  const [isBuyingExternalStars, setIsBuyingExternalStars] = useState(false);
+
+  const handleExternalStarsBuy = async (customUsername?: string) => {
+    setIsBuyingExternalStars(true);
+    try {
+      const starsToBuy = config?.spin_cost_stars || 50;
+      const res = await wheelApi.buyStarsExternal(starsToBuy, customUsername || inputUsername);
+      if (res.requires_username) {
+        setShowUsernameModal(true);
+        notify.info('Пожалуйста, укажите ваш Telegram @username для покупки Stars');
+      } else if (res.payment_url) {
+        setShowUsernameModal(false);
+        window.open(res.payment_url, '_blank');
+      } else if (res.error) {
+        notify.error(res.error);
+      }
+    } catch (err: any) {
+      notify.error('Ошибка при обращении к сервису покупки Stars');
+    } finally {
+      setIsBuyingExternalStars(false);
+    }
+  };
+
+
   const {
     data: config,
     isLoading,
@@ -582,8 +608,22 @@ export default function Wheel() {
                       </button>
                     )}
                   </div>
+                  {starsEnabled && paymentType === 'telegram_stars' && (
+                    <div className="mt-2 text-center pb-1">
+                      <button
+                        type="button"
+                        onClick={() => handleExternalStarsBuy()}
+                        disabled={isSpinning || isBuyingExternalStars}
+                        className="inline-flex items-center gap-1.5 text-xs text-accent-400 hover:text-accent-300 transition-colors font-medium hover:underline"
+                      >
+                        <StarIcon className="h-3.5 w-3.5" />
+                        {isBuyingExternalStars ? 'Загрузка...' : 'Купить Звёзды ⭐'}
+                      </button>
+                    </div>
+                  )}
                 </div>
               )}
+
 
               {/* Subscription selector for days payment in multi-tariff */}
               {paymentType === 'subscription_days' &&
@@ -819,6 +859,54 @@ export default function Wheel() {
           )}
         </AnimatePresence>
       </Card>
+
+      {/* Modal to ask for @username if user's Telegram username is missing */}
+      {showUsernameModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm animate-fade-in">
+          <div className="w-full max-w-md space-y-4 rounded-2xl border border-dark-700 bg-dark-900 p-6 shadow-xl">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-bold text-dark-50">Покупка Telegram Stars</h3>
+              <button
+                type="button"
+                onClick={() => setShowUsernameModal(false)}
+                className="rounded-lg p-1 text-dark-400 hover:bg-dark-800 hover:text-dark-200"
+              >
+                <CloseIcon className="h-5 w-5" />
+              </button>
+            </div>
+            <p className="text-sm text-dark-300">
+              У вашего аккаунта не найден Telegram @username. Пожалуйста, укажите ваш @username, чтобы сервис смог выдать вам Stars:
+            </p>
+            <div>
+              <input
+                type="text"
+                value={inputUsername}
+                onChange={(e) => setInputUsername(e.target.value)}
+                placeholder="@username"
+                className="w-full rounded-xl border border-dark-700 bg-dark-800 px-4 py-2.5 text-sm text-white placeholder-dark-500 focus:border-accent-500 focus:outline-none"
+              />
+            </div>
+            <div className="flex justify-end gap-2 pt-2">
+              <button
+                type="button"
+                onClick={() => setShowUsernameModal(false)}
+                className="rounded-xl border border-dark-700 bg-dark-800 px-4 py-2 text-sm font-medium text-dark-300 hover:bg-dark-700"
+              >
+                Отмена
+              </button>
+              <button
+                type="button"
+                onClick={() => handleExternalStarsBuy(inputUsername)}
+                disabled={!inputUsername.trim() || isBuyingExternalStars}
+                className="rounded-xl bg-accent-500 px-4 py-2 text-sm font-medium text-white hover:bg-accent-600 disabled:opacity-50"
+              >
+                {isBuyingExternalStars ? 'Загрузка...' : 'Купить Stars'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
+
