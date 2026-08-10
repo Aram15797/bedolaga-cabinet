@@ -98,16 +98,20 @@ export default function Wheel() {
   const [inputUsername, setInputUsername] = useState('');
   const [isBuyingExternalStars, setIsBuyingExternalStars] = useState(false);
   const [paymentModalUrl, setPaymentModalUrl] = useState<string | null>(null);
+  const [showStarsQuantityModal, setShowStarsQuantityModal] = useState(false);
+  const [selectedStarsAmount, setSelectedStarsAmount] = useState<number>(50);
 
-  const handleExternalStarsBuy = async (customUsername?: string) => {
+  const handleExternalStarsBuy = async (amountToBuy?: number, customUsername?: string) => {
     setIsBuyingExternalStars(true);
     try {
-      const starsToBuy = Math.max(50, config?.spin_cost_stars || 50);
+      const starsToBuy = Math.max(50, amountToBuy || selectedStarsAmount || 50);
       const res = await wheelApi.buyStarsExternal(starsToBuy, customUsername || inputUsername);
       if (res.requires_username) {
+        setShowStarsQuantityModal(false);
         setShowUsernameModal(true);
         notify.info('Пожалуйста, укажите ваш Telegram @username для покупки Stars');
       } else if (res.payment_url) {
+        setShowStarsQuantityModal(false);
         setShowUsernameModal(false);
         setPaymentModalUrl(res.payment_url);
       } else if (res.error) {
@@ -613,7 +617,7 @@ export default function Wheel() {
                     <div className="mt-2.5 text-center border-t border-dark-700/30 pt-2 pb-0.5">
                       <button
                         type="button"
-                        onClick={() => handleExternalStarsBuy()}
+                        onClick={() => setShowStarsQuantityModal(true)}
                         disabled={isSpinning || isBuyingExternalStars}
                         className="inline-flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-lg bg-accent-500/10 hover:bg-accent-500/20 text-accent-400 text-xs font-semibold transition-all border border-accent-500/20"
                       >
@@ -898,11 +902,94 @@ export default function Wheel() {
               </button>
               <button
                 type="button"
-                onClick={() => handleExternalStarsBuy(inputUsername)}
+                onClick={() => handleExternalStarsBuy(selectedStarsAmount, inputUsername)}
                 disabled={!inputUsername.trim() || isBuyingExternalStars}
                 className="rounded-xl bg-accent-500 px-4 py-2 text-sm font-medium text-white hover:bg-accent-600 disabled:opacity-50"
               >
                 {isBuyingExternalStars ? 'Загрузка...' : 'Купить Stars'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Stars Quantity Selection Modal */}
+      {showStarsQuantityModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm animate-fade-in">
+          <div className="relative w-full max-w-md overflow-hidden rounded-2xl border border-dark-700 bg-dark-900 p-6 shadow-2xl">
+            <div className="mb-4 flex items-center justify-between border-b border-dark-800 pb-3">
+              <div className="flex items-center gap-2">
+                <StarIcon className="h-5 w-5 text-accent-400" />
+                <h3 className="font-bold text-dark-100 text-lg">Покупка Telegram Stars</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowStarsQuantityModal(false)}
+                className="rounded-lg p-1.5 text-dark-400 hover:bg-dark-800 hover:text-dark-200 transition-colors"
+              >
+                <CloseIcon className="h-5 w-5" />
+              </button>
+            </div>
+
+            <p className="mb-4 text-sm text-dark-300">
+              Выберите или укажите количество Telegram Stars для покупки (минимум 50):
+            </p>
+
+            {/* Quick Presets */}
+            <div className="mb-4 grid grid-cols-5 gap-1.5">
+              {[50, 100, 250, 500, 1000].map((preset) => (
+                <button
+                  key={preset}
+                  type="button"
+                  onClick={() => setSelectedStarsAmount(preset)}
+                  className={`rounded-xl py-2 text-xs font-semibold transition-all border ${
+                    selectedStarsAmount === preset
+                      ? 'bg-accent-500/20 border-accent-500/50 text-accent-400'
+                      : 'bg-dark-800/60 border-dark-700/50 text-dark-300 hover:bg-dark-800'
+                  }`}
+                >
+                  {preset} ⭐
+                </button>
+              ))}
+            </div>
+
+            {/* Manual input */}
+            <div className="mb-6">
+              <label className="mb-1.5 block text-xs font-medium text-dark-400">
+                Количество Stars:
+              </label>
+              <div className="relative">
+                <input
+                  type="number"
+                  min={50}
+                  value={selectedStarsAmount}
+                  onChange={(e) => setSelectedStarsAmount(Math.max(1, parseInt(e.target.value) || 0))}
+                  className="w-full rounded-xl border border-dark-700 bg-dark-800 px-4 py-2.5 text-base font-semibold text-white placeholder-dark-500 focus:border-accent-500 focus:outline-none"
+                />
+                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-dark-400">
+                  ⭐
+                </span>
+              </div>
+              {selectedStarsAmount < 50 && (
+                <p className="mt-1 text-xs text-error-400">Минимальный пакет — 50 Stars</p>
+              )}
+            </div>
+
+            <div className="flex justify-end gap-2.5">
+              <button
+                type="button"
+                onClick={() => setShowStarsQuantityModal(false)}
+                className="rounded-xl border border-dark-700 bg-dark-800 px-4 py-2.5 text-sm font-medium text-dark-300 hover:bg-dark-700 transition-colors"
+              >
+                Отмена
+              </button>
+              <button
+                type="button"
+                onClick={() => handleExternalStarsBuy(selectedStarsAmount)}
+                disabled={selectedStarsAmount < 50 || isBuyingExternalStars}
+                className="rounded-xl bg-accent-500 px-5 py-2.5 text-sm font-semibold text-white hover:bg-accent-600 disabled:opacity-50 transition-colors flex items-center gap-2"
+              >
+                {isBuyingExternalStars ? 'Загрузка...' : `Оплатить ${selectedStarsAmount} Stars ⭐`}
               </button>
             </div>
           </div>
