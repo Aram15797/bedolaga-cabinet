@@ -608,21 +608,22 @@ export default function Wheel() {
                       </button>
                     )}
                   </div>
-                  {starsEnabled && paymentType === 'telegram_stars' && (
-                    <div className="mt-2 text-center pb-1">
+                  {starsEnabled && (
+                    <div className="mt-2.5 text-center border-t border-dark-700/30 pt-2 pb-0.5">
                       <button
                         type="button"
                         onClick={() => handleExternalStarsBuy()}
                         disabled={isSpinning || isBuyingExternalStars}
-                        className="inline-flex items-center gap-1.5 text-xs text-accent-400 hover:text-accent-300 transition-colors font-medium hover:underline"
+                        className="inline-flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-lg bg-accent-500/10 hover:bg-accent-500/20 text-accent-400 text-xs font-semibold transition-all border border-accent-500/20"
                       >
-                        <StarIcon className="h-3.5 w-3.5" />
-                        {isBuyingExternalStars ? 'Загрузка...' : 'Купить Звёзды ⭐'}
+                        <StarIcon className="h-4 w-4" />
+                        {isBuyingExternalStars ? 'Загрузка...' : 'Купить Звёзды ⭐ (пополнение Telegram Stars)'}
                       </button>
                     </div>
                   )}
                 </div>
               )}
+
 
 
               {/* Subscription selector for days payment in multi-tariff */}
