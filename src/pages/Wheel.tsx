@@ -101,7 +101,7 @@ export default function Wheel() {
   const handleExternalStarsBuy = async (customUsername?: string) => {
     setIsBuyingExternalStars(true);
     try {
-      const starsToBuy = config?.spin_cost_stars || 50;
+      const starsToBuy = Math.max(50, config?.spin_cost_stars || 50);
       const res = await wheelApi.buyStarsExternal(starsToBuy, customUsername || inputUsername);
       if (res.requires_username) {
         setShowUsernameModal(true);
