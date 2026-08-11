@@ -619,7 +619,6 @@ export default function Wheel() {
                         type="button"
                         onClick={() => {
                           setShowStarsQuantityModal(true);
-                          window.scrollTo({ top: 0, behavior: 'smooth' });
                         }}
                         disabled={isSpinning || isBuyingExternalStars}
                         className="inline-flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-lg bg-accent-500/10 hover:bg-accent-500/20 text-accent-400 text-xs font-semibold transition-all border border-accent-500/20"
@@ -871,7 +870,7 @@ export default function Wheel() {
 
       {/* Modal to ask for @username if user's Telegram username is missing */}
       {showUsernameModal && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4 backdrop-blur-md animate-fade-in overflow-y-auto">
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 p-4 pb-24 sm:pb-4 backdrop-blur-md animate-fade-in overflow-y-auto">
           <div className="relative my-auto w-full max-w-md space-y-4 rounded-2xl border border-dark-700 bg-dark-900 p-6 shadow-2xl">
             <div className="flex items-center justify-between border-b border-dark-800 pb-3">
               <h3 className="text-lg font-bold text-dark-50">Покупка Telegram Stars</h3>
@@ -918,7 +917,7 @@ export default function Wheel() {
 
       {/* Stars Quantity Selection Modal */}
       {showStarsQuantityModal && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4 backdrop-blur-md animate-fade-in overflow-y-auto">
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 p-4 pb-24 sm:pb-4 backdrop-blur-md animate-fade-in overflow-y-auto">
           <div className="relative my-auto w-full max-w-md overflow-hidden rounded-2xl border border-dark-700 bg-dark-900 p-6 shadow-2xl">
             <div className="mb-4 flex items-center justify-between border-b border-dark-800 pb-3">
               <div className="flex items-center gap-2">
@@ -1001,7 +1000,7 @@ export default function Wheel() {
 
       {/* Embedded Stars Payment Modal */}
       {paymentModalUrl && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-3 sm:p-6 backdrop-blur-sm animate-fade-in">
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/75 p-3 pb-24 sm:p-6 backdrop-blur-sm animate-fade-in">
           <div className="relative flex h-[85vh] max-h-[680px] w-full max-w-xl flex-col overflow-hidden rounded-2xl border border-dark-700 bg-dark-900 shadow-2xl">
             {/* Header */}
             <div className="flex items-center justify-between border-b border-dark-800 px-5 py-3.5 bg-dark-900">
