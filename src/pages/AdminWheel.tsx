@@ -980,7 +980,7 @@ function InlinePrizeForm({
     color: prize?.color || '#3B82F6',
     prize_value_kopeks: prize?.prize_value_kopeks || 0,
     is_active: prize?.is_active ?? true,
-    manual_probability: prize?.manual_probability || null,
+    manual_probability: prize?.manual_probability ?? null,
     promo_balance_bonus_kopeks: prize?.promo_balance_bonus_kopeks || 0,
     promo_subscription_days: prize?.promo_subscription_days || 0,
     promo_traffic_gb: prize?.promo_traffic_gb || 0,
