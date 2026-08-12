@@ -2,7 +2,13 @@ import { uiLocale } from '@/utils/uiLocale';
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
-import { wheelApi, type WheelPrize, type SpinResult, type SpinHistoryItem } from '../api/wheel';
+import {
+  wheelApi,
+  type WheelPrize,
+  type SpinResult,
+  type SpinHistoryItem,
+  type SpinHistoryResponse,
+} from '../api/wheel';
 import FortuneWheel from '../components/wheel/FortuneWheel';
 import WheelLegend from '../components/wheel/WheelLegend';
 import { usePlatform, useHaptic } from '@/platform';
@@ -34,10 +40,37 @@ function rotationForIndex(prizes: WheelPrize[], prizeIndex: number): number {
   return 360 - baseAngle + offset;
 }
 
-/** Index of the "Nothing" sector, or 0 if there isn't one. */
+/**
+ * Index of a generic "Nothing" sector, ensuring prizes with manual_probability === 0 are NEVER landed on.
+ */
 function neutralIndex(prizes: WheelPrize[]): number {
-  const idx = prizes.findIndex((p) => p.prize_type === 'nothing');
-  return idx === -1 ? 0 : idx;
+  if (prizes.length === 0) return 0;
+  // 1. Look for a sector that is prize_type === 'nothing', has manual_probability !== 0,
+  // AND has a display name indicating a generic loss/nothing (to avoid picking e.g. "iPhone 17 pro"!)
+  const idx = prizes.findIndex((p) => {
+    if (p.manual_probability === 0) return false;
+    if (p.prize_type !== 'nothing') return false;
+    const name = (p.display_name || '').toLowerCase();
+    return (
+      name.includes('ничего') ||
+      name.includes('пусто') ||
+      name.includes('повезет') ||
+      name.includes('nothing') ||
+      name.includes('empty') ||
+      name.includes('try again')
+    );
+  });
+  if (idx !== -1) return idx;
+
+  // 2. Fallback to any winnable 'nothing' sector (manual_probability !== 0)
+  const fallbackNothingIdx = prizes.findIndex(
+    (p) => p.prize_type === 'nothing' && p.manual_probability !== 0,
+  );
+  if (fallbackNothingIdx !== -1) return fallbackNothingIdx;
+
+  // 3. Fallback to any winnable sector (manual_probability !== 0)
+  const winnableIdx = prizes.findIndex((p) => p.manual_probability !== 0);
+  return winnableIdx !== -1 ? winnableIdx : 0;
 }
 
 /**
@@ -79,7 +112,7 @@ function neutralRotation(prizes: WheelPrize[]): number {
 export default function Wheel() {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
-  const { openInvoice, capabilities } = usePlatform();
+  const { openInvoice, openLink, capabilities } = usePlatform();
   const haptic = useHaptic();
   const notify = useNotify();
 
@@ -114,17 +147,16 @@ export default function Wheel() {
       } else if (res.payment_url) {
         setShowStarsQuantityModal(false);
         setShowUsernameModal(false);
-        window.open(res.payment_url, '_blank');
+        openLink(res.payment_url);
       } else if (res.error) {
         notify.error(res.error);
       }
-    } catch (err: any) {
+    } catch (_err) {
       notify.error('Ошибка при обращении к сервису покупки Stars');
     } finally {
       setIsBuyingExternalStars(false);
     }
   };
-
 
   const {
     data: config,
@@ -169,11 +201,11 @@ export default function Wheel() {
       if (signal.aborted) return null;
 
       // Get current history to find the latest spin ID
-      let historyBefore;
+      let historyBefore: SpinHistoryResponse;
       try {
         historyBefore = await wheelApi.getHistory(1, 1);
       } catch {
-        historyBefore = { items: [], total: 0 };
+        historyBefore = { items: [], total: 0, page: 1, per_page: 1, pages: 0 };
       }
       const lastSpinIdBefore = historyBefore.items.length > 0 ? historyBefore.items[0].id : 0;
 
@@ -626,14 +658,14 @@ export default function Wheel() {
                         className="inline-flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-lg bg-accent-500/10 hover:bg-accent-500/20 text-accent-400 text-xs font-semibold transition-all border border-accent-500/20"
                       >
                         <StarIcon className="h-4 w-4" />
-                        {isBuyingExternalStars ? 'Загрузка...' : 'Купить Звёзды ⭐ (пополнение Telegram Stars)'}
+                        {isBuyingExternalStars
+                          ? 'Загрузка...'
+                          : 'Купить Звёзды ⭐ (пополнение Telegram Stars)'}
                       </button>
                     </div>
                   )}
                 </div>
               )}
-
-
 
               {/* Subscription selector for days payment in multi-tariff */}
               {paymentType === 'subscription_days' &&
@@ -888,7 +920,8 @@ export default function Wheel() {
               </button>
             </div>
             <p className="text-sm text-dark-300">
-              У вашего аккаунта не найден Telegram @username. Пожалуйста, укажите ваш @username, чтобы сервис смог выдать вам Stars:
+              У вашего аккаунта не найден Telegram @username. Пожалуйста, укажите ваш @username,
+              чтобы сервис смог выдать вам Stars:
             </p>
             <div>
               <input
@@ -970,7 +1003,9 @@ export default function Wheel() {
                   type="number"
                   min={50}
                   value={selectedStarsAmount}
-                  onChange={(e) => setSelectedStarsAmount(Math.max(1, parseInt(e.target.value) || 0))}
+                  onChange={(e) =>
+                    setSelectedStarsAmount(Math.max(1, parseInt(e.target.value, 10) || 0))
+                  }
                   className="w-full rounded-xl border border-dark-700 bg-dark-800 px-4 py-2.5 text-base font-semibold text-white placeholder-dark-500 focus:border-accent-500 focus:outline-none"
                 />
                 <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-dark-400">
@@ -1056,4 +1091,3 @@ export default function Wheel() {
     </div>
   );
 }
-

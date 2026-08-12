@@ -6,6 +6,7 @@ export interface WheelPrize {
   emoji: string;
   color: string;
   prize_type: string;
+  manual_probability?: number | null;
 }
 
 export interface EligibleSubscription {
@@ -242,7 +243,6 @@ export const wheelApi = {
     return response.data;
   },
 };
-
 
 export const adminWheelApi = {
   getConfig: async (): Promise<AdminWheelConfig> => {
