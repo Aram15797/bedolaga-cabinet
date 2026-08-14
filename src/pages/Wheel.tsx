@@ -112,7 +112,7 @@ function neutralRotation(prizes: WheelPrize[]): number {
 export default function Wheel() {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
-  const { openInvoice, openLink, capabilities } = usePlatform();
+  const { openInvoice, openLink, openTelegramLink, capabilities } = usePlatform();
   const haptic = useHaptic();
   const notify = useNotify();
 
@@ -147,7 +147,11 @@ export default function Wheel() {
       } else if (res.payment_url) {
         setShowStarsQuantityModal(false);
         setShowUsernameModal(false);
-        openLink(res.payment_url);
+        if (res.payment_url.includes('t.me/')) {
+          openTelegramLink(res.payment_url);
+        } else {
+          openLink(res.payment_url);
+        }
       } else if (res.error) {
         notify.error(res.error);
       }
