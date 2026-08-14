@@ -79,7 +79,7 @@ function neutralRotation(prizes: WheelPrize[]): number {
 export default function Wheel() {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
-  const { openInvoice, capabilities } = usePlatform();
+  const { openInvoice, capabilities, openLink, openTelegramLink } = usePlatform();
   const haptic = useHaptic();
   const notify = useNotify();
 
@@ -114,17 +114,20 @@ export default function Wheel() {
       } else if (res.payment_url) {
         setShowStarsQuantityModal(false);
         setShowUsernameModal(false);
-        window.open(res.payment_url, '_blank');
+        if (res.payment_url.includes('t.me/')) {
+          openTelegramLink(res.payment_url);
+        } else {
+          openLink(res.payment_url);
+        }
       } else if (res.error) {
         notify.error(res.error);
       }
-    } catch (err: any) {
+    } catch {
       notify.error('Ошибка при обращении к сервису покупки Stars');
     } finally {
       setIsBuyingExternalStars(false);
     }
   };
-
 
   const {
     data: config,
@@ -625,14 +628,14 @@ export default function Wheel() {
                         className="inline-flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-lg bg-accent-500/10 hover:bg-accent-500/20 text-accent-400 text-xs font-semibold transition-all border border-accent-500/20"
                       >
                         <StarIcon className="h-4 w-4" />
-                        {isBuyingExternalStars ? 'Загрузка...' : 'Купить Звёзды ⭐ (пополнение Telegram Stars)'}
+                        {isBuyingExternalStars
+                          ? 'Загрузка...'
+                          : 'Купить Звёзды ⭐ (пополнение Telegram Stars)'}
                       </button>
                     </div>
                   )}
                 </div>
               )}
-
-
 
               {/* Subscription selector for days payment in multi-tariff */}
               {paymentType === 'subscription_days' &&
@@ -887,7 +890,8 @@ export default function Wheel() {
               </button>
             </div>
             <p className="text-sm text-dark-300">
-              У вашего аккаунта не найден Telegram @username. Пожалуйста, укажите ваш @username, чтобы сервис смог выдать вам Stars:
+              У вашего аккаунта не найден Telegram @username. Пожалуйста, укажите ваш @username,
+              чтобы сервис смог выдать вам Stars:
             </p>
             <div>
               <input
@@ -969,7 +973,9 @@ export default function Wheel() {
                   type="number"
                   min={50}
                   value={selectedStarsAmount}
-                  onChange={(e) => setSelectedStarsAmount(Math.max(1, parseInt(e.target.value) || 0))}
+                  onChange={(e) =>
+                    setSelectedStarsAmount(Math.max(1, parseInt(e.target.value, 10) || 0))
+                  }
                   className="w-full rounded-xl border border-dark-700 bg-dark-800 px-4 py-2.5 text-base font-semibold text-white placeholder-dark-500 focus:border-accent-500 focus:outline-none"
                 />
                 <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-dark-400">
@@ -1055,4 +1061,3 @@ export default function Wheel() {
     </div>
   );
 }
-
