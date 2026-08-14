@@ -266,6 +266,40 @@ function createCloudStorageController(): CloudStorageController | null {
   };
 }
 
+function extractInvoiceSlug(url: string): string | null {
+  if (!url) return null;
+  const cleanUrl = url.trim();
+  const match = cleanUrl.match(
+    /^(?:https?:\/\/t\.me\/(?:\$|invoice\/)?|tg:\/\/invoice\?slug=|\$)?([A-Za-z0-9_-]+)/i,
+  );
+  if (match && match[1]) {
+    return match[1];
+  }
+  return null;
+}
+
+async function fallbackOpenInvoice(url: string, slug: string | null): Promise<InvoiceStatus> {
+  if (slug) {
+    try {
+      const status = await (openInvoice(slug) as Promise<InvoiceStatus>);
+      if (status) return status;
+    } catch {}
+  }
+
+  try {
+    const status = await (openInvoice(url, 'url') as Promise<InvoiceStatus>);
+    if (status) return status;
+  } catch {}
+
+  try {
+    openTelegramLink(url);
+    return 'pending';
+  } catch {
+    window.open(url, '_blank');
+    return 'pending';
+  }
+}
+
 export function createTelegramAdapter(): PlatformContext {
   return {
     platform: 'telegram',
@@ -277,13 +311,23 @@ export function createTelegramAdapter(): PlatformContext {
     theme: createThemeController(),
     cloudStorage: createCloudStorageController(),
 
-    openInvoice(url: string): Promise<InvoiceStatus> {
-      try {
-        return openInvoice(url, 'url') as Promise<InvoiceStatus>;
-      } catch {
-        window.open(url, '_blank');
-        return Promise.resolve('pending');
+    async openInvoice(url: string): Promise<InvoiceStatus> {
+      const slug = extractInvoiceSlug(url);
+      const tgWebApp = (window as any).Telegram?.WebApp;
+
+      if (tgWebApp && typeof tgWebApp.openInvoice === 'function') {
+        return new Promise<InvoiceStatus>((resolve) => {
+          try {
+            tgWebApp.openInvoice(url, (status: string) => {
+              resolve((status as InvoiceStatus) || 'cancelled');
+            });
+          } catch {
+            resolve(fallbackOpenInvoice(url, slug));
+          }
+        });
       }
+
+      return fallbackOpenInvoice(url, slug);
     },
 
     openLink(url: string, options?: { tryInstantView?: boolean }) {
