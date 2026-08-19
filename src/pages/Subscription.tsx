@@ -256,7 +256,11 @@ export default function Subscription() {
     staleTime: 0,
     refetchOnMount: 'always',
   });
-  const { data: connectionLink, isLoading: isConnectionLinkLoading } = useQuery({
+  const {
+    data: connectionLink,
+    isLoading: isConnectionLinkLoading,
+    isError: isConnectionLinkError,
+  } = useQuery({
     queryKey: ['connection-link', subscriptionId],
     queryFn: () => subscriptionApi.getConnectionLink(subscriptionId),
     retry: false,
@@ -265,6 +269,16 @@ export default function Subscription() {
 
   // Extract subscription from response (null if no subscription)
   const subscription = subscriptionResponse?.subscription ?? null;
+
+  // Fallback URL from the /subscription response — only use it once the
+  // connection-link query has *settled* (success OR error) AND the
+  // subscription data itself has loaded. This prevents a race where
+  // connection-link resolves first (before subscription data arrives)
+  // and returns undefined/error, making fallbackUrl momentarily null.
+  const connectionLinkSettled = !isConnectionLinkLoading;
+  const subscriptionLoaded = !isLoading && subscription !== null;
+  const canUseFallback = connectionLinkSettled && subscriptionLoaded;
+
   const displayedConnectionUrl = useMemo(
     () =>
       resolveConnectionUrlForUi({
@@ -275,7 +289,9 @@ export default function Subscription() {
         happCryptLink: connectionLink?.happ_cryptolink,
         happCryptoLink: connectionLink?.happ_crypto_link,
         happLink: connectionLink?.happ_link,
-        fallbackUrl: isConnectionLinkLoading ? null : (subscription?.subscription_url ?? null),
+        // Use fallback ONLY when both queries have settled — otherwise keep
+        // null so the URL isn't shown/hidden prematurely.
+        fallbackUrl: canUseFallback ? (subscription?.subscription_url ?? null) : null,
       }),
     [
       connectionLink?.connect_mode,
@@ -285,12 +301,19 @@ export default function Subscription() {
       connectionLink?.happ_link,
       connectionLink?.happ_scheme_link,
       connectionLink?.subscription_url,
-      isConnectionLinkLoading,
+      canUseFallback,
       subscription?.subscription_url,
     ],
   );
   const shouldHideConnectionLink =
-    subscription?.hide_subscription_link || connectionLink?.hide_link;
+    // While connection-link is loading, don't hide (avoid flicker).
+    // Once settled: respect hide_link from the dedicated endpoint;
+    // fall back to the flag embedded in the subscription response.
+    isConnectionLinkLoading
+      ? false
+      : isConnectionLinkError
+        ? (subscription?.hide_subscription_link ?? false)
+        : (connectionLink?.hide_link ?? subscription?.hide_subscription_link ?? false);
 
   // Traffic zone (theme-aware) — called unconditionally at top level
   const usedPercent = trafficData?.traffic_used_percent ?? subscription?.traffic_used_percent ?? 0;
