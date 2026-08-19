@@ -401,21 +401,27 @@ function PaymentMethodCard({
       {isSelected && hasSubOptions && (
         <div className="border-t border-dark-800/30 px-4 pb-4 pt-3">
           <div className="flex flex-wrap gap-2">
-            {method.sub_options!.map((opt) => (
-              <button
-                key={opt.id}
-                type="button"
-                onClick={() => onSelectSubOption(opt.id)}
-                className={cn(
-                  'rounded-xl px-4 py-2 text-sm font-medium transition-all duration-200',
-                  selectedSubOption === opt.id
-                    ? 'bg-accent-500 text-on-accent shadow-sm shadow-accent-500/25'
-                    : 'bg-dark-800/50 text-dark-300 hover:bg-dark-700/50 hover:text-dark-100',
-                )}
-              >
-                {opt.name}
-              </button>
-            ))}
+            {method.sub_options!.map((opt) => {
+              const lowerId = opt.id.toLowerCase();
+              const isRecurrent = lowerId.includes('recurrent') || lowerId === '6' || opt.name.toLowerCase().includes('рекуррент');
+              const buttonText = isRecurrent ? 'Подписка' : opt.name;
+
+              return (
+                <button
+                  key={opt.id}
+                  type="button"
+                  onClick={() => onSelectSubOption(opt.id)}
+                  className={cn(
+                    'rounded-xl px-4 py-2 text-sm font-medium transition-all duration-200',
+                    selectedSubOption === opt.id
+                      ? 'bg-accent-500 text-on-accent shadow-sm shadow-accent-500/25'
+                      : 'bg-dark-800/50 text-dark-300 hover:bg-dark-700/50 hover:text-dark-100',
+                  )}
+                >
+                  {buttonText}
+                </button>
+              );
+            })}
           </div>
         </div>
       )}
