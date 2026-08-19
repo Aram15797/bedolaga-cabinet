@@ -404,7 +404,7 @@ function PaymentMethodCard({
             {method.sub_options!.map((opt) => {
               const lowerId = opt.id.toLowerCase();
               const isRecurrent = lowerId.includes('recurrent') || lowerId === '6' || opt.name.toLowerCase().includes('рекуррент');
-              const buttonText = isRecurrent ? 'Подписка' : opt.name;
+              const buttonText = isRecurrent ? 'СБП (Подписка)' : opt.name;
 
               return (
                 <button
