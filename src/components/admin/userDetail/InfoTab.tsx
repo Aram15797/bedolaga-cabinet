@@ -88,6 +88,7 @@ export interface InfoTabProps {
   onInlineConfirm: (actionKey: string, executeFn: () => Promise<void>) => void;
   onResetTrial: () => Promise<void>;
   onResetSubscription: () => Promise<void>;
+  onCancelAllRecurring?: () => Promise<void>;
   onDisableUser: () => Promise<void>;
   onFullDeleteUser: () => Promise<void>;
   onResetPassword: () => Promise<string>;
@@ -132,6 +133,7 @@ export function InfoTab(props: InfoTabProps) {
     onInlineConfirm,
     onResetTrial,
     onResetSubscription,
+    onCancelAllRecurring,
     onDisableUser,
     onFullDeleteUser,
     onResetPassword,
@@ -635,6 +637,21 @@ export function InfoTab(props: InfoTabProps) {
               ? t('admin.users.detail.actions.areYouSure')
               : t('admin.users.userActions.resetSubscription')}
           </button>
+          {hasPermission('users:subscription') && onCancelAllRecurring && (
+            <button
+              onClick={() => onInlineConfirm('cancelAllRecurring', onCancelAllRecurring)}
+              disabled={actionLoading}
+              className={`rounded-lg px-3 py-2 text-sm font-medium transition-all disabled:opacity-50 ${
+                confirmingAction === 'cancelAllRecurring'
+                  ? 'bg-warning-500 text-white'
+                  : 'bg-warning-500/15 text-warning-400 hover:bg-warning-500/25'
+              }`}
+            >
+              {confirmingAction === 'cancelAllRecurring'
+                ? t('admin.users.detail.actions.areYouSure')
+                : t('admin.users.userActions.cancelAllRecurring', 'Отключить все рекурренты (API)')}
+            </button>
+          )}
           <button
             onClick={() => onInlineConfirm('resetPassword', handleResetPasswordClick)}
             disabled={actionLoading}

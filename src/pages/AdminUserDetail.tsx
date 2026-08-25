@@ -16,6 +16,7 @@ import {
   type UpdateSubscriptionRequest,
   type AdminUserGiftsResponse,
   type SubscriptionRequestRecord,
+  type CancelAllRecurringResponse,
 } from '../api/adminUsers';
 import { promocodesApi, type PromoGroup } from '../api/promocodes';
 import { RefreshIcon, TelegramSmallIcon as TelegramIcon } from '@/components/icons';
@@ -28,6 +29,7 @@ import { ActivityTab } from '../components/admin/userDetail/ActivityTab';
 import { TicketsTab } from '../components/admin/userDetail/TicketsTab';
 import { InfoTab } from '../components/admin/userDetail/InfoTab';
 import { SubscriptionTab } from '../components/admin/userDetail/SubscriptionTab';
+import { RecurringCancellationReportModal } from '../components/admin/userDetail/RecurringCancellationReportModal';
 import { toNumber } from '../utils/inputHelpers';
 import { usePermissionStore } from '../store/permissions';
 
@@ -84,6 +86,8 @@ export default function AdminUserDetail() {
   const [activeSubscriptionId, setActiveSubscriptionId] = useState<number | null>(null);
   const hasAutoSelectedSub = useRef(false);
   const [subscriptionDetailView, setSubscriptionDetailView] = useState(false);
+  const [recurringReport, setRecurringReport] = useState<CancelAllRecurringResponse | null>(null);
+  const [recurringModalOpen, setRecurringModalOpen] = useState(false);
 
   // Promo group
   const [promoGroups, setPromoGroups] = useState<PromoGroup[]>([]);
@@ -665,6 +669,26 @@ export default function AdminUserDetail() {
     }
   };
 
+  const handleCancelAllRecurring = async () => {
+    if (!userId) return;
+    setActionLoading(true);
+    try {
+      const result = await adminUsersApi.cancelAllRecurring(userId);
+      setRecurringReport(result);
+      setRecurringModalOpen(true);
+      if (result.success) {
+        notify.success(result.message, t('common.success'));
+      } else {
+        notify.warning(result.message, t('common.warning', 'Внимание'));
+      }
+      await loadUser();
+    } catch {
+      notify.error(t('admin.users.userActions.error'), t('common.error'));
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
   const handleDisableUser = async () => {
     if (!userId) return;
     setActionLoading(true);
@@ -907,6 +931,7 @@ export default function AdminUserDetail() {
             onInlineConfirm={handleInlineConfirm}
             onResetTrial={handleResetTrial}
             onResetSubscription={handleResetSubscription}
+            onCancelAllRecurring={handleCancelAllRecurring}
             onDisableUser={handleDisableUser}
             onFullDeleteUser={handleFullDeleteUser}
             onResetPassword={handleResetPassword}
@@ -920,6 +945,7 @@ export default function AdminUserDetail() {
             userSubscriptions={userSubscriptions}
             selectedSub={selectedSub}
             onCancelSbpRecurring={handleCancelSbpRecurring}
+            onCancelAllRecurring={handleCancelAllRecurring}
             activeSubscriptionId={activeSubscriptionId}
             onActiveSubscriptionChange={setActiveSubscriptionId}
             subscriptionDetailView={subscriptionDetailView}
@@ -1028,6 +1054,14 @@ export default function AdminUserDetail() {
           <ActivityTab userId={userId} formatDate={formatDate} />
         )}
       </div>
+
+      {/* Recurring Cancellation Report Modal */}
+      <RecurringCancellationReportModal
+        open={recurringModalOpen}
+        onClose={() => setRecurringModalOpen(false)}
+        report={recurringReport}
+        userName={user?.full_name || user?.username || (userId ? `#${userId}` : '')}
+      />
     </div>
   );
 }

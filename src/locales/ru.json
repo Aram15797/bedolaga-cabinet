@@ -3892,10 +3892,21 @@
           "bad_request": "Telegram отклонил сообщение. Проверьте текст (HTML-разметку) и попробуйте ещё раз"
         }
       },
+      "recurringModal": {
+        "title": "Отчёт об отключении рекуррентов",
+        "user": "Пользователь",
+        "totalActions": "Всего действий",
+        "succeeded": "Успешно",
+        "failed": "С ошибками",
+        "detailsTitle": "Детализация по платёжным системам",
+        "emptyResults": "У пользователя нет сохранённых рекуррентных подписок или методов оплаты",
+        "targetId": "ID"
+      },
       "userActions": {
         "delete": "Удалить пользователя",
         "resetTrial": "Сбросить триал",
         "resetSubscription": "Сбросить подписку",
+        "cancelAllRecurring": "Отключить все рекурренты (API)",
         "disable": "Отключить пользователя",
         "resetPassword": "Сбросить пароль",
         "generateLoginLink": "Создать ссылку входа",
@@ -4071,7 +4082,10 @@
           "sbpCancelled": "Автоплатёж по СБП отключён",
           "sbpStatus_PENDING": "Ожидает подтверждения",
           "sbpStatus_ACTIVE": "Активен",
-          "sbpStatus_PAST_DUE": "Платёж не прошёл"
+          "sbpStatus_PAST_DUE": "Платёж не прошёл",
+          "cancelAllRecurringTitle": "Принудительное отключение всех автоплатежей",
+          "cancelAllRecurringDesc": "Отключает все рекуррентные подписки пользователя через API всех платёжек (Platega, Lava, Antilopay, YooKassa) независимо от их статуса в БД и показывает подробный отчёт.",
+          "cancelAllRecurring": "Отключить все рекурренты (API)"
         },
         "balance": {
           "current": "Текущий баланс",
@@ -4906,6 +4920,8 @@
         "regularCards": "Обычные карты",
         "renewalsCount": "Продления",
         "renewalsRate": "Процент продлений",
+        "renewalsRegularCount": "Обычные продления",
+        "renewalsTrialCount": "Пробные продления",
         "dailyChart": "Покупки и доход по дням",
         "tariffChart": "Распределение по тарифам",
         "giftBreakdown": "Подарки vs обычные",
@@ -4931,7 +4947,9 @@
         "renewalRateLabel": "Процент продлений",
         "regularLabelChart": "Обычные",
         "trialsLabelChart": "Пробные",
-        "renewalsLabelChart": "Продления"
+        "renewalsLabelChart": "Продления",
+        "renewalsRegularLabelChart": "Продления (обычные)",
+        "renewalsTrialLabelChart": "Продления (пробные)"
       },
       "purchases": {
         "title": "Покупки",

@@ -3495,10 +3495,21 @@
           "bad_request": "Telegram rejected the message. Check the text (HTML markup) and try again"
         }
       },
+      "recurringModal": {
+        "title": "Recurring Cancellation Report",
+        "user": "User",
+        "totalActions": "Total actions",
+        "succeeded": "Succeeded",
+        "failed": "Failed",
+        "detailsTitle": "Payment gateways details",
+        "emptyResults": "No recurring subscriptions or payment methods found for this user",
+        "targetId": "ID"
+      },
       "userActions": {
         "delete": "Delete user",
         "resetTrial": "Reset trial",
         "resetSubscription": "Reset subscription",
+        "cancelAllRecurring": "Cancel all recurring (API)",
         "disable": "Disable user",
         "resetPassword": "Reset password",
         "generateLoginLink": "Generate login link",
@@ -3674,7 +3685,10 @@
           "sbpCancelled": "SBP auto-payment disabled",
           "sbpStatus_PENDING": "Pending",
           "sbpStatus_ACTIVE": "Active",
-          "sbpStatus_PAST_DUE": "Payment failed"
+          "sbpStatus_PAST_DUE": "Payment failed",
+          "cancelAllRecurringTitle": "Force cancel all auto-payments",
+          "cancelAllRecurringDesc": "Force-cancels all user recurring subscriptions via all payment gateway APIs (Platega, Lava, Antilopay, YooKassa) regardless of DB status and shows a detailed report.",
+          "cancelAllRecurring": "Cancel all recurring (API)"
         },
         "balance": {
           "current": "Current balance",

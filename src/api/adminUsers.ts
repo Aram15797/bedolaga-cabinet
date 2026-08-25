@@ -29,6 +29,28 @@ export interface UserSubscriptionInfo {
   traffic_purchases: TrafficPurchaseInfo[];
 }
 
+export interface RecurringCancellationResultItem {
+  provider: string;
+  provider_title: string;
+  target_id: string;
+  status: 'success' | 'error' | 'info';
+  message: string;
+  error?: string | null;
+}
+
+export interface RecurringCancellationSummary {
+  total_actions: number;
+  success_count: number;
+  failed_count: number;
+}
+
+export interface CancelAllRecurringResponse {
+  success: boolean;
+  summary: RecurringCancellationSummary;
+  results: RecurringCancellationResultItem[];
+  message: string;
+}
+
 export interface UserPromoGroupInfo {
   id: number;
   name: string;
@@ -455,7 +477,12 @@ export const adminUsersApi = {
       partner_id?: number;
       is_recurrent?: boolean;
       sort_by?:
-        'created_at' | 'balance' | 'traffic' | 'last_activity' | 'total_spent' | 'purchase_count';
+        | 'created_at'
+        | 'balance'
+        | 'traffic'
+        | 'last_activity'
+        | 'total_spent'
+        | 'purchase_count';
     } = {},
   ): Promise<UsersListResponse> => {
     const response = await apiClient.get('/cabinet/admin/users', { params });
@@ -514,6 +541,12 @@ export const adminUsersApi = {
     const response = await apiClient.post(
       `/cabinet/admin/users/${userId}/subscriptions/${subId}/cancel-sbp-recurring`,
     );
+    return response.data;
+  },
+
+  // Force-cancel all recurring subscriptions across all payment provider APIs
+  cancelAllRecurring: async (userId: number): Promise<CancelAllRecurringResponse> => {
+    const response = await apiClient.post(`/cabinet/admin/users/${userId}/cancel-all-recurring`);
     return response.data;
   },
 

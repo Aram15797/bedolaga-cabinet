@@ -131,6 +131,7 @@ export interface SubscriptionTabProps {
   onRemoveTraffic: (purchaseId: number) => Promise<void>;
   onResetDevices: () => Promise<void>;
   onCancelSbpRecurring: () => Promise<void>;
+  onCancelAllRecurring?: () => Promise<void>;
   onDeleteDevice: (hwid: string) => Promise<void>;
   onRenameDevice: (hwid: string) => Promise<void>;
   onLoadDevices: () => Promise<void>;
@@ -195,6 +196,7 @@ export function SubscriptionTab(props: SubscriptionTabProps) {
     onRemoveTraffic,
     onResetDevices,
     onCancelSbpRecurring,
+    onCancelAllRecurring,
     onDeleteDevice,
     onRenameDevice,
     onLoadDevices,
@@ -425,6 +427,44 @@ export function SubscriptionTab(props: SubscriptionTabProps) {
                       : t('admin.users.detail.subscription.sbpCancel')}
                   </button>
                 )}
+              </div>
+            </div>
+          )}
+
+          {/* Force Cancel All Recurring (All Gateway APIs) */}
+          {hasPermission('users:subscription') && onCancelAllRecurring && (
+            <div className="rounded-xl border border-warning-500/20 bg-warning-500/5 p-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <div className="text-sm font-semibold text-dark-200">
+                    {t(
+                      'admin.users.detail.subscription.cancelAllRecurringTitle',
+                      'Принудительное отключение всех автоплатежей',
+                    )}
+                  </div>
+                  <div className="mt-0.5 text-xs text-dark-400 leading-relaxed">
+                    {t(
+                      'admin.users.detail.subscription.cancelAllRecurringDesc',
+                      'Принудительно отменяет подписки через API всех платёжек (Platega, Lava, Antilopay, YooKassa) независимо от их статуса в БД и показывает подробный отчёт.',
+                    )}
+                  </div>
+                </div>
+                <button
+                  onClick={() => onInlineConfirm('cancelAllRecurring', onCancelAllRecurring)}
+                  disabled={actionLoading}
+                  className={`shrink-0 rounded-lg px-3.5 py-2 text-sm font-medium transition-all disabled:opacity-50 ${
+                    confirmingAction === 'cancelAllRecurring'
+                      ? 'bg-warning-500 text-white'
+                      : 'bg-warning-500/15 text-warning-400 hover:bg-warning-500/25'
+                  }`}
+                >
+                  {confirmingAction === 'cancelAllRecurring'
+                    ? t('admin.users.detail.actions.areYouSure', 'Вы уверены?')
+                    : t(
+                        'admin.users.detail.subscription.cancelAllRecurring',
+                        'Отключить все рекурренты (API)',
+                      )}
+                </button>
               </div>
             </div>
           )}
