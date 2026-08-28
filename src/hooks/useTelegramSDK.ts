@@ -13,11 +13,11 @@ import {
   enableVerticalSwipes as sdkEnableVerticalSwipes,
   expandViewport,
   retrieveLaunchParams,
-  retrieveRawInitData,
   themeParamsState,
   closeMiniApp as sdkCloseMiniApp,
   postEvent,
 } from '@telegram-apps/sdk-react';
+import { getTelegramInitData as readTelegramInitData } from '../utils/telegramInitData';
 
 const FULLSCREEN_CACHE_KEY = 'cabinet_fullscreen_enabled';
 
@@ -90,11 +90,7 @@ export function isTelegramMobile(): boolean {
 }
 
 export function getTelegramInitData(): string | null {
-  try {
-    return retrieveRawInitData() || null;
-  } catch {
-    return null;
-  }
+  return readTelegramInitData();
 }
 
 function isDarkHexColor(hex: string): boolean {
@@ -138,7 +134,15 @@ export function getTelegramLanguageCode(): string | null {
 }
 
 export type TelegramPlatform =
-  'android' | 'ios' | 'tdesktop' | 'macos' | 'weba' | 'webk' | 'unigram' | 'unknown' | undefined;
+  | 'android'
+  | 'ios'
+  | 'tdesktop'
+  | 'macos'
+  | 'weba'
+  | 'webk'
+  | 'unigram'
+  | 'unknown'
+  | undefined;
 
 const defaultInsets = { top: 0, bottom: 0, left: 0, right: 0 };
 

@@ -482,7 +482,8 @@ export const adminUsersApi = {
         | 'traffic'
         | 'last_activity'
         | 'total_spent'
-        | 'purchase_count';
+        | 'purchase_count'
+        | 'subscription_end_date';
     } = {},
   ): Promise<UsersListResponse> => {
     const response = await apiClient.get('/cabinet/admin/users', { params });
@@ -547,6 +548,19 @@ export const adminUsersApi = {
   // Force-cancel all recurring subscriptions across all payment provider APIs
   cancelAllRecurring: async (userId: number): Promise<CancelAllRecurringResponse> => {
     const response = await apiClient.post(`/cabinet/admin/users/${userId}/cancel-all-recurring`);
+    return response.data;
+  },
+
+  // Delete one of the user's subscriptions (multi-tariff: trials pile up)
+  deleteSubscription: async (
+    userId: number,
+    subId: number,
+    force = false,
+  ): Promise<{ status: string }> => {
+    const response = await apiClient.delete(
+      `/cabinet/admin/users/${userId}/subscriptions/${subId}`,
+      { params: force ? { force: true } : undefined },
+    );
     return response.data;
   },
 

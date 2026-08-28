@@ -103,8 +103,8 @@ export function SimpleAreaChart({
             }}
             labelStyle={{ color: colors.label }}
             itemStyle={{ color: colors.label }}
-            formatter={(value: any) => [
-              valueFormatter && value !== undefined ? valueFormatter(value) : (value ?? 0),
+            formatter={(value) => [
+              valueFormatter ? valueFormatter(Number(value) || 0) : Number(value) || 0,
               valueLabel || '',
             ]}
           />

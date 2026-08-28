@@ -12,6 +12,7 @@ import { TREND_STYLES } from '../stats/constants';
 
 import { SimpleAreaChart } from './SimpleAreaChart';
 import { MultiSeriesAreaChart } from './MultiSeriesAreaChart';
+import { StatsTabSkeleton } from './StatsTabSkeleton';
 
 interface RenewalsTabProps {
   params: SalesStatsParams;
@@ -51,13 +52,7 @@ export function RenewalsTab({ params }: RenewalsTabProps) {
   }, [data]);
 
   if (isLoading) {
-    return (
-      <div className="animate-pulse space-y-4">
-        {Array.from({ length: 3 }, (_, i) => (
-          <div key={i} className="h-24 rounded-xl bg-dark-800/30" />
-        ))}
-      </div>
-    );
+    return <StatsTabSkeleton />;
   }
 
   if (isError || !data) {

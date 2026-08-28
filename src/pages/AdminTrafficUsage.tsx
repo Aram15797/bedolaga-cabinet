@@ -37,6 +37,7 @@ import { TariffFilter } from '../components/admin/trafficUsage/filters/TariffFil
 import { StatusFilter } from '../components/admin/trafficUsage/filters/StatusFilter';
 import { NodeFilter } from '../components/admin/trafficUsage/filters/NodeFilter';
 import { CountryFilter } from '../components/admin/trafficUsage/filters/CountryFilter';
+import { Skeleton } from '../components/ui/skeleton';
 import {
   SearchIcon,
   ChevronLeftIcon,
@@ -52,6 +53,11 @@ import {
 // (TanStack Table augmentation + utils + risk helpers moved into ./trafficUsage/trafficUsageHelpers.ts)
 
 // (Icons moved into ./trafficUsage/TrafficIcons.tsx)
+
+// Заглушка ячейки, пока догружается обогащение строки. SkeletonGroup здесь не
+// применяется: заглушки живут в разных ячейках таблицы, и объявлять role="status"
+// в каждой значило бы заставить скринридер зачитать «загрузка» по разу на ячейку.
+const cellSkeleton = (width: string) => <Skeleton className={`mx-auto h-4 ${width}`} />;
 
 // ============ Progress Bar ============
 
@@ -493,8 +499,7 @@ export default function AdminTrafficUsage() {
         meta: { align: 'center' as const },
         cell: ({ row }) => {
           const e = enrichment?.[row.original.user_id];
-          if (enrichmentLoading && !enrichment)
-            return <div className="mx-auto h-4 w-8 animate-pulse rounded bg-dark-700" />;
+          if (enrichmentLoading && !enrichment) return cellSkeleton('w-8');
           return <span className="text-xs text-dark-300">{e?.devices_connected ?? '\u2014'}</span>;
         },
       },
@@ -507,8 +512,7 @@ export default function AdminTrafficUsage() {
         meta: { align: 'center' as const },
         cell: ({ row }) => {
           const e = enrichment?.[row.original.user_id];
-          if (enrichmentLoading && !enrichment)
-            return <div className="mx-auto h-4 w-12 animate-pulse rounded bg-dark-700" />;
+          if (enrichmentLoading && !enrichment) return cellSkeleton('w-12');
           if (!e || e.total_spent_kopeks === 0)
             return <span className="text-xs text-dark-300">{'\u2014'}</span>;
           return (
@@ -525,8 +529,7 @@ export default function AdminTrafficUsage() {
         meta: { align: 'center' as const },
         cell: ({ row }) => {
           const e = enrichment?.[row.original.user_id];
-          if (enrichmentLoading && !enrichment)
-            return <div className="mx-auto h-4 w-14 animate-pulse rounded bg-dark-700" />;
+          if (enrichmentLoading && !enrichment) return cellSkeleton('w-14');
           return (
             <span className="text-xs text-dark-300">
               {formatShortDate(e?.subscription_start_date ?? null)}
@@ -543,8 +546,7 @@ export default function AdminTrafficUsage() {
         meta: { align: 'center' as const },
         cell: ({ row }) => {
           const e = enrichment?.[row.original.user_id];
-          if (enrichmentLoading && !enrichment)
-            return <div className="mx-auto h-4 w-14 animate-pulse rounded bg-dark-700" />;
+          if (enrichmentLoading && !enrichment) return cellSkeleton('w-14');
           return (
             <span className="text-xs text-dark-300">
               {formatShortDate(e?.subscription_end_date ?? null)}
@@ -561,48 +563,52 @@ export default function AdminTrafficUsage() {
         meta: { align: 'center' as const },
         cell: ({ row }) => {
           const e = enrichment?.[row.original.user_id];
-          if (enrichmentLoading && !enrichment)
-            return <div className="mx-auto h-4 w-16 animate-pulse rounded bg-dark-700" />;
+          if (enrichmentLoading && !enrichment) return cellSkeleton('w-16');
           return <span className="text-xs text-dark-300">{e?.last_node_name ?? '\u2014'}</span>;
         },
       },
       // ---- Dynamic node columns ----
-      ...displayNodes.map((node): ColumnDef<UserTrafficItem> => ({
-        id: `node_${node.node_uuid}`,
-        accessorFn: (row) => row.node_traffic[node.node_uuid] || 0,
-        header: `${getFlagEmoji(node.country_code)} ${node.node_name}`,
-        enableSorting: true,
-        size: 110,
-        minSize: 80,
-        meta: { align: 'center' as const },
-        cell: ({ getValue }) => {
-          const bytes = getValue() as number;
-          if (bytes <= 0) {
-            return <span className="text-xs text-dark-300">{'\u2014'}</span>;
-          }
-          const dailyNode = bytesToGbPerDay(bytes, periodDays);
-          const nodeRatio = hasNodeThreshold ? getRatio(dailyNode, nodeThresholdNum) : 0;
-          const textColor = hasNodeThreshold ? getNodeTextColor(nodeRatio) : undefined;
-          return (
-            <div className="flex flex-col items-center">
-              <span
-                className="text-xs text-dark-300"
-                style={{
-                  color: textColor,
-                  fontWeight: nodeRatio > 0.8 ? 600 : undefined,
-                }}
-              >
-                {formatBytes(bytes)}
-              </span>
-              {hasNodeThreshold && (
-                <span className="text-[9px] leading-tight opacity-60" style={{ color: textColor }}>
-                  {formatGbPerDay(dailyNode)} GB/d
+      ...displayNodes.map(
+        (node): ColumnDef<UserTrafficItem> => ({
+          id: `node_${node.node_uuid}`,
+          accessorFn: (row) => row.node_traffic[node.node_uuid] || 0,
+          header: `${getFlagEmoji(node.country_code)} ${node.node_name}`,
+          enableSorting: true,
+          size: 110,
+          minSize: 80,
+          meta: { align: 'center' as const },
+          cell: ({ getValue }) => {
+            const bytes = getValue() as number;
+            if (bytes <= 0) {
+              return <span className="text-xs text-dark-300">{'\u2014'}</span>;
+            }
+            const dailyNode = bytesToGbPerDay(bytes, periodDays);
+            const nodeRatio = hasNodeThreshold ? getRatio(dailyNode, nodeThresholdNum) : 0;
+            const textColor = hasNodeThreshold ? getNodeTextColor(nodeRatio) : undefined;
+            return (
+              <div className="flex flex-col items-center">
+                <span
+                  className="text-xs text-dark-300"
+                  style={{
+                    color: textColor,
+                    fontWeight: nodeRatio > 0.8 ? 600 : undefined,
+                  }}
+                >
+                  {formatBytes(bytes)}
                 </span>
-              )}
-            </div>
-          );
-        },
-      })),
+                {hasNodeThreshold && (
+                  <span
+                    className="text-[9px] leading-tight opacity-60"
+                    style={{ color: textColor }}
+                  >
+                    {formatGbPerDay(dailyNode)} GB/d
+                  </span>
+                )}
+              </div>
+            );
+          },
+        }),
+      ),
     ];
 
     // Risk column — insert before total when any threshold is set

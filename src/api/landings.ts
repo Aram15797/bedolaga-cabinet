@@ -114,6 +114,10 @@ export interface PurchaseRequest {
   yandex_cid?: string;
   referrer?: string;
   subid?: string;
+  // Слаг рекламной кампании: без него покупка гостем не попадает в статистику
+  // кампании и не даёт её бонус — auth-флоу, который привязывает кампанию
+  // обычно, на этом пути не срабатывает.
+  campaign_slug?: string;
 }
 
 export interface PurchaseResponse {
@@ -366,7 +370,12 @@ export interface LandingStatsResponse {
 }
 
 export type PurchaseItemStatus =
-  'pending' | 'paid' | 'delivered' | 'pending_activation' | 'failed' | 'expired';
+  | 'pending'
+  | 'paid'
+  | 'delivered'
+  | 'pending_activation'
+  | 'failed'
+  | 'expired';
 
 export interface LandingPurchaseItem {
   id: number;
