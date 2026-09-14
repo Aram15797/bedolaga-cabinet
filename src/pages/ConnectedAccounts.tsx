@@ -449,8 +449,8 @@ export default function ConnectedAccounts() {
         navigate(`/merge/${response.merge_token}`, { replace: true });
       }
     },
-    onError: (err: { response?: { data?: { detail?: string } } }) => {
-      setEmailError(err.response?.data?.detail || t('profile.emailMergeCodeInvalid'));
+    onError: (err: unknown) => {
+      setEmailError(getApiErrorMessage(err, t('profile.emailMergeCodeInvalid')));
     },
   });
 
@@ -722,6 +722,12 @@ export default function ConnectedAccounts() {
                 )}
               </div>
             </div>
+
+            {confirmingUnlink === provider.provider && provider.forgets_email && (
+              <p className="mt-2 text-xs text-warning-400">
+                {t('profile.accounts.unlinkForgetsEmail', { email: provider.forgets_email })}
+              </p>
+            )}
 
             {/* Inline email linking form */}
             {provider.provider === 'email' && !provider.linked && (

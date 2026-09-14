@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
+import { backTo } from '@/components/admin';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 import { statsApi, type NodeStatus } from '../api/admin';
-import { formatUptime } from '../utils/format';
+import { formatUptime, parseCalendarDate } from '../utils/format';
 
 const CABINET_VERSION = __APP_VERSION__;
 import { useCurrency } from '../hooks/useCurrency';
@@ -169,7 +170,7 @@ function RevenueChart({ data }: { data: { date: string; amount_rubles: number }[
     <div className="space-y-3">
       {last7Days.map((item) => {
         const percentage = (item.amount_rubles / maxValue) * 100;
-        const date = new Date(item.date);
+        const date = parseCalendarDate(item.date);
         const dayName = date.toLocaleDateString('ru-RU', { weekday: 'short' });
         const dayNum = date.getDate();
 
@@ -199,6 +200,7 @@ function RevenueChart({ data }: { data: { date: string; amount_rubles: number }[
 export default function AdminDashboard() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
   const { formatAmount, currencySymbol } = useCurrency();
   const { capabilities } = usePlatform();
 
@@ -855,7 +857,9 @@ export default function AdminDashboard() {
                   >
                     <td className="px-2 py-3">
                       <button
-                        onClick={() => navigate(`/admin/users/${payment.user_id}`)}
+                        onClick={() =>
+                          navigate(`/admin/users/${payment.user_id}`, backTo(location))
+                        }
                         className="text-left transition-colors hover:opacity-80"
                       >
                         <div className="text-sm font-medium text-dark-100 underline decoration-dark-600 underline-offset-2 hover:decoration-dark-400">
@@ -917,7 +921,7 @@ export default function AdminDashboard() {
                       {payment.type_display}
                     </span>
                     <button
-                      onClick={() => navigate(`/admin/users/${payment.user_id}`)}
+                      onClick={() => navigate(`/admin/users/${payment.user_id}`, backTo(location))}
                       className="truncate text-sm font-medium text-dark-100 underline decoration-dark-600 underline-offset-2 transition-colors hover:decoration-dark-400"
                     >
                       {payment.display_name}

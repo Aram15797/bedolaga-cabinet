@@ -22,6 +22,7 @@ import {
   shareURL,
   enableClosingConfirmation,
   disableClosingConfirmation,
+  hideKeyboard,
 } from '@telegram-apps/sdk-react';
 import type {
   PlatformContext,
@@ -373,6 +374,14 @@ export function createTelegramAdapter(): PlatformContext {
           disableClosingConfirmation();
         }
       } catch {}
+    },
+
+    hideKeyboard() {
+      try {
+        if (hideKeyboard.isAvailable()) hideKeyboard();
+      } catch {
+        // Старый клиент: клавиатуру закрывает потеря фокуса полем.
+      }
     },
   };
 }
