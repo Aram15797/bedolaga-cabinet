@@ -37,7 +37,36 @@
     "no_results": "Ничего не найдено",
     "ok": "ОК",
     "processing": "Обработка…",
-    "rangeTo": "до"
+    "rangeTo": "до",
+    "relative": {
+      "online": "онлайн",
+      "now": "только что",
+      "never": "не было",
+      "minutes_one": "{{count}} мин назад",
+      "minutes_few": "{{count}} мин назад",
+      "minutes_many": "{{count}} мин назад",
+      "hours_one": "{{count}} ч назад",
+      "hours_few": "{{count}} ч назад",
+      "hours_many": "{{count}} ч назад",
+      "days_one": "{{count}} день назад",
+      "days_few": "{{count}} дня назад",
+      "days_many": "{{count}} дней назад",
+      "weeks_one": "{{count}} нед назад",
+      "weeks_few": "{{count}} нед назад",
+      "weeks_many": "{{count}} нед назад",
+      "months_one": "{{count}} мес назад",
+      "months_few": "{{count}} мес назад",
+      "months_many": "{{count}} мес назад",
+      "yesterday": "вчера"
+    },
+    "clear": "Очистить",
+    "dayTime": {
+      "today": "сегодня, {{time}}",
+      "yesterday": "вчера, {{time}}"
+    }
+  },
+  "navShort": {
+    "wheel": "Колесо"
   },
   "nav": {
     "dashboard": "Главная",
@@ -172,13 +201,13 @@
     "validUntil": "Действует до",
     "goToSubscription": "Перейти к подписке",
     "goToBalance": "Перейти к балансу",
-    "devicesAdded": "+{{count}} устройств",
+    "devicesAdded": "Добавлено устройств",
     "devicesPurchased": {
       "title": "Устройства добавлены"
     },
-    "totalDevices": "Всего устройств: {{count}}",
-    "totalTraffic": "Всего трафика: {{value}}",
-    "trafficAdded": "+{{value}} трафика",
+    "totalDevices": "Всего устройств",
+    "totalTraffic": "Всего трафика",
+    "trafficAdded": "Добавлено трафика",
     "trafficPurchased": {
       "title": "Трафик добавлен"
     }
@@ -338,6 +367,9 @@
       "title": "Подписка приостановлена",
       "resume": "Возобновить"
     },
+    "reminders": {
+      "dismiss": "Закрыть"
+    },
     "trialOffer": {
       "freeTitle": "Бесплатный пробный период",
       "paidTitle": "Пробная подписка",
@@ -368,6 +400,9 @@
     "expiresAt": "Действует до",
     "daysLeft": "Осталось дней",
     "devices": "Устройства",
+    "devicesWord_one": "устройство",
+    "devicesWord_few": "устройства",
+    "devicesWord_many": "устройств",
     "devices_one": "{{count}} устройство",
     "devices_few": "{{count}} устройства",
     "devices_many": "{{count}} устройств",
@@ -413,6 +448,8 @@
     "noSubscription": "У вас нет активной подписки",
     "getSubscription": "Оформить подписку",
     "cta": {
+      "moveToTariff": "Перейти на тариф",
+      "moveToTariffHint": "Подписка куплена до появления тарифов",
       "expiredHint": "Выберите тариф и оплатите",
       "trialHint": "Больше трафика и устройств",
       "activeHint": "Продление и смена тарифа",
@@ -466,7 +503,7 @@
     "currentTariff": "Текущий",
     "from": "от",
     "month": "мес",
-    "insufficientBalance": "Недостаточно средств. Не хватает {{missing}} ₽",
+    "insufficientBalance": "Недостаточно средств. Не хватает {{missing}} ₽",
     "trial": {
       "title": "Бесплатный пробный период",
       "titlePaid": "Пробная подписка",
@@ -682,9 +719,10 @@
       "cooldown": "Доступно через {{minutes}} мин. {{seconds}} сек."
     },
     "legacy": {
-      "selectTariffTitle": "Выберите тариф для продления",
-      "selectTariffDescription": "Ваша текущая подписка была создана до введения тарифов. Для продления необходимо выбрать один из доступных тарифов.",
-      "currentSubContinues": "Ваша текущая подписка продолжит действовать до окончания срока."
+      "noTariff": "Без тарифа",
+      "selectTariffTitle": "Подписка куплена до появления тарифов",
+      "selectTariffDescription": "Выберите тариф: он применится к этой же подписке, ссылка для подключения не изменится.",
+      "currentSubContinues": "Оставшиеся дни сохранятся и прибавятся к оплаченному периоду."
     },
     "promoGroup": {
       "yourGroup": "Ваша группа: {{name}}",
@@ -733,7 +771,7 @@
       "statusActive": "Активен",
       "statusPastDue": "Платёж не прошёл — попробуйте снова",
       "nextCharge": "следующее списание {{date}}",
-      "amountPerInterval": "{{amount}} ₽ {{interval}}",
+      "amountPerInterval": "{{amount}} ₽ {{interval}}",
       "interval": {
         "day": "ежедневно",
         "week": "еженедельно",
@@ -757,8 +795,8 @@
       "statusActive": "Активно",
       "statusPastDue": "Платёж не прошёл — попробуйте снова",
       "nextCharge": "следующее списание {{date}}",
-      "amountPerPeriod": "{{amount}} ₽ {{period}}",
-      "amountPerDays": "{{amount}} ₽ раз в {{days}} дн.",
+      "amountPerPeriod": "{{amount}} ₽ {{period}}",
+      "amountPerDays": "{{amount}} ₽ раз в {{days}} дн.",
       "period": {
         "day": "ежедневно",
         "week": "еженедельно",
@@ -781,8 +819,12 @@
       "connectedDevices": "Подключённые устройства",
       "disconnect": "Отключить",
       "addSlots": "Добавить слоты",
-      "limitExplained": "Тариф «{{name}}» даёт {{count}} слота, и все заняты. Освободите слот или добавьте ещё.",
-      "limitExplainedNoTopup": "Тариф «{{name}}» даёт {{count}} слота, и все заняты. Освободите занятый слот.",
+      "limitExplained_one": "Тариф «{{name}}» даёт {{count}} слот, и он занят. Освободите его или добавьте ещё.",
+      "limitExplained_few": "Тариф «{{name}}» даёт {{count}} слота, и все заняты. Освободите слот или добавьте ещё.",
+      "limitExplained_many": "Тариф «{{name}}» даёт {{count}} слотов, и все заняты. Освободите слот или добавьте ещё.",
+      "limitExplainedNoTopup_one": "Тариф «{{name}}» даёт {{count}} слот, и он занят. Освободите его.",
+      "limitExplainedNoTopup_few": "Тариф «{{name}}» даёт {{count}} слота, и все заняты. Освободите занятый слот.",
+      "limitExplainedNoTopup_many": "Тариф «{{name}}» даёт {{count}} слотов, и все заняты. Освободите занятый слот.",
       "noTopupHint": "На тестовой подписке слоты докупить нельзя — освободите занятый или оформите платный тариф."
     },
     "delete": "Удалить",
@@ -798,7 +840,31 @@
     "statusActive": "Активна",
     "statusExpired": "Истекла",
     "statusLimited": "Ограничена",
-    "statusTrial": "Триал"
+    "statusTrial": "Триал",
+    "casheraRecurring": {
+      "title": "Автопродление Cashera",
+      "connect": "Подключить",
+      "confirm": "Подтвердить автосписания",
+      "cancel": "Отключить",
+      "confirmCancel": "Отключить автопродление Cashera? Подписка больше не будет продлеваться автоматически.",
+      "cancelled": "Автопродление Cashera отключено",
+      "enableError": "Не удалось подключить автопродление Cashera",
+      "cancelError": "Не удалось отменить автопродление Cashera",
+      "statusPending": "Ожидает подтверждения по ссылке",
+      "statusActive": "Активно",
+      "statusPastDue": "Платёж не прошёл — попробуйте снова",
+      "nextCharge": "следующее списание {{date}}",
+      "amountPerInterval": "{{amount}} ₽ {{interval}}",
+      "interval": {
+        "daily": "ежедневно",
+        "weekly": "еженедельно",
+        "monthly": "ежемесячно",
+        "yearly": "ежегодно"
+      },
+      "autopayHint": "Подписка будет автоматически продлеваться через Cashera",
+      "purchaseButton": "⚡ Оформить с автооплатой Cashera",
+      "purchaseHint": "Подтвердите автосписания по ссылке Cashera; дальше продления списываются автоматически."
+    }
   },
   "balance": {
     "title": "Баланс",
@@ -891,6 +957,9 @@
       },
       "apple_iap": {
         "description": "Оплата через Apple In-App Purchase"
+      },
+      "cashera": {
+        "description": "СБП, карты, криптовалюта (Cashera)"
       }
     },
     "transactionHistory": "История операций",
@@ -903,6 +972,11 @@
     "withdrawal": "Списание",
     "subscriptionPayment": "Оплата подписки",
     "referralReward": "Реферальный бонус",
+    "refund": "Возврат",
+    "failedRefund": "Неудачный возврат",
+    "pollReward": "Награда за опрос",
+    "giftPayment": "Оплата подарка",
+    "otherOperation": "Операция",
     "minAmount": "Мин.",
     "maxAmount": "Макс.",
     "notAvailable": "Недоступно",
@@ -915,7 +989,7 @@
       "activate": "Активировать",
       "activating": "Активация...",
       "success": "Промокод успешно активирован!",
-      "balanceAdded": "На баланс начислено: {{amount}} ₽",
+      "balanceAdded": "На баланс начислено: {{amount}} ₽",
       "errors": {
         "not_found": "Промокод не найден",
         "expired": "Срок действия промокода истёк",
@@ -936,8 +1010,8 @@
       "daysLeft": "Осталось дней: {{count}}",
       "selectSubscription": "Выберите подписку"
     },
-    "minAmountError": "Минимальная сумма: {{amount}} ₽",
-    "maxAmountError": "Максимальная сумма: {{amount}} ₽",
+    "minAmountError": "Минимальная сумма: {{amount}} ₽",
+    "maxAmountError": "Максимальная сумма: {{amount}} ₽",
     "paymentOption": "Способ оплаты",
     "selectPaymentOption": "Выберите способ оплаты",
     "selectPaymentMethod": "Выберите способ оплаты",
@@ -979,7 +1053,7 @@
       "rateLimit": "Подождите {{seconds}} сек.",
       "selectMethod": "Выберите способ",
       "enterAmount": "Введите сумму",
-      "amountRange": "Сумма: {{min}} – {{max}} ₽"
+      "amountRange": "Сумма: {{min}} – {{max}} ₽"
     },
     "paymentSuccess": {
       "title": "Оплата прошла успешно",
@@ -998,7 +1072,8 @@
       "goToBalance": "Перейти к балансу",
       "tryAgain": "Попробовать снова"
     },
-    "top_up": "Пополнить баланс"
+    "top_up": "Пополнить баланс",
+    "scanQrToPay": "Отсканируйте QR-код в приложении банка или откройте оплату"
   },
   "referral": {
     "title": "Реферальная программа",
@@ -1221,6 +1296,7 @@
       "closed": "Закрыт"
     },
     "attachImage": "Прикрепить изображение",
+    "downloadFile": "Скачать файл",
     "invalidFileType": "Неверный тип файла. Используйте JPEG, PNG, GIF или WebP.",
     "fileTooLarge": "Файл слишком большой. Максимальный размер 10МБ.",
     "uploadFailed": "Не удалось загрузить изображение",
@@ -1412,7 +1488,6 @@
       "title": "Админка",
       "dashboard": "Статистика",
       "tickets": "Тикеты",
-      "aiSupport": "ИИ Поддержка",
       "settings": "Настройки",
       "graceAccess": "Grace-доступ",
       "apps": "Приложения",
@@ -1435,6 +1510,7 @@
       "trafficUsage": "Расход трафика",
       "updates": "Обновления",
       "pinnedMessages": "Закреплённые",
+      "reminders": "Напоминания",
       "partners": "Партнёры",
       "referralLevels": "Уровни наград",
       "withdrawals": "Выводы",
@@ -1450,7 +1526,9 @@
       "bulkActions": "Массовые действия",
       "infoPages": "Инфо-страницы",
       "legalPages": "Системные страницы",
-      "systemErrors": "Ошибки системы"
+      "systemErrors": "Ошибки системы",
+      "dpichecker": "DPI//CHECKER",
+      "aiSupport": "ИИ Поддержка"
     },
     "panel": {
       "title": "Панель администратора",
@@ -1487,6 +1565,7 @@
       "trafficUsageDesc": "Трафик пользователей по нодам",
       "updatesDesc": "Версии бота и кабинета",
       "pinnedMessagesDesc": "Управление закреплёнными сообщениями",
+      "remindersDesc": "Напоминания пользователям по условиям",
       "partnersDesc": "Управление заявками партнёров и комиссиями",
       "withdrawalsDesc": "Проверка и обработка заявок на вывод",
       "channelSubscriptionsDesc": "Управление обязательными подписками на каналы",
@@ -1561,11 +1640,11 @@
         "previousPeriod": "Предыдущий период",
         "dailyChart": "Продления по дням",
         "renewals": "Продления",
+        "dailyBreakdownChart": "Покупки и продления по дням",
         "regularChart": "Обычные",
         "trialsChart": "Пробные",
-        "renewalsChart": "Продления",
-        "dailyBreakdownChart": "Покупки и продления по дням",
-        "dailyPercentageChart": "Процент продлений по дням (%)"
+        "dailyPercentageChart": "Процент продлений по дням (%)",
+        "renewalsChart": "Продления"
       },
       "addons": {
         "totalPurchases": "Всего покупок",
@@ -1861,12 +1940,12 @@
       "minAmount": "Мин. сумма (коп.)",
       "maxAmount": "Макс. сумма (коп.)",
       "quickAmounts": "Быстрые суммы (₽)",
-      "quickAmountsHint": "Кнопки быстрого выбора суммы пополнения. Пусто — используются значения по умолчанию: {{defaults}} ₽",
+      "quickAmountsHint": "Кнопки быстрого выбора суммы пополнения. Пусто — используются значения по умолчанию: {{defaults}} ₽",
       "quickAmountsPlaceholder": "Сумма в рублях",
       "quickAmountsAdd": "Добавить",
       "quickAmountsInvalid": "Введите положительную сумму в рублях",
       "quickAmountsLimit": "Не более 10 сумм",
-      "quickAmountsRemove": "Удалить сумму {{value}} ₽",
+      "quickAmountsRemove": "Удалить сумму {{value}} ₽",
       "overpayCertTitle": "Сертификат mTLS (Overpay)",
       "overpayCertValid": "✅ Действует до {{date}}",
       "overpayCertExpired": "⚠️ Срок действия истёк {{date}}",
@@ -2735,7 +2814,13 @@
           "active": "Активен",
           "worth": "Стоимость",
           "probability": "Ручная вероятность (0–1)",
-          "probabilityHint": "Пусто — авто по RTP"
+          "probabilityHint": "Пусто — авто по RTP",
+          "displayNamePlaceholder": "Например: 7 дней бесплатно",
+          "valueUnits": {
+            "kopeks": "в копейках",
+            "days": "в днях",
+            "gb": "в ГБ"
+          }
         },
         "promo": {
           "title": "Настройки промокода",
@@ -2800,6 +2885,65 @@
         "cancelled": "Отменено",
         "cancelling": "Отменяется"
       },
+      "audience": {
+        "authType": "Способ регистрации",
+        "join": "Связь условий",
+        "and": "И",
+        "or": "ИЛИ",
+        "field": "Параметр",
+        "comparison": "Сравнение",
+        "equals": "Равно",
+        "notEquals": "Не равно",
+        "value": "Значение",
+        "remove": "Удалить условие",
+        "add": "Добавить условие",
+        "loadError": "Не удалось загрузить получателей",
+        "recipientCount": "Получателей",
+        "showUsers": "Посмотреть список",
+        "users": "Получатели рассылки",
+        "empty": "Получателей нет",
+        "conditions": "Условия",
+        "noUsersPermission": "Нужно право на просмотр пользователей"
+      },
+      "atomic": {
+        "all": "Все пользователи",
+        "subscriptionStatus": "Статус подписки",
+        "active": "Активна",
+        "expired": "Истекла",
+        "subscriptionType": "Тип подписки",
+        "trial": "Триальная",
+        "paid": "Оплаченная",
+        "tariff": "Тариф",
+        "trafficZero": "Использованный трафик равен 0",
+        "trafficGt": "Использованный трафик больше",
+        "trafficLt": "Использованный трафик меньше",
+        "endPreset": "Окончание подписки: быстрый период",
+        "next3Days": "В ближайшие 3 дня",
+        "endDate": "Окончание подписки: дата",
+        "registrationPreset": "Регистрация: быстрый период",
+        "today": "Сегодня",
+        "last7Days": "За 7 дней",
+        "last30Days": "За 30 дней",
+        "registrationDate": "Дата регистрации",
+        "activityPreset": "Активность: быстрый период",
+        "activeToday": "Активен сегодня",
+        "inactive7Days": "Неактивен 7+ дней",
+        "inactive30Days": "Неактивен 30+ дней",
+        "activityDate": "Последняя активность: дата",
+        "source": "Источник регистрации",
+        "referral": "По рефералу",
+        "direct": "Напрямую",
+        "paidHistory": "Оплачивал раньше",
+        "telegramUsername": "Ник Telegram",
+        "searchUser": "Начните вводить и выберите пользователя",
+        "noUsers": "Пользователи не найдены",
+        "before": "До даты",
+        "after": "После даты",
+        "between": "Между датами",
+        "dateFrom": "Дата",
+        "dateTo": "До",
+        "gigabytes": "Гигабайты"
+      },
       "filterGroups": {
         "basic": "Основные",
         "subscription": "По подписке",
@@ -2808,7 +2952,9 @@
         "activity": "По активности",
         "source": "По источнику",
         "tariff": "По тарифу",
-        "email": "Email-пользователи"
+        "email": "Email-пользователи",
+        "promo_group": "По промогруппе",
+        "recipient": "Получатель"
       },
       "channel": {
         "telegram": "Telegram",
@@ -2820,6 +2966,7 @@
       "emailSection": "Email-рассылка",
       "selectEmailFilter": "Выберите email-аудиторию",
       "selectEmailFilterPlaceholder": "Выберите фильтр...",
+      "singleUser": "Только {{name}}",
       "emailSubject": "Тема письма",
       "emailSubjectPlaceholder": "Введите тему письма...",
       "emailContent": "Содержимое письма",
@@ -2896,6 +3043,87 @@
       "unpinnedCount": "Откреплено",
       "editMessage": "Редактировать",
       "cantDeleteActive": "Нельзя удалить активное сообщение"
+    },
+    "reminders": {
+      "title": "Напоминания",
+      "description": "Напоминания пользователям по условиям: в боте, в кабинете или и там и там.",
+      "create": "Создать",
+      "createTitle": "Новое напоминание",
+      "editTitle": "Напоминание",
+      "empty": "Напоминаний пока нет",
+      "active": "Включено",
+      "inactive": "Выключено",
+      "builtin": "Встроенное",
+      "enable": "Включить",
+      "disable": "Выключить",
+      "edit": "Изменить",
+      "delete": "Удалить",
+      "confirmDelete": "Удалить напоминание «{{name}}»?",
+      "stats": "Отправлено: {{sent}} · закрыли: {{dismissed}} · подходят сейчас: бот {{bot}}, кабинет {{cabinet}}",
+      "any": "Любой",
+      "channels": {
+        "both": "Бот и кабинет",
+        "bot": "Только бот",
+        "cabinet": "Только кабинет"
+      },
+      "category": {
+        "service": "Служебное — всем",
+        "marketing": "Маркетинговое — кроме отписавшихся от промо"
+      },
+      "auth": {
+        "single_method": "Только один способ входа",
+        "telegram_only": "Вход только через Telegram",
+        "email_only": "Вход только через email"
+      },
+      "segment": {
+        "active": "Активная подписка",
+        "trial": "Триал",
+        "expiring": "Истекает в ближайшие дни",
+        "expired": "Подписка истекла",
+        "none": "Без подписки",
+        "low_balance": "Низкий баланс",
+        "tariff": "Тариф"
+      },
+      "button": {
+        "none": "Без кнопки",
+        "cabinet": "Раздел кабинета",
+        "url": "Ссылка"
+      },
+      "form": {
+        "name": "Название (видно только в админке)",
+        "channels": "Где показывать",
+        "category": "Тип",
+        "conditions": "Кому",
+        "auth": "Способ входа",
+        "segment": "Подписка",
+        "segmentDays": "Сколько дней до окончания",
+        "tariffId": "ID тарифа",
+        "tariffRequired": "Укажите ID тарифа",
+        "registeredDays": "Не раньше чем через N дней после регистрации",
+        "inactiveDays": "Неактивен N дней",
+        "audience": "Подходят сейчас",
+        "repeatEvery": "Повторять в боте раз в N дней",
+        "maxSends": "Максимум отправок в бот",
+        "title": "Заголовок",
+        "body": "Текст",
+        "buttonKind": "Кнопка",
+        "buttonTarget": "Куда ведёт",
+        "buttonText": "Текст кнопки",
+        "buttonTextRequired": "Заполните текст кнопки на русском",
+        "partialLanguage": "Заполните и заголовок, и текст для языка {{lang}} или очистите оба",
+        "httpsRequired": "Ссылка должна начинаться с https://",
+        "preview": "Предпросмотр",
+        "save": "Сохранить",
+        "sendTest": "Отправить себе",
+        "testHint": "Отправляется сохранённая версия, без проверки условий и лимитов",
+        "testSent": "Отправлено вам в бот",
+        "testFailed": "Не удалось отправить",
+        "testNoTelegram": "У вас не привязан Telegram",
+        "testInvalidTexts": "Исправьте тексты и сохраните",
+        "ruRequired": "Заполните заголовок и текст на русском",
+        "saveFailed": "Не удалось сохранить — проверьте поля"
+      },
+      "loadFailed": "Не удалось загрузить напоминания"
     },
     "channelSubscriptions": {
       "title": "Обязательные каналы",
@@ -2989,6 +3217,8 @@
       "interfaceOptions": "Опции интерфейса",
       "animatedBackground": "Анимированный фон",
       "animatedBackgroundDesc": "Волны на фоне приложения",
+      "liteMode": "Простой вид кабинета",
+      "liteModeDesc": "Один экран покупателя вместо «Главного» и «Подписки»",
       "autoFullscreen": "Авто-Fullscreen",
       "autoFullscreenDesc": "В Telegram WebApp",
       "emailAuth": "Email авторизация",
@@ -3104,7 +3334,9 @@
         "iface_info": "Правовые документы",
         "iface_menu": "Кнопка меню",
         "sys_cabinet": "Кабинет",
-        "sys_other": "Прочие настройки"
+        "sys_other": "Прочие настройки",
+        "sys_dpichecker": "DPI//CHECKER",
+        "payments_cashera": "Cashera"
       },
       "presets": {
         "standard": "Стандарт",
@@ -3695,6 +3927,7 @@
         "external_squad_uuid": "Внешний сквад",
         "duration_hours": "Длительность, часов",
         "traffic_gb": "Трафик, ГБ",
+        "reset_traffic_on_start": "Обнулять счётчик трафика при выдаче",
         "reconcile_interval_seconds": "Интервал сверки, сек",
         "reconcile_batch_size": "Размер пачки",
         "candidate_lookback_minutes": "Окно поиска, мин",
@@ -3728,6 +3961,7 @@
         "title": "Что получает человек",
         "durationDesc": "Сколько часов действует временный доступ, если подписку так и не продлили",
         "trafficDesc": "Сколько новых гигабайт можно потратить за это время: считается поверх уже израсходованного, старый остаток не переносится",
+        "resetTrafficDesc": "Панель и приложение покажут «0 из 1 ГБ», а не почти исчерпанные «64.76 из 65.76 GiB». Только истёкшие подписки с безлимитом — там счётчик информационный; расход до grace теряется. Упёршиеся в лимит не обнуляются никогда",
         "hint": "Пока действует grace, аккаунт в панели активен, но выходит в сеть только через сквад grace.",
         "allowedDesc": "Так это увидит человек в сообщении бота и в письме: «доступно только: …». Что реально пропускает сквад grace, решают ноды — бот только сообщает.",
         "allowedPlaceholder": "Telegram и личный кабинет"
@@ -3969,7 +4203,6 @@
       "reminderCooldownDesc": "Минимальное время между напоминаниями (1-120 минут)",
       "settingsUpdateError": "Ошибка сохранения настроек",
       "copyTelegramId": "Нажмите чтобы скопировать Telegram ID",
-      "copyEmail": "Нажмите чтобы скопировать почту",
       "viewUser": "Профиль пользователя",
       "cabinetNotifications": "Уведомления в кабинете",
       "userNotificationsEnabled": "Уведомления для пользователей",
@@ -3981,7 +4214,14 @@
         "checkIntervalRange": "Интервал проверки должен быть от 1 до 1440 мин",
         "reminderCooldownRange": "Кулдаун напоминания должен быть от 0 до 1440 мин",
         "slaMinutesRange": "SLA должен быть от 1 до 10080 мин"
-      }
+      },
+      "priorities": {
+        "low": "Низкий",
+        "normal": "Обычный",
+        "high": "Высокий",
+        "urgent": "Срочный"
+      },
+      "copyEmail": "Нажмите чтобы скопировать почту"
     },
     "tariffs": {
       "title": "Управление тарифами",
@@ -4390,7 +4630,32 @@
         "rejectTitle": "Отклонить заявку?",
         "rejectDescription": "При необходимости добавьте комментарий с причиной отклонения.",
         "commentPlaceholder": "Причина отклонения (необязательно)...",
-        "confirmReject": "Подтвердить отклонение"
+        "confirmReject": "Подтвердить отклонение",
+        "risk": {
+          "balance": {
+            "total_earned": "Заработано с рефералов",
+            "own_deposits": "Свои пополнения",
+            "spending": "Потрачено",
+            "referral_spent": "Из них реферальных",
+            "withdrawn": "Уже выведено",
+            "pending": "На рассмотрении",
+            "available_referral": "Доступно реферального",
+            "available_total": "Всего доступно к выводу"
+          },
+          "deposits": {
+            "referral_count": "Рефералов",
+            "paying_referrals": "Платящих рефералов",
+            "total_deposits": "Пополнений рефералов",
+            "total_amount": "Сумма их пополнений"
+          },
+          "recent": {
+            "week": "Начислено за неделю"
+          },
+          "recentTitle": "Активность за неделю",
+          "times_one": "· {{count}} раз",
+          "times_few": "· {{count}} раза",
+          "times_many": "· {{count}} раз"
+        }
       }
     },
     "partners": {
@@ -4734,7 +4999,7 @@
         "applyToAddons": "Применять к дополнительным услугам",
         "default": "По умолчанию",
         "daysShort": "{{days}} дн.",
-        "autoFrom": "Авто от {{amount}} руб.",
+        "autoFrom": "Авто от {{amount}}",
         "members_one": "{{count}} участник",
         "members_few": "{{count}} участника",
         "members_many": "{{count}} участников"
@@ -4755,7 +5020,8 @@
         "discountPercentInvalid": "Процент скидки должен быть от 1 до 100",
         "discountHoursRequired": "Укажите время действия скидки в часах",
         "trafficRequired": "Объём трафика должен быть больше 0"
-      }
+      },
+      "cannotSave": "Невозможно сохранить промокод:"
     },
     "promoGroups": {
       "title": "Группы скидок",
@@ -4767,8 +5033,14 @@
       "traffic": "Трафик",
       "devices": "Устройства",
       "daysShort": "{{days}} дн.",
-      "autoFrom": "Авто от {{amount}} руб.",
+      "autoFrom": "Авто от {{amount}}",
       "members": "{{count}} участников",
+      "recalculate": "Пересчитать участников",
+      "recalculateHint": "Раздать группы по тратам всем, кто платил. После создания, изменения или удаления группы с порогом это происходит само.",
+      "recalculating": "Идёт пересчёт участников по тратам…",
+      "recalculateStarted": "Пересчёт запущен. Участники обновятся через минуту.",
+      "recalculateDone": "Пересчёт завершён: проверено {{checked}}, переназначено {{changed}}.",
+      "recalculateFailed": "Пересчёт не удался. Попробуйте ещё раз.",
       "createTitle": "Создание группы скидок",
       "editTitle": "Редактирование группы",
       "stats": {
@@ -4810,21 +5082,17 @@
     "users": {
       "title": "Пользователи",
       "subtitle": "Управление пользователями бота",
-      "search": "Поиск по ID, имени, username...",
-      "searchEmail": "Поиск по email...",
+      "search": "ID, имя, @username или email",
+      "searchShort": "Имя, ID, @ник, email",
       "noData": "Пользователи не найдены",
-      "purchaseCount_one": "{{count}} покупка",
-      "purchaseCount_few": "{{count}} покупки",
-      "purchaseCount_many": "{{count}} покупок",
-      "noPurchases": "Нет покупок",
       "stats": {
         "total": "Всего",
         "active": "Активных",
         "withSubscription": "С подпиской",
-        "recurrentUsers": "С привязанной картой",
         "newToday": "Новых сегодня",
         "blocked": "Заблокировано",
-        "deleted": "Удалено"
+        "deleted": "Удалено",
+        "recurrentUsers": "С привязанной картой"
       },
       "status": {
         "active": "Активные",
@@ -4835,18 +5103,15 @@
         "expired": "Истекла"
       },
       "filters": {
-        "allStatuses": "Все статусы",
+        "title": "Фильтры",
+        "buttonApplied_one": "Фильтры: выбран {{count}}",
+        "buttonApplied_few": "Фильтры: выбрано {{count}}",
+        "buttonApplied_many": "Фильтры: выбрано {{count}}",
+        "reset": "Сбросить",
+        "remove": "Убрать фильтр «{{name}}»",
         "allCards": "Все пользователи",
         "hasCard": "С привязанной картой",
-        "noCard": "Без привязанной карты",
-        "byDate": "По дате",
-        "byBalance": "По балансу",
-        "byActivity": "По активности",
-        "bySpent": "По расходам",
-        "byExpiry": "По истечению подписки"
-      },
-      "pagination": {
-        "showing": "Показано {{from}}-{{to}} из {{total}}"
+        "noCard": "Без привязанной карты"
       },
       "actions": {
         "block": "Заблокировать",
@@ -4871,32 +5136,17 @@
           "bad_request": "Telegram отклонил сообщение. Проверьте текст (HTML-разметку) и попробуйте ещё раз"
         }
       },
-      "recurringModal": {
-        "title": "Отчёт об отключении рекуррентов",
-        "user": "Пользователь",
-        "totalActions": "Всего действий",
-        "succeeded": "Успешно",
-        "failed": "С ошибками",
-        "detailsTitle": "Детализация по платёжным системам",
-        "emptyResults": "У пользователя нет сохранённых рекуррентных подписок или методов оплаты",
-        "targetId": "ID"
-      },
       "userActions": {
         "delete": "Удалить пользователя",
         "resetTrial": "Сбросить триал",
-        "resetSubscription": "Сбросить подписку",
-        "cancelAllRecurring": "Отключить все рекурренты (API)",
         "disable": "Отключить пользователя",
-        "resetPassword": "Сбросить пароль",
-        "generateLoginLink": "Создать ссылку входа",
         "error": "Не удалось выполнить действие",
         "success": {
           "delete": "Пользователь успешно удалён",
           "resetTrial": "Триал успешно сброшен",
-          "resetSubscription": "Подписка успешно сброшена",
           "disable": "Пользователь успешно отключён",
-          "resetPassword": "Пароль успешно сброшен",
-          "generateLoginLink": "Ссылка для входа успешно сгенерирована"
+          "generateLoginLink": "Ссылка для входа успешно сгенерирована",
+          "resetPassword": "Пароль успешно сброшен"
         },
         "confirmDelete": {
           "title": "Удалить пользователя?",
@@ -4906,33 +5156,29 @@
           "title": "Сбросить триал?",
           "message": "Пользователь сможет снова воспользоваться пробным периодом."
         },
-        "confirmResetSubscription": {
-          "title": "Сбросить подписку?",
-          "message": "Текущая подписка пользователя будет отменена."
-        },
         "confirmDisable": {
           "title": "Отключить пользователя?",
           "message": "Пользователь не сможет пользоваться сервисом до повторной активации."
         },
-        "confirmResetPassword": {
-          "title": "Сбросить пароль?",
-          "message": "Вы уверены, что хотите сбросить пароль пользователя? Это сгенерирует новый случайный пароль."
-        },
+        "generateLoginLink": "Создать ссылку входа",
+        "resetPassword": "Сбросить пароль",
         "confirmGenerateLoginLink": {
           "title": "Создать ссылку входа?",
           "message": "Это создаст временный токен и сгенерирует безопасную ссылку авто-входа."
+        },
+        "cancelAllRecurring": "Отключить все рекурренты (API)",
+        "confirmResetPassword": {
+          "title": "Сбросить пароль?",
+          "message": "Вы уверены, что хотите сбросить пароль пользователя? Это сгенерирует новый случайный пароль."
         }
       },
       "detail": {
         "tabs": {
-          "info": "Информация",
           "subscription": "Подписка",
           "balance": "Баланс",
-          "sync": "Синхронизация",
-          "tickets": "Тикеты",
-          "gifts": "Подарки",
           "referrals": "Рефералы",
-          "activity": "Активность"
+          "activity": "Активность",
+          "overview": "Обзор"
         },
         "noTickets": "У пользователя нет тикетов",
         "ticketsCount": "тикетов",
@@ -4947,7 +5193,6 @@
         "firstConnection": "Первое подключение",
         "online": "Онлайн",
         "noVpnData": "Нет данных о подключении",
-        "recurrentCards": "Привязанные карты",
         "requestHistory": "История запросов подписки",
         "requestHistoryTotal": "Всего запросов",
         "requestAt": "Дата",
@@ -4974,10 +5219,6 @@
         "lifetime": "За всё время",
         "nodeUsage": "Расход по нодам",
         "copied": "Скопировано",
-        "copy": "Копировать",
-        "generatedCredentialsTitle": "Сгенерированные данные",
-        "tempPasswordLabel": "Временный пароль",
-        "loginLinkLabel": "Ссылка для авто-входа",
         "panelNotFound": "Пользователь не найден в панели",
         "devices": {
           "title": "Устройства",
@@ -5061,23 +5302,77 @@
           "sbpStatus_PENDING": "Ожидает подтверждения",
           "sbpStatus_ACTIVE": "Активен",
           "sbpStatus_PAST_DUE": "Платёж не прошёл",
-          "cancelAllRecurringTitle": "Принудительное отключение всех автоплатежей",
-          "cancelAllRecurringDesc": "Отключает все рекуррентные подписки пользователя через API всех платёжек (Platega, Lava, Antilopay, YooKassa) независимо от их статуса в БД и показывает подробный отчёт.",
-          "cancelAllRecurring": "Отключить все рекурренты (API)",
           "deleteTitle": "Удаление подписки",
           "deleteHint": "Подписка и её устройства будут удалены безвозвратно",
           "deleteButton": "Удалить подписку",
-          "deleted": "Подписка удалена"
+          "deleted": "Подписка удалена",
+          "extendBy": "на {{count}} дн.",
+          "customDays": "другой срок",
+          "shortenTitle": "Сократить срок",
+          "deviceLimitTitle": "Лимит устройств",
+          "deviceLimitHint": "Максимум по тарифу: {{max}}",
+          "removePackage": "Убрать пакет",
+          "purchasedExtra": "докуплено {{gb}} ГБ",
+          "periodDays": "{{count}} д",
+          "noNodeUsage": "За этот период трафика по нодам не было",
+          "deviceSince": "с {{date}}",
+          "sbpShort": "СБП",
+          "cancelTitle": "Отменить подписку",
+          "cancelButton": "Отменить подписку",
+          "dangerZone": {
+            "title": "Опасная зона",
+            "description": "Отмена обрывает подписку сейчас, удаление стирает её вместе с устройствами из бота и панели."
+          },
+          "support": {
+            "title": "Для поддержки",
+            "hint": "ссылка подписки, ключи, история запросов"
+          },
+          "confirm": {
+            "cancelSubscription": "Отменить подписку? Срок и трафик не вернутся.",
+            "shorten": "Списать {{count}} дн. со срока подписки?",
+            "removePackage": "Убрать пакет {{gb}} ГБ? Трафик из него пропадёт.",
+            "deleteDevice": "Удалить устройство «{{name}}»? Ему придётся подключиться заново.",
+            "resetDevices": "Сбросить все устройства? Всем клиентам придётся подключиться заново.",
+            "cancelSbp": "Отключить автоплатёж по СБП?"
+          },
+          "lastPayment": "Оплачено",
+          "autopay": "Автопродление",
+          "autopayOn": "включено",
+          "autopayOff": "выключено",
+          "extendDays": "Продлить на, дней",
+          "shortenDays": "Списать, дней",
+          "newTariff": "Новый тариф",
+          "package": "Пакет",
+          "devicesLimit_one": "до {{count}} устройства",
+          "devicesLimit_few": "до {{count}} устройств",
+          "devicesLimit_many": "до {{count}} устройств",
+          "cancelAllRecurring": "Отключить все рекурренты (API)",
+          "cancelAllRecurringDesc": "Отключает все рекуррентные подписки пользователя через API всех платёжек (Platega, Lava, Antilopay, YooKassa) независимо от их статуса в БД и показывает подробный отчёт.",
+          "cancelAllRecurringTitle": "Принудительное отключение всех автоплатежей"
         },
         "balance": {
           "current": "Текущий баланс",
-          "amountPlaceholder": "Сумма в рублях",
-          "descriptionPlaceholder": "Описание (опционально)",
+          "amountPlaceholder": "0 ₽",
+          "descriptionPlaceholder": "Например, компенсация за простой",
           "add": "Начислить",
           "subtract": "Списать",
           "addByAdmin": "Начисление админом",
           "subtractByAdmin": "Списание админом",
-          "recentTransactions": "Последние транзакции"
+          "recentTransactions": "Последние транзакции",
+          "title": "Баланс",
+          "changeTitle": "Начислить или списать",
+          "amountLabel": "Сумма",
+          "commentLabel": "Комментарий для журнала",
+          "confirmSubtract": "Списать {{amount}} с баланса?",
+          "confirmDeactivate": "Отключить скидку {{percent}}%?",
+          "discountTitle": "Персональная скидка",
+          "noOffer": "нет активного предложения",
+          "offerFormOpen": "Отправить предложение",
+          "noOperations": "Операций пока не было",
+          "added": "Начислено {{amount}}",
+          "subtracted": "Списано {{amount}}",
+          "offerNow": "Сейчас",
+          "offerValue": "−{{percent}} % до {{date}}"
         },
         "sync": {
           "selectSubscription": "Выберите подписку",
@@ -5127,44 +5422,46 @@
           "balance": "баланс",
           "unknownUser": "Неизвестный",
           "totalSent": "Всего отправлено",
-          "totalReceived": "Всего получено"
+          "totalReceived": "Всего получено",
+          "to": "кому:",
+          "from": "от:",
+          "periodValue_one": "{{count}} день",
+          "periodValue_few": "{{count}} дня",
+          "periodValue_many": "{{count}} дней"
         },
         "referrals": {
-          "referredBy": "Приглашён",
+          "referredBy": "Пригласил",
           "noReferrer": "Реферер не назначен",
           "assignReferrer": "Назначить реферера",
-          "removeReferrer": "Удалить",
+          "removeReferrer": "Отвязать",
           "referrerAssigned": "Реферер назначен",
           "referrerRemoved": "Реферер удалён",
           "totalReferrals": "Всего рефералов",
           "totalEarnings": "Всего заработано",
           "commission": "Комиссия",
           "referralCode": "Реферальный код",
-          "default": "стандарт",
+          "default": "по умолчанию",
           "referralsList": "Рефералы",
           "noReferrals": "Рефералов пока нет",
           "removeReferral": "Удалить реферала",
           "referralRemoved": "Реферал удалён",
-          "addReferral": "Добавить реферала",
+          "add": "Добавить",
           "referralAdded": "Реферал добавлен",
           "searchPlaceholder": "Поиск по имени, email или Telegram ID...",
           "alreadyReferred": "уже чей-то реферал",
-          "noUsersFound": "Пользователи не найдены"
+          "noUsersFound": "Пользователи не найдены",
+          "assign": "Назначить",
+          "invited": "Приглашено",
+          "earned": "Заработано",
+          "code": "Код",
+          "commissionPercent": "Комиссия, %",
+          "commissionSaved": "Комиссия сохранена",
+          "spentHint": "Сколько потратил в сервисе",
+          "confirmRemoveReferrer": "Отвязать пригласившего? Начисления ему по этому человеку прекратятся.",
+          "confirmRemoveReferral": "Убрать {{name}} из рефералов? Начисления по нему прекратятся."
         },
         "activity": {
-          "total": "Всего событий",
           "empty": "Активности пока нет",
-          "filters": {
-            "all": "Все",
-            "payments": "Платежи",
-            "events": "События",
-            "promo": "Промо",
-            "tickets": "Тикеты",
-            "gifts": "Подарки",
-            "referrals": "Рефералы",
-            "logins": "Входы",
-            "clicks": "Клики"
-          },
           "types": {
             "transaction": "Транзакция",
             "event": "Событие",
@@ -5180,7 +5477,7 @@
             "withdrawal": "Заявка на вывод",
             "button_click": "Кнопка в боте",
             "cabinet_action": "Действие в кабинете",
-            "miniapp_action": "Действие в Mini App",
+            "miniapp_action": "Действие в кабинете",
             "screen": "Открыл экран",
             "click": "Нажал",
             "message": "Сообщение боту"
@@ -5188,7 +5485,7 @@
           "sources": {
             "bot": "Бот",
             "cabinet": "Кабинет",
-            "miniapp": "Mini App"
+            "miniapp": "Кабинет"
           },
           "subtypes": {
             "deposit": "Пополнение",
@@ -5303,11 +5600,344 @@
             "contact": "контакт",
             "location": "геопозиция",
             "other": "сообщение"
+          },
+          "views": {
+            "tickets": "Обращения",
+            "gifts": "Подарки",
+            "all": "Всё",
+            "payments": "Оплаты",
+            "subscription": "Подписка",
+            "actions": "Действия",
+            "logins": "Входы"
+          },
+          "fromBalance": "с баланса",
+          "loadError": "Не удалось загрузить активность"
+        },
+        "header": {
+          "copy": "Скопировать",
+          "emailVerified": "подтверждён",
+          "emailUnverified": "не подтверждён",
+          "onlineAt": "онлайн · {{node}}",
+          "write": "Написать",
+          "writeEmail": "На почту",
+          "group": "Группа: {{name}}"
+        },
+        "facts": {
+          "balance": "Баланс",
+          "until": "Подписка до",
+          "days": "{{count}} дн.",
+          "traffic": "Трафик",
+          "devices": "Устройства",
+          "devicesValue": "{{used}} из {{limit}}",
+          "spent": "Потрачено",
+          "noSubscription": "нет",
+          "subscriptions": "Подписки",
+          "subscriptionsLive_one": "{{count}} активная",
+          "subscriptionsLive_few": "{{count}} активные",
+          "subscriptionsLive_many": "{{count}} активных",
+          "noLive": "нет активных",
+          "nearest": "ближайшая до {{date}}",
+          "tariffUntil": "{{tariff}} · до {{date}}"
+        },
+        "menu": {
+          "more": "Ещё действия"
+        },
+        "overview": {
+          "trafficPeriod": "Трафик",
+          "extend": "Продлить",
+          "connection": "Подключение",
+          "now": "Сейчас",
+          "firstConnection": "Подключён с",
+          "devices": "Устройства",
+          "lifetimeTraffic": "За всё время",
+          "noDevices": "нет",
+          "noPanelData": "Панель ещё не видела этого человека",
+          "origin": "Откуда пришёл",
+          "registered": "Регистрация",
+          "campaign": "Кампания",
+          "promoGroup": "Промогруппа",
+          "change": "Изменить",
+          "noPromoGroup": "без группы",
+          "referrer": "Пригласил",
+          "cabinetLogin": "Вход в кабинет",
+          "restrictionsAndSupport": "Ограничения и обращения",
+          "restrictions": "Ограничения",
+          "noRestrictions": "нет",
+          "configure": "Настроить",
+          "restrictTopup": "запрет пополнения",
+          "restrictSubscription": "запрет покупки подписки",
+          "restrictionReason": "Причина (видна только админам)",
+          "tickets": "Тикеты",
+          "open": "Открыть",
+          "gifts": "Подарки",
+          "recent": "Последние события",
+          "allActivity": "Вся активность",
+          "noActivity": "Пока ничего не происходило",
+          "assign": "Назначить",
+          "none": "нет",
+          "list": "Список",
+          "promocodes": "Промокоды",
+          "restrictTopupFull": "Запретить пополнение баланса",
+          "restrictSubscriptionFull": "Запретить покупку подписки",
+          "promocodesUsed_one": "{{count}} использован",
+          "promocodesUsed_few": "{{count}} использовано",
+          "promocodesUsed_many": "{{count}} использовано",
+          "ticketsOpen_one": "{{count}} открытый",
+          "ticketsOpen_few": "{{count}} открытых",
+          "ticketsOpen_many": "{{count}} открытых",
+          "ticketsClosed_one": "{{count}} закрытый",
+          "ticketsClosed_few": "{{count}} закрытых",
+          "ticketsClosed_many": "{{count}} закрытых",
+          "giftsSent_one": "{{count}} отправлен",
+          "giftsSent_few": "{{count}} отправлено",
+          "giftsSent_many": "{{count}} отправлено",
+          "giftsReceived_one": "{{count}} получен",
+          "giftsReceived_few": "{{count}} получено",
+          "giftsReceived_many": "{{count}} получено",
+          "all": "Все",
+          "lastActivity": "Последняя активность"
+        },
+        "restrictionsSaved": "Ограничения обновлены",
+        "panel": {
+          "title": "Панель Remnawave",
+          "matches": "Совпадает",
+          "differs": "Есть отличия",
+          "unknown": "Не проверялось",
+          "checked": "Синхронизировано",
+          "pull": "Из панели в бота",
+          "pushManual": "Из бота в панель",
+          "confirmPull": "Забрать данные из панели в бота? Срок и трафик в базе бота будут перезаписаны.",
+          "confirmPush": "Отправить данные бота в панель? Срок, трафик и сквады в панели будут перезаписаны.",
+          "notLinked": "Нет в панели",
+          "live": "работает",
+          "notLive": "не работает",
+          "pullTitle": "Из панели в бота",
+          "pushTitle": "Из бота в панель",
+          "remnawaveId": "Номер в панели Remnawave",
+          "rows": {
+            "status": "Доступ",
+            "until": "Действует до",
+            "trafficLimit": "Лимит трафика",
+            "trafficUsed": "Расход",
+            "devices": "Устройства",
+            "squads": "Сквады"
+          },
+          "graceNote": "Человеку открыт временный доступ до {{date}} — пока он идёт, в панели стоят его настройки. Это не расхождение, переносить ничего не нужно."
+        },
+        "loadError": "Не удалось загрузить пользователя",
+        "done": {
+          "subscription": {
+            "extend": "Продлено на {{count}} дн. — до {{date}}",
+            "shorten": "Срок сокращён на {{count}} дн. — до {{date}}",
+            "change_tariff": "Тариф сменён",
+            "activate": "Подписка активирована до {{date}}",
+            "cancel": "Подписка отменена",
+            "create": "Подписка выдана до {{date}}"
+          },
+          "pulled": "Данные забраны из панели",
+          "pushed": "Данные отправлены в панель",
+          "promoGroup": "Промогруппа изменена",
+          "blocked": "Пользователь заблокирован",
+          "unblocked": "Пользователь разблокирован",
+          "pulledWithWarning": "В боте срок был позже, чем в панели, — применена дата панели. Проверьте, не было ли автопродления"
+        },
+        "operations": {
+          "title": "Операции",
+          "operation": "Операция",
+          "notCompleted": "не завершена",
+          "filters": {
+            "all": "Все",
+            "deposit": "Пополнения",
+            "withdrawal": "Списания",
+            "subscription_payment": "Покупки"
           }
-        }
+        },
+        "messages_one": "{{count}} сообщение",
+        "messages_few": "{{count}} сообщения",
+        "messages_many": "{{count}} сообщений",
+        "ticketLoadError": "Не удалось открыть обращение",
+        "copy": "Копировать",
+        "generatedCredentialsTitle": "Сгенерированные данные",
+        "recurrentCards": "Привязанные карты",
+        "loginLinkLabel": "Ссылка для авто-входа",
+        "tempPasswordLabel": "Временный пароль"
       },
       "notFound": "Пользователь не найден",
-      "purchaseCount": "Покупок: {{count}}"
+      "summary": {
+        "total_one": "{{value}} человек",
+        "total_few": "{{value}} человека",
+        "total_many": "{{value}} человек",
+        "subscribed": "{{value}} с активной подпиской",
+        "newToday_one": "{{value}} новый сегодня",
+        "newToday_few": "{{value}} новых сегодня",
+        "newToday_many": "{{value}} новых сегодня",
+        "blocked_one": "{{value}} заблокирован",
+        "blocked_few": "{{value}} заблокированы",
+        "blocked_many": "{{value}} заблокировано"
+      },
+      "shown": "Показано {{shown}} из {{total}}",
+      "loadingMore": "Загружаем ещё",
+      "noneFound": "Никого не нашли — попробуйте другой запрос или уберите фильтры",
+      "loadError": "Не удалось загрузить список",
+      "connectedNow": "подключён сейчас",
+      "onlineUnavailable": "Панель не ответила — не удалось узнать, кто сейчас подключён. Попробуйте ещё раз.",
+      "reset": "Сбросить всё",
+      "toTop": "Наверх",
+      "unlimited": "безлимит",
+      "until": "до {{date}}",
+      "sort": {
+        "label": "Сортировка",
+        "expires": {
+          "asc": "Скоро истекают",
+          "desc": "Истекают позже всех"
+        },
+        "grace": {
+          "asc": "Грейс скоро кончится",
+          "desc": "Грейс кончится позже всех"
+        },
+        "activity": {
+          "asc": "Давно не заходили",
+          "desc": "Недавно заходили"
+        },
+        "created": {
+          "asc": "Сначала старые",
+          "desc": "Сначала новые"
+        },
+        "balance": {
+          "asc": "Меньше всего на балансе",
+          "desc": "Больше всего на балансе"
+        },
+        "spent": {
+          "asc": "Меньше всего потратили",
+          "desc": "Больше всего потратили"
+        },
+        "traffic": {
+          "asc": "Меньше всего трафика",
+          "desc": "Больше всего трафика"
+        },
+        "purchases": {
+          "asc": "Меньше всего покупок",
+          "desc": "Больше всего покупок"
+        }
+      },
+      "views": {
+        "all": "Все",
+        "expiring": "Истекают за {{days}} дней",
+        "grace": "В грейсе",
+        "traffic": "Трафик на исходе",
+        "nopay": "Без покупок",
+        "online": "Онлайн",
+        "blocked": "Заблокированные"
+      },
+      "viewsLabel": "Выборка",
+      "filterLabels": {
+        "status": "Статус",
+        "sub": "Подписка",
+        "tariff": "Тариф",
+        "group": "Промогруппа",
+        "campaign": "Кампания"
+      },
+      "filterAny": {
+        "status": "любой",
+        "sub": "любая",
+        "tariff": "любой",
+        "group": "любая",
+        "campaign": "любая"
+      },
+      "subFilters": {
+        "active": "активна",
+        "trial": "триал",
+        "expiring": "истекает",
+        "expired": "истекла",
+        "limited": "трафик исчерпан",
+        "none": "нет подписки"
+      },
+      "columns": {
+        "user": "Пользователь",
+        "subscription": "Подписка",
+        "activity": "Активность",
+        "balance": "Баланс"
+      },
+      "statuses": {
+        "active": "Активен",
+        "blocked": "Заблокирован",
+        "deleted": "Удалён",
+        "noSubscription": "Без подписки",
+        "disabled": "Отключена",
+        "pending": "Ожидает оплаты",
+        "other": "Подписка"
+      },
+      "subscriptionChips": {
+        "trial": "Триал · {{count}} дн.",
+        "daysLeft": "{{count}} дн.",
+        "today": "истекает сегодня",
+        "expiredToday": "истекла сегодня",
+        "expiredAgo": "истекла {{count}} дн. назад",
+        "limited": "трафик исчерпан",
+        "graceUntil": "временно до {{date}}"
+      },
+      "summaryShort": {
+        "total_one": "{{value}}",
+        "total_few": "{{value}}",
+        "total_many": "{{value}}",
+        "subscribed": "{{value}} с подпиской",
+        "newToday_one": "{{value}} новый",
+        "newToday_few": "{{value}} новых",
+        "newToday_many": "{{value}} новых"
+      },
+      "endOfList_one": "Это все: {{total}} человек по запросу",
+      "endOfList_other": "Это все: {{total}} человек по запросу",
+      "endOfList_few": "Это все: {{total}} человека по запросу",
+      "endOfList_many": "Это все: {{total}} человек по запросу",
+      "subscriptionState": {
+        "active": "Активна",
+        "trial": "Триал",
+        "limited": "Трафик исчерпан",
+        "expired": "Истекла",
+        "disabled": "Отключена",
+        "pending": "Ожидает оплаты",
+        "other": "Подписка"
+      },
+      "purchaseCount_one": "{{count}} покупка",
+      "purchaseCount_few": "{{count}} покупки",
+      "purchaseCount_many": "{{count}} покупок",
+      "errors": {
+        "generic": "Не удалось выполнить действие. Попробуйте ещё раз",
+        "insufficientBalance": "На балансе {{current}}, а списать нужно {{requested}}",
+        "tariffTaken": "На этот тариф уже есть живая подписка — продлите её",
+        "singleTariff": "Подписка уже есть. Вторую можно выдать только в мультитарифе",
+        "graceActive": "Сейчас действует временный доступ — дождитесь его конца или восстановите подписку",
+        "badDays": "Укажите количество дней больше нуля",
+        "selfReferrer": "Нельзя назначить человека пригласившим самого себя",
+        "circularReferral": "Так получится круг: этот человек уже в цепочке приглашённых",
+        "noReferrer": "Пригласивший не назначен",
+        "notReferral": "Этот человек не реферал выбранного пользователя",
+        "ownCommission": "Свою реферальную комиссию менять нельзя",
+        "adminProtected": "Это администратор — его нельзя заблокировать",
+        "notInPanel": "Этого человека нет в панели Remnawave",
+        "panelUnreachable": "Не удалось связаться с панелью. Попробуйте позже",
+        "resetNotFinished": "Панель не отключила подписку — сброс не завершён",
+        "noSubscription": "Подписки нет",
+        "noDevices": "Устройств нет",
+        "deviceNotFound": "Устройство уже удалено",
+        "packageNotFound": "Пакет трафика не найден",
+        "tariffNotFound": "Тариф не найден",
+        "promoGroupNotFound": "Промогруппа не найдена",
+        "subscriptionNotFound": "Подписка не найдена",
+        "userNotFound": "Пользователь не найден",
+        "trialBlockedBySubscription": "Триал всё равно закрыт: у человека есть другая подписка. Сначала удалите её."
+      },
+      "moreTariffs": "ещё {{count}}",
+      "recurringModal": {
+        "title": "Отчёт об отключении рекуррентов",
+        "user": "Пользователь",
+        "totalActions": "Всего действий",
+        "succeeded": "Успешно",
+        "failed": "С ошибками",
+        "detailsTitle": "Детализация по платёжным системам",
+        "emptyResults": "У пользователя нет сохранённых рекуррентных подписок или методов оплаты",
+        "targetId": "ID"
+      }
     },
     "promoOffers": {
       "title": "Промопредложения",
@@ -5616,7 +6246,15 @@
           "email_templates": "Шаблоны писем",
           "pinned_messages": "Закреплённые сообщения",
           "landings": "Лендинги",
-          "updates": "Обновления"
+          "updates": "Обновления",
+          "bulk_actions": "Массовые действия",
+          "coupons": "Купоны",
+          "info_pages": "Справочные страницы",
+          "news": "Новости",
+          "reachability": "Доступность из РФ",
+          "system_errors": "Ошибки системы",
+          "user": "Пользователь",
+          "dpichecker": "DPI//CHECKER"
         },
         "permissionActions": {
           "read": "Чтение",
@@ -5642,7 +6280,10 @@
           "balance": "Баланс",
           "subscription": "Подписка",
           "send_offer": "Промо-предложение",
-          "referral": "Реф. процент"
+          "referral": "Реф. процент",
+          "execute": "Выполнение",
+          "run": "Запуск",
+          "send_message": "Отправка сообщения"
         },
         "toggleSection": "Переключить все права {{section}}",
         "selectedPermissions_one": "{{count}} разрешение выбрано",
@@ -5905,7 +6546,11 @@
         "loadFailed": "Не удалось загрузить журнал аудита",
         "retry": "Попробовать снова"
       },
-      "totalEntries": "Всего записей: {{count}}"
+      "totalEntries": "Всего записей: {{count}}",
+      "actions": {
+        "phantom_claimed": "Вход в заготовленный аккаунт",
+        "phantom_merged": "Слияние заготовленного аккаунта"
+      }
     },
     "landings": {
       "title": "Лендинги",
@@ -5987,13 +6632,6 @@
         "regularPurchases": "Обычные",
         "conversionRate": "Конверсия",
         "avgPurchase": "Средний чек",
-        "linkedCards": "Привязанные карты",
-        "trialCards": "Пробные (10₽)",
-        "regularCards": "Обычные карты",
-        "renewalsCount": "Продления",
-        "renewalsRate": "Процент продлений",
-        "renewalsRegularCount": "Обычные продления",
-        "renewalsTrialCount": "Пробные продления",
         "dailyChart": "Покупки и доход по дням",
         "tariffChart": "Распределение по тарифам",
         "giftBreakdown": "Подарки vs обычные",
@@ -6015,13 +6653,20 @@
         "paid": "оплачено",
         "dailyPurchases": "Покупок в день",
         "dailyPurchaseTypes": "Покупки и продления",
-        "dailyRenewalRate": "Процент продлений (%)",
-        "renewalRateLabel": "Процент продлений",
-        "regularLabelChart": "Обычные",
-        "trialsLabelChart": "Пробные",
-        "renewalsLabelChart": "Продления",
+        "linkedCards": "Привязанные карты",
+        "trialCards": "Пробные (10₽)",
+        "renewalsTrialLabelChart": "Продления (пробные)",
         "renewalsRegularLabelChart": "Продления (обычные)",
-        "renewalsTrialLabelChart": "Продления (пробные)"
+        "renewalsCount": "Продления",
+        "renewalsLabelChart": "Продления",
+        "renewalRateLabel": "Процент продлений",
+        "regularCards": "Обычные карты",
+        "trialsLabelChart": "Пробные",
+        "dailyRenewalRate": "Процент продлений (%)",
+        "regularLabelChart": "Обычные",
+        "renewalsRate": "Процент продлений",
+        "renewalsRegularCount": "Обычные продления",
+        "renewalsTrialCount": "Пробные продления"
       },
       "purchases": {
         "title": "Покупки",
@@ -6056,7 +6701,8 @@
       "methodMaxAmount": "Максимальная сумма",
       "methodMinAmount": "Минимальная сумма",
       "methodReturnUrl": "URL возврата",
-      "stickyPayButton": "Закреплённая кнопка оплаты"
+      "stickyPayButton": "Закреплённая кнопка оплаты",
+      "stickyPayButtonHint": "Кнопка оплаты прикреплена к низу экрана на телефоне"
     },
     "infoPages": {
       "title": "Информационные страницы",
@@ -6281,6 +6927,436 @@
         "retry": "Отправить повторно",
         "retrySent": "Ошибка отправлена в админ-чат",
         "retryFailed": "Не удалось отправить в админ-чат"
+      }
+    },
+    "dpichecker": {
+      "subtitle": "проверки из сетей России, Китая, Ирана и Туркменистана",
+      "tabs": {
+        "label": "Разделы DPI//CHECKER",
+        "vpn": "VPN",
+        "ip": "IP / домен",
+        "mtproto": "MTProto",
+        "noisy": "Соседи",
+        "probe": "Зонд",
+        "cheremsha": "Черемша",
+        "monitors": "Мониторы",
+        "history": "История"
+      },
+      "header": {
+        "noisyLeft": "Соседи: осталось {{left}} из {{limit}} на сегодня",
+        "topup": "Пополнить",
+        "noisyShort": "Соседи: {{left}} из {{limit}} сегодня"
+      },
+      "money": {
+        "usd": "{{value}} USD"
+      },
+      "setup": {
+        "titleDisabled": "DPI//CHECKER выключен",
+        "titleNotConfigured": "DPI//CHECKER не настроен",
+        "intro": "Проверка VPN-ключей, адресов и MTProto-прокси из домашних и мобильных сетей России, Китая, Ирана и Туркменистана. Чтобы раздел заработал:",
+        "key": "Ключ API",
+        "keyHint": "Выпускается в боте DPI//CHECKER (Главное меню → API) или на сайте dpichecker.st; нужен депозит от $1",
+        "enable": "Включите DPI//CHECKER",
+        "enableHint": "Переключатель в тех же настройках",
+        "rights": "Права админов",
+        "rightsHint": "Кто может смотреть раздел и кто может запускать проверки: они тратят деньги с баланса DPI//CHECKER",
+        "openSettings": "Открыть настройки DPI//CHECKER",
+        "openSite": "Получить ключ на dpichecker.st",
+        "envNote": "Если бот настроен через файл окружения, его значения главнее настроек из кабинета: тогда правьте файл и перезапустите бота.",
+        "reference": "Подписка по умолчанию, необязательно",
+        "referenceHint": "Ссылка подписки или shortUuid панели: её ключи VPN «Из панели» возьмёт без выбора пользователя"
+      },
+      "locations": {
+        "russia": "Россия",
+        "china": "Китай",
+        "iran": "Иран",
+        "turkmenistan": "Туркменистан"
+      },
+      "pops": {
+        "optimal": "Оптимальный выбор",
+        "all": "Все доступные",
+        "random": "Случайные 10",
+        "clear": "очистить",
+        "districts": "Округа",
+        "republics": "Республики",
+        "search": "Поиск по региону или оператору",
+        "loading": "Загружаю точки присутствия",
+        "loadFailed": "Не удалось загрузить точки.",
+        "nothingFound": "Ничего не найдено.",
+        "wholeRegion": "Выбрать весь регион",
+        "dead": "Точка сейчас недоступна",
+        "anyOperator": "Любой",
+        "optimalFailed": "Не удалось получить оптимальный набор, попробуйте ещё раз.",
+        "groupEmpty": "В этом округе сейчас нет доступных точек."
+      },
+      "form": {
+        "step1": "Что проверяем",
+        "step2": "Откуда проверяем",
+        "step3": "Итого",
+        "paste": "Вставить",
+        "fromPanel": "Из панели",
+        "originLabel": "Откуда взять цели",
+        "hint": {
+          "vpn": "Ключи VLESS / VMess / Trojan / Shadowsocks / Hysteria2 или ссылки на подписки — по одному в строке.",
+          "ip": "До 50 IP-адресов или доменов, по одному в строке. Ссылки тоже подойдут — из них будет взят только домен.",
+          "mtproto": "Ссылки на MTProto-прокси (tg://proxy… или t.me/proxy…) — по одной в строке."
+        },
+        "placeholder": {
+          "vpn": "vless://… или https://…/subscription",
+          "ip": "example.com\n203.0.113.10",
+          "mtproto": "tg://proxy?server=…&port=…&secret=…"
+        },
+        "continue": "Продолжить",
+        "parsing": "Разбираю…",
+        "failed": "Не получилось — попробуйте ещё раз",
+        "fetchFailed": "Не удалось получить подписку. Попробуйте позже.",
+        "accepted": "Принято: {{count}}",
+        "nothingAccepted": "Ничего не принято.",
+        "udpOnly": "только UDP — не проверяется",
+        "notes": {
+          "invalid": "невалидных: {{count}}",
+          "private": "локальных/приватных IP (не проверяются): {{count}}",
+          "overflow": "сверх лимита строк, отброшено: {{count}}",
+          "duplicate": "дублей: {{count}}",
+          "blacklisted": "в чёрном списке: {{items}}"
+        },
+        "panel": {
+          "label": "Что взять из панели",
+          "subscription": "Подписка",
+          "hosts": "Хосты",
+          "nodes": "Ноды",
+          "loading": "Загружаю из панели…"
+        },
+        "total": {
+          "pops": "Точек",
+          "resources": "Ресурсов",
+          "cost": "Стоимость",
+          "balance": "Баланс",
+          "tariff": "({{pop}} USD за точку + {{resource}} USD за ресурс на точке)"
+        },
+        "probeMode": {
+          "label": "Режим проверки",
+          "auto": "Авто — определить самим",
+          "server": "На цели есть веб-сервер",
+          "noserver": "Веб-сервера нет — искать блокировку",
+          "hint": "Если на адресе ничего не запущено, ставить веб-сервер не нужно: вместо «открывается ли» проверяется «есть ли блокировка» — имя (SNI), DNS и доступность портов."
+        },
+        "runMode": "Как запускать",
+        "once": "Разово",
+        "scheduled": "По расписанию",
+        "schedule": {
+          "interval": "Каждые, часов",
+          "alertAfter": "Тревога после неудач подряд",
+          "notifyOnSuccess": "Сообщать и об успехе",
+          "perRun": "каждый прогон стоит как одна такая проверка",
+          "notify": "Тревоги бота DPI//CHECKER",
+          "notifyDm": "Мне в личку",
+          "notifyGroup": "В группу",
+          "notifyHint": "Для группы после создания появится команда — её нужно отправить в группе, где есть бот DPI//CHECKER. Итоги в админ-чат бота приходят в любом случае."
+        },
+        "pay": "Оплатить",
+        "createMonitor": "Создать монитор",
+        "confirmPay": "Списать {{value}} USD",
+        "confirmMonitor": "Создать монитор · прогон {{value}} USD",
+        "cancel": "Отмена",
+        "estimateFailed": "Не удалось посчитать цену",
+        "pickSome": "Отметьте, что проверить"
+      },
+      "status": {
+        "submitting": "Отправляю в DPI//CHECKER…",
+        "pending": "В очереди",
+        "active": "Идёт проверка",
+        "running": "Идёт",
+        "completed": "Готово",
+        "done": "Готово",
+        "failed": "Не удалось",
+        "cancelled": "Отменена",
+        "rejected": "Отклонена",
+        "unknown": "DPI//CHECKER не ответил",
+        "up": "Работает",
+        "down": "Не работает",
+        "paused": "На паузе",
+        "active_monitor": "Активен",
+        "deleted": "Отключён"
+      },
+      "result": {
+        "title": {
+          "vpn": "Проверка VPN-ключей",
+          "ip": "Проверка IP/домена",
+          "mtproto": "Проверка MTProto"
+        },
+        "points": "{{count}} точек",
+        "points_one": "{{count}} точка",
+        "points_few": "{{count}} точки",
+        "points_many": "{{count}} точек",
+        "resources": "{{count}} рес.",
+        "charged": "списано {{value}} USD",
+        "cancel": "Отменить",
+        "refunded": "Вернули {{value}} USD",
+        "resubmit": "Спросить ещё раз",
+        "unknownHint": "DPI//CHECKER не ответил на запуск. Деньги могли списаться. Спросите ещё раз — запрос уйдёт с тем же ключом, второго списания не будет.",
+        "rejected": "DPI//CHECKER отказал в запуске — деньги не списаны.",
+        "progress": "Сделано {{done}} из {{total}}",
+        "available": "Доступно",
+        "partial": "Частично",
+        "unavailable": "Недоступно",
+        "avgLatency": "Средняя задержка",
+        "ms": "{{value}} мс",
+        "speed": "{{host}}: {{value}} Мбит/с",
+        "ok": "доступно",
+        "fail": "недоступно",
+        "okOf": "{{ok}} из {{total}} доступно",
+        "abroadOk": "Из-за границы: доступен · {{value}} мс",
+        "abroadFail": "Из-за границы: недоступен — похоже, дело не в блокировке",
+        "showAll": "Показать все {{count}}",
+        "showLess": "Свернуть",
+        "csv": "CSV",
+        "map": "Карта",
+        "loadFailed": "Не удалось загрузить проверку",
+        "newCheck": "Новая проверка",
+        "notes": {
+          "noInternet": "у точки нет интернета — это не блокировка",
+          "httpsUpgradeStub": "на 80-м порту только редирект на HTTPS, который не отвечает — так отвечает сеть провайдера",
+          "tlsHandshakeFailed": "не прошло TLS-рукопожатие",
+          "dnsFailed": "адрес не резолвится",
+          "timeout": "нет ответа",
+          "connectionRefused": "соединение отклонено",
+          "connectionReset": "соединение оборвано",
+          "proxyDead": "точка не отвечает",
+          "untestable": "проверить нельзя"
+        },
+        "csvFailed": "Не удалось скачать CSV",
+        "details": "Подробно",
+        "detailsFailed": "Не удалось загрузить подробности",
+        "detailsEmpty": "Подробностей по этой точке нет.",
+        "yes": "да",
+        "no": "нет",
+        "fields": {
+          "host": "Ключ",
+          "error": "Ошибка",
+          "pop_name": "Точка",
+          "connected": "Подключился",
+          "server_ip": "IP сервера",
+          "latency_ms": "Задержка, мс",
+          "proxy_dead": "Точка не отвечает",
+          "untestable": "Проверить нельзя",
+          "proxy_exit_ip": "Выход точки",
+          "untestable_reason": "Почему нельзя проверить",
+          "control_check": "Интернет у точки",
+          "mode": "Режим",
+          "dns_ips": "Адреса по DNS",
+          "exit_ip": "Выход точки",
+          "verdict": "Вердикт",
+          "resource": "Адрес",
+          "cert_name": "Сертификат",
+          "accessible": "Доступен",
+          "error_code": "Код ошибки",
+          "port_story": "Что с портами",
+          "samples_ok": "Удачных замеров",
+          "ssh_status": "SSH",
+          "dns_verdict": "DNS",
+          "ping_avg_ms": "Пинг, мс",
+          "scheme_used": "Протокол",
+          "sni_verdict": "SNI",
+          "status_code": "Код ответа сайта",
+          "port_80_open": "Порт 80 открыт",
+          "port_443_open": "Порт 443 открыт",
+          "samples_total": "Всего замеров",
+          "port_443_state": "Порт 443",
+          "samples_tls_ok": "Удачных TLS",
+          "throughput_kbps": "Скорость, Кбит/с",
+          "port_80_hijacked": "Порт 80 подменён",
+          "port_443_hijacked": "Порт 443 подменён",
+          "samples_throttled": "Замеров с замедлением",
+          "port_control_state": "Контрольный порт",
+          "control_port_number": "Номер контрольного порта",
+          "error_redirect_host": "Куда перенаправляет",
+          "dns_intercepted_ratio": "Доля подменённых DNS",
+          "tcp_latency_ms": "TCP-задержка, мс",
+          "baseline_unreliable": "Эталон ненадёжен",
+          "status": "Итог",
+          "reached": "Достучался",
+          "secret_kind": "Тип секрета"
+        }
+      },
+      "noisy": {
+        "intro": "Список TLS-сертификатов (SNI) хостов в подсети /24. Показывает, насколько «шумные» соседи у вашего сервера (SNI max.ru, vk.ru, google.com и т.п.). Бесплатно, до 10 сканов в день, использовано сегодня: {{used}}.",
+        "placeholder": "Подсети /24, IP или домены — по одному в строке",
+        "run": "Сканировать",
+        "exhausted": "Лимит сканов на сегодня исчерпан.",
+        "found": "Найдено хостов: {{count}}",
+        "badRu": "Российские сервисы рядом",
+        "vpnLike": "Похожи на VPN",
+        "badForeign": "Заметные иностранные сервисы",
+        "quiet": "Шумных соседей не найдено."
+      },
+      "probe": {
+        "intro": "Проверка, заблокирована ли подсеть целиком по /24, или ТСПУ бьёт по отдельным адресам (/32). Подсеть проверяется чужими руками — по соседям, ничего в ней арендовать не нужно.",
+        "howTitle": "Как это работает",
+        "how1": "Сканирую подсеть и собираю TLS-сертификаты (SNI) её живых хостов.",
+        "how2": "Выкидываю всё, что не является доменом, и заведомо «плохие» SNI.",
+        "how3": "Проверяю через DNS, что домен всё ещё живёт в этой подсети.",
+        "how4": "Из-за границы открываю каждый домен по HTTPS и ищу ответ от 48 КБ.",
+        "how5": "Этот ответ тяну с 10 точек присутствия в России и смотрю, доходит ли он целиком.",
+        "why": "Почему именно так: на части диапазонов ТСПУ не рвёт соединение, а даёт получить ~16–20 КБ и обрывает передачу. Страница меньше 16 КБ откроется и через такую блокировку — поэтому нужен ответ заведомо больше порога.",
+        "price": "Стоимость: 1.00 USD фикс. + 1.50 USD за ГБ трафика (по факту, после проверки). Фикс списывается сразу и возвращается только при сбое инфраструктуры DPI//CHECKER.",
+        "placeholder": "Подсеть /24, IP или домен",
+        "confirm": "Списать {{value}} USD + трафик",
+        "cost": "Фикс {{fixed}} USD · Трафик {{traffic}} USD ({{mb}} МБ)",
+        "stage": {
+          "queued": "В очереди",
+          "scan": "Сканирую подсеть…",
+          "foreign": "Проверяю из-за границы…",
+          "russia": "Проверяю из России…",
+          "report": "Готовлю отчёт…"
+        },
+        "verdict": {
+          "clean": "Подсеть не заблокирована",
+          "blocked": "Подсеть заблокирована целиком",
+          "partial": "Заблокированы отдельные адреса",
+          "unknown": "Итог неясен"
+        },
+        "blocked": "Заблокировано адресов: {{blocked}} из {{tested}} проверенных ({{percent}}%).",
+        "regions": "Регионов, рубящих подсеть целиком: {{whole}}, частично: {{part}}, чистых: {{clean}}.",
+        "pipeline": "Конвейер: хостов {{scanned}} → доменов {{kept}} → в подсети {{inSubnet}} → открываются из-за границы {{foreign}} → проверено из России {{tested}}.",
+        "byIp": "По адресам",
+        "byRegion": "По регионам",
+        "pops": "✅ / ⚠️ / ❌ {{green}} / {{yellow}} / {{red}} из {{total}}",
+        "regionLine": "{{name}}: заблокировано {{blocked}} из {{tested}}",
+        "state": {
+          "open": "✅ открыт",
+          "blocked": "❌ заблокирован",
+          "stalled": "⚠️ обрывается"
+        },
+        "drops": "Отсеяно на этапах фильтрации",
+        "drop": {
+          "bad_sni": "плохой SNI",
+          "moved_away": "переехал из подсети",
+          "dns_failed": "не резолвится",
+          "payload_too_small": "ответ меньше порога",
+          "foreign_failed": "не открывается из-за границы"
+        }
+      },
+      "cheremsha": {
+        "intro": "Есть ли домен или IP в реестре РКН и в CDN-списках. Бесплатно, до 20 за раз.",
+        "placeholder": "Домены или IP — по одному в строке",
+        "run": "Проверить",
+        "verdict": {
+          "blocked": "заблокирован",
+          "maybe": "возможно заблокирован",
+          "noResolve": "не резолвится в IP",
+          "notFound": "в реестре не найден"
+        },
+        "domainHit": "домен есть в реестре",
+        "subnet": "{{value}} — блокировка возможна по соседству",
+        "resolved": "Резолвится в {{value}}",
+        "invalid": "Пропущено (не домен и не IP): {{items}}",
+        "refreshed": "Списки обновлены: {{value}}"
+      },
+      "monitors": {
+        "foreign": "Создан на сайте DPI//CHECKER",
+        "every": "каждые {{hours}} ч",
+        "active": "Монитор активен",
+        "noRuns": "Ещё не запускался",
+        "fails": "неудач подряд: {{count}}",
+        "lastNext": "Последний прогон: {{last}} · следующий: {{next}}",
+        "delete": "Отключить",
+        "deleteConfirm": "Отключить монитор (история сохранится)",
+        "empty": "Мониторов пока нет — создайте его в форме проверки, выбрав «По расписанию».",
+        "paused": {
+          "insufficient_balance": "На паузе: кончились деньги на балансе DPI//CHECKER",
+          "deleted_via_api": "Отключён",
+          "other": "На паузе"
+        },
+        "howTitle": "Как работают мониторы",
+        "how": {
+          "create": "Создать: вкладка VPN, IP / домен или MTProto → цели и точки → «По расписанию» → интервал.",
+          "runs": "Сервис сам проверяет цели каждые N часов. Сам монитор бесплатный, каждый прогон стоит как одна такая проверка.",
+          "alerts": "Итоги приходят в админ-чат бота: тревога после заданного числа неудач подряд и восстановление; каждый прогон — если включено «Сообщать и об успехе». Бот DPI//CHECKER тоже присылает тревоги — вам в личку или в группу, это выбирается при создании монитора.",
+          "manage": "Здесь — пауза, отключение, настройки и прогоны любого монитора, в том числе созданного на сайте DPI//CHECKER."
+        },
+        "untitled": "Монитор #{{id}}",
+        "deletedBlock": "Отключённые · {{count}}",
+        "runs": "Прогоны",
+        "runsEmpty": "Прогонов ещё не было.",
+        "runsFailed": "Не удалось загрузить прогоны",
+        "runOpen": "Открыть прогон",
+        "runCost": "{{value}} USD",
+        "settings": "Настройки",
+        "save": "Сохранить",
+        "groupTitle": "Тревоги бота DPI//CHECKER — в группу",
+        "groupHow": "Добавьте бота DPI//CHECKER в группу и отправьте там команду:",
+        "copy": "Скопировать команду",
+        "copied": "Скопировано"
+      },
+      "history": {
+        "all": "Все",
+        "filter": "Что показать",
+        "mine": "Только мои",
+        "empty": "Запусков пока нет.",
+        "more": "Показать ещё",
+        "withCount": "{{name}} · {{count}}",
+        "columns": {
+          "what": "Что",
+          "where": "Где",
+          "resources": "Рес.",
+          "cost": "Списано",
+          "who": "Кто",
+          "when": "Когда",
+          "status": "Итог",
+          "source": "Откуда"
+        },
+        "scope": "Чьи запуски",
+        "scopeCabinet": "Из кабинета",
+        "scopeAccount": "Весь аккаунт",
+        "accountHint": "Все запуски вашего ключа у DPI//CHECKER: с сайта, из их бота, через API и прогоны мониторов. Нажмите на строку — результат откроется здесь.",
+        "allChecks": "Все проверки",
+        "openFailed": "Не удалось открыть запуск",
+        "sources": {
+          "web": "Сайт",
+          "bot": "Бот DPI//CHECKER",
+          "api": "API",
+          "watcher": "Монитор",
+          "inline": "Инлайн в Telegram"
+        }
+      },
+      "shortcuts": {
+        "checkSubscription": "Проверить в DPI//CHECKER",
+        "checkNode": "Проверить в DPI//CHECKER"
+      },
+      "map": {
+        "status": {
+          "green": "доступно",
+          "yellow": "частично",
+          "red": "недоступно",
+          "gray": "не проверялся",
+          "none": "не проверялся"
+        },
+        "any": "Любой",
+        "okOf": "{{ok}}/{{total}} ок",
+        "proxyDead": "прокси недоступен",
+        "deadExtra": "+{{count}} без прокси"
+      },
+      "deliveries": {
+        "title": "Уведомления DPI//CHECKER боту",
+        "hint": "Когда проверка заканчивается, DPI//CHECKER сообщает об этом боту. Если здесь проверка всё ещё «идёт», а на сайте она готова — посмотрите, дошло ли уведомление.",
+        "empty": "Уведомлений пока не было.",
+        "loadFailed": "Не удалось загрузить журнал уведомлений",
+        "events": {
+          "check_completed": "Проверка готова",
+          "check_cancelled": "Проверка отменена",
+          "probe_done": "Зонд готов",
+          "noisy_done": "Соседи готовы",
+          "monitor_run": "Монитор начал прогон"
+        },
+        "status": {
+          "delivered": "Доставлено",
+          "pending": "Ждёт повтора",
+          "failed": "Не доставлено"
+        },
+        "object": "№ {{id}}",
+        "attempts": "попыток: {{count}}",
+        "response": "бот ответил {{code}}"
       }
     }
   },
@@ -6821,7 +7897,8 @@
     "ru": "Русский",
     "en": "English",
     "zh": "中文",
-    "fa": "فارسی"
+    "fa": "فارسی",
+    "ua": "Украинский"
   },
   "contests": {
     "title": "Конкурсы",
@@ -7036,7 +8113,7 @@
     "chooseSubscription": "Выберите подписку, которую хотите сохранить",
     "afterMerge": "После объединения",
     "allAuthMethodsMerged": "Все способы входа объединятся",
-    "balanceSummed": "Баланс: {{amount}} ₽ (сумма)",
+    "balanceSummed": "Баланс: {{amount}} ₽ (сумма)",
     "unselectedSubscriptionDeleted": "Невыбранная подписка будет удалена",
     "historyPreserved": "История операций сохранится",
     "confirm": "Объединить аккаунты",
@@ -7399,5 +8476,66 @@
     "offer": "Публичная оферта",
     "privacy": "Политика конфиденциальности",
     "recurrent": "Рекуррентные платежи"
+  },
+  "lite": {
+    "status": {
+      "none": "Подписки пока нет",
+      "active": "Подписка работает до {{date}}",
+      "trial": "Пробный период до {{date}}",
+      "expiring": "Подписка закончится {{date}}",
+      "expired": "Подписка закончилась {{date}}",
+      "limited": "Трафик закончился",
+      "paused": "Подписка на паузе",
+      "legacy": "Нужно выбрать тариф",
+      "many": "Ваши подписки"
+    },
+    "action": {
+      "connect": "Подключить устройство",
+      "renew": "Продлить подписку",
+      "buy": "Выбрать тариф",
+      "manage": "Открыть управление",
+      "tryFree": "Попробовать бесплатно",
+      "tryPaid": "Попробовать за {{price}}",
+      "chooseTariff": "Выбрать тариф"
+    },
+    "traffic": {
+      "label": "Трафик",
+      "used": "{{used}} из {{total}}",
+      "unlimited": "Трафик без ограничений"
+    },
+    "rows": {
+      "devices": "Устройства",
+      "devicesValue": "{{used}} из {{total}}",
+      "balance": "Баланс",
+      "manage": "Управление подпиской",
+      "buyAnother": "Купить ещё тариф",
+      "buyTraffic": "Докупить трафик",
+      "buyDevices": "Докупить устройства",
+      "reduceDevices": "Уменьшить число устройств",
+      "servers": "Серверы",
+      "myDevices": "Мои устройства",
+      "allSettings": "Все настройки подписки",
+      "delete": "Удалить подписку",
+      "plans": "Посмотреть тарифы",
+      "support": "Поддержка",
+      "copyLink": "Скопировать ссылку подписки",
+      "copied": "Скопировано"
+    },
+    "error": {
+      "load": "Не удалось загрузить данные",
+      "hint": "Проверьте связь и повторите",
+      "retry": "Повторить"
+    },
+    "promo": {
+      "available": "Для вас есть предложение",
+      "discountActive": "Скидка активна"
+    },
+    "tariff": {
+      "current": "сейчас",
+      "unlimitedDevices": "Устройств без ограничений"
+    },
+    "subscription": {
+      "untitled": "Подписка"
+    }
   }
 }

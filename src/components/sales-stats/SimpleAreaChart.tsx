@@ -10,6 +10,8 @@ import {
   YAxis,
 } from 'recharts';
 
+import { formatAxisTick } from '../../utils/formatNumber';
+
 import { SALES_STATS } from '../../constants/salesStats';
 import { useChartColors } from '../../hooks/useChartColors';
 
@@ -89,9 +91,10 @@ export function SimpleAreaChart({
             tick={{ fill: colors.tick, fontSize: SALES_STATS.AXIS.TICK_FONT_SIZE }}
             tickLine={false}
             axisLine={false}
-            width={SALES_STATS.AXIS.WIDTH}
             allowDecimals={valueFormatter ? true : false}
-            tickFormatter={valueFormatter}
+            tickFormatter={(value: number) =>
+              valueFormatter ? valueFormatter(value) : formatAxisTick(value)
+            }
           />
           <Tooltip
             contentStyle={{

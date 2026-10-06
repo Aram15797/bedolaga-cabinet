@@ -13,6 +13,7 @@ import InsufficientBalancePrompt from '../components/InsufficientBalancePrompt';
 import { WebBackButton } from '../components/WebBackButton';
 import { BEST_VALUE_BORDER, BestValueBadge } from '../components/subscription/BestValueBadge';
 import { PageSkeleton, Skeleton } from '../components/ui/skeleton';
+import { needsTariff, tariffSelectionPath } from '../utils/legacySubscription';
 
 export default function RenewSubscription() {
   const { subscriptionId } = useParams<{ subscriptionId: string }>();
@@ -30,7 +31,7 @@ export default function RenewSubscription() {
   const [error, setError] = useState<string | null>(null);
 
   // Load subscription detail for tariff name
-  const { data: subscriptionResponse } = useQuery({
+  const { data: subscriptionResponse, isLoading: isSubscriptionLoading } = useQuery({
     queryKey: ['subscription', subId],
     queryFn: () => subscriptionApi.getSubscription(subId),
     enabled: !!subId,
@@ -99,7 +100,13 @@ export default function RenewSubscription() {
     return <Navigate to="/subscriptions" replace />;
   }
 
-  if (isLoading) {
+  // Старая подписка (куплена в классике, тарифа нет): продлевать нечего, бот
+  // отдаёт пустой список — уводим на витрину тарифов с этой подпиской.
+  if (needsTariff(subscription)) {
+    return <Navigate to={tariffSelectionPath(subId)} replace />;
+  }
+
+  if (isLoading || isSubscriptionLoading) {
     return (
       <PageSkeleton leading={1} titleWidth="w-56" className="space-y-5">
         <Skeleton variant="card" className="h-16" />
@@ -139,7 +146,9 @@ export default function RenewSubscription() {
           {t('common.balance', 'Баланс')}
         </span>
         <span className="text-base font-semibold" style={{ color: g.text }}>
-          {formatAmount(balanceKopeks / 100)} {currencySymbol}
+          {formatAmount(balanceKopeks / 100)}
+          {'\u00A0'}
+          {currencySymbol}
         </span>
       </div>
 
@@ -210,17 +219,20 @@ export default function RenewSubscription() {
                     <div className="text-base font-semibold" style={{ color: g.text }}>
                       {option.price_kopeks === 0
                         ? t('subscription.free', 'Бесплатно')
-                        : `${formatAmount(option.price_kopeks / 100)} ${currencySymbol}`}
+                        : `${formatAmount(option.price_kopeks / 100)}\u00A0${currencySymbol}`}
                     </div>
                     {perMonth !== null && (
                       <div className="text-[11px]" style={{ color: g.textSecondary }}>
-                        {formatAmount(perMonth / 100)} {currencySymbol}/
-                        {t('subscription.month', 'мес')}
+                        {formatAmount(perMonth / 100)}
+                        {'\u00A0'}
+                        {currencySymbol}/{t('subscription.month', 'мес')}
                       </div>
                     )}
                     {option.original_price_kopeks && (
                       <div className="text-[11px] line-through" style={{ color: g.textSecondary }}>
-                        {formatAmount(option.original_price_kopeks / 100)} {currencySymbol}
+                        {formatAmount(option.original_price_kopeks / 100)}
+                        {'\u00A0'}
+                        {currencySymbol}
                       </div>
                     )}
                   </div>
@@ -231,7 +243,7 @@ export default function RenewSubscription() {
                       'subscription.insufficientBalanceAmount',
                       'Недостаточно средств. Не хватает {{missing}}',
                       {
-                        missing: `${formatAmount((option.price_kopeks - balanceKopeks) / 100)} ${currencySymbol}`,
+                        missing: `${formatAmount((option.price_kopeks - balanceKopeks) / 100)}\u00A0${currencySymbol}`,
                       },
                     )}
                   </div>

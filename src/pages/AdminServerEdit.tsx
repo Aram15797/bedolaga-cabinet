@@ -6,7 +6,7 @@ import { serversApi, type ServerUpdateRequest } from '../api/servers';
 import { AdminBackButton } from '../components/admin';
 import { ServerIcon } from '../components/icons';
 import { createNumberInputHandler, toNumber } from '../utils/inputHelpers';
-import Twemoji from 'react-twemoji';
+import Twemoji from '@/lib/twemoji';
 import { getFlagEmoji as getCountryFlag } from '../utils/subscriptionHelpers';
 import { PageSkeleton, Skeleton } from '../components/ui/skeleton';
 
@@ -110,7 +110,7 @@ export default function AdminServerEdit() {
         <div>
           <h1 className="text-xl font-semibold text-dark-100">{t('admin.servers.edit')}</h1>
           <p className="text-sm text-dark-400">
-            <Twemoji options={{ className: 'twemoji', folder: 'svg', ext: '.svg' }}>
+            <Twemoji tag="span" options={{ className: 'twemoji', folder: 'svg', ext: '.svg' }}>
               {server.display_name}
             </Twemoji>
           </p>

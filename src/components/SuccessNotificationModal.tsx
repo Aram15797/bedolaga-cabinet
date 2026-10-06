@@ -87,13 +87,13 @@ export default function SuccessNotificationModal() {
 
   // Format amount
   const formattedAmount = data.amountKopeks
-    ? `${formatAmount(data.amountKopeks / 100)} ${currencySymbol}`
+    ? `${formatAmount(data.amountKopeks / 100)}\u00A0${currencySymbol}`
     : null;
 
   // Format new balance
   const formattedBalance =
     data.newBalanceKopeks !== undefined
-      ? `${formatAmount(data.newBalanceKopeks / 100)} ${currencySymbol}`
+      ? `${formatAmount(data.newBalanceKopeks / 100)}\u00A0${currencySymbol}`
       : null;
 
   // Format expiry date
@@ -231,7 +231,9 @@ export default function SuccessNotificationModal() {
               <span className="text-dark-400">
                 {t('successNotification.trafficAdded', 'Traffic added')}
               </span>
-              <span className="text-lg font-bold text-success-400">+{data.trafficGbAdded} GB</span>
+              <span className="text-lg font-bold text-success-400">
+                +{data.trafficGbAdded} {t('common.units.gb', 'GB')}
+              </span>
             </div>
           )}
 
@@ -240,7 +242,9 @@ export default function SuccessNotificationModal() {
               <span className="text-dark-400">
                 {t('successNotification.totalTraffic', 'Total traffic')}
               </span>
-              <span className="font-semibold text-dark-100">{data.newTrafficLimitGb} GB</span>
+              <span className="font-semibold text-dark-100">
+                {data.newTrafficLimitGb} {t('common.units.gb', 'GB')}
+              </span>
             </div>
           )}
 

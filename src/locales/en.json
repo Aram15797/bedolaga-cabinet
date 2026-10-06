@@ -37,7 +37,31 @@
     "no_results": "No results",
     "ok": "OK",
     "processing": "Processing…",
-    "rangeTo": "to"
+    "rangeTo": "to",
+    "relative": {
+      "online": "online",
+      "now": "just now",
+      "never": "never",
+      "minutes_one": "{{count}} min ago",
+      "minutes_other": "{{count}} min ago",
+      "hours_one": "{{count}} h ago",
+      "hours_other": "{{count}} h ago",
+      "days_one": "{{count}} day ago",
+      "days_other": "{{count}} days ago",
+      "weeks_one": "{{count}} wk ago",
+      "weeks_other": "{{count}} wks ago",
+      "months_one": "{{count}} mo ago",
+      "months_other": "{{count}} mo ago",
+      "yesterday": "yesterday"
+    },
+    "clear": "Clear",
+    "dayTime": {
+      "today": "today, {{time}}",
+      "yesterday": "yesterday, {{time}}"
+    }
+  },
+  "navShort": {
+    "wheel": "Wheel"
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -169,13 +193,13 @@
     "validUntil": "Valid until",
     "goToSubscription": "Go to Subscription",
     "goToBalance": "Go to Balance",
-    "devicesAdded": "+{{count}} devices",
+    "devicesAdded": "Devices added",
     "devicesPurchased": {
       "title": "Devices added"
     },
-    "totalDevices": "Total devices: {{count}}",
-    "totalTraffic": "Total traffic: {{value}}",
-    "trafficAdded": "+{{value}} traffic",
+    "totalDevices": "Total devices",
+    "totalTraffic": "Total traffic",
+    "trafficAdded": "Traffic added",
     "trafficPurchased": {
       "title": "Traffic added"
     }
@@ -335,6 +359,9 @@
       "title": "Subscription Suspended",
       "resume": "Resume"
     },
+    "reminders": {
+      "dismiss": "Dismiss"
+    },
     "trialOffer": {
       "freeTitle": "Free Trial Available",
       "paidTitle": "Trial Subscription",
@@ -365,6 +392,8 @@
     "expiresAt": "Expires at",
     "daysLeft": "Days left",
     "devices": "Devices",
+    "devicesWord_one": "device",
+    "devicesWord_other": "devices",
     "devices_one": "{{count}} device",
     "devices_other": "{{count}} devices",
     "serversLabel": "Servers",
@@ -404,6 +433,8 @@
     "noSubscription": "You don't have an active subscription",
     "getSubscription": "Get Subscription",
     "cta": {
+      "moveToTariff": "Switch to a plan",
+      "moveToTariffHint": "Bought before plans were introduced",
       "expiredHint": "Choose a plan and pay",
       "trialHint": "More traffic and devices",
       "activeHint": "Renewal and plan change",
@@ -454,7 +485,7 @@
     "currentTariff": "Current",
     "from": "from",
     "month": "mo",
-    "insufficientBalance": "Insufficient balance. Missing {{missing}} ₽",
+    "insufficientBalance": "Insufficient balance. Missing {{missing}} ₽",
     "trial": {
       "title": "Free Trial",
       "titlePaid": "Trial Subscription",
@@ -662,9 +693,10 @@
       "cooldown": "Available in {{minutes}} min {{seconds}} sec"
     },
     "legacy": {
-      "selectTariffTitle": "Select a tariff to renew",
-      "selectTariffDescription": "Your current subscription was created before tariffs were introduced. To renew, please select one of the available tariffs.",
-      "currentSubContinues": "Your current subscription will remain active until it expires."
+      "noTariff": "No plan",
+      "selectTariffTitle": "Bought before plans were introduced",
+      "selectTariffDescription": "Choose a plan: it applies to this same subscription, your connection link stays the same.",
+      "currentSubContinues": "Remaining days are kept and added to the paid period."
     },
     "promoGroup": {
       "yourGroup": "Your group: {{name}}",
@@ -713,7 +745,7 @@
       "statusActive": "Active",
       "statusPastDue": "Payment failed — please retry",
       "nextCharge": "next charge {{date}}",
-      "amountPerInterval": "{{amount}} ₽ {{interval}}",
+      "amountPerInterval": "{{amount}} ₽ {{interval}}",
       "interval": {
         "day": "daily",
         "week": "weekly",
@@ -737,8 +769,8 @@
       "statusActive": "Active",
       "statusPastDue": "Payment failed — please try again",
       "nextCharge": "next charge on {{date}}",
-      "amountPerPeriod": "{{amount}} ₽ {{period}}",
-      "amountPerDays": "{{amount}} ₽ every {{days}} days",
+      "amountPerPeriod": "{{amount}} ₽ {{period}}",
+      "amountPerDays": "{{amount}} ₽ every {{days}} days",
       "period": {
         "day": "daily",
         "week": "weekly",
@@ -761,8 +793,10 @@
       "connectedDevices": "Connected devices",
       "disconnect": "Disconnect",
       "addSlots": "Add slots",
-      "limitExplained": "The «{{name}}» plan gives {{count}} slots and all are in use. Free one up or add more.",
-      "limitExplainedNoTopup": "The «{{name}}» plan gives {{count}} slots and all are in use. Free up a slot to continue.",
+      "limitExplained_one": "The «{{name}}» plan gives {{count}} slot and it is in use. Free it up or add more.",
+      "limitExplained_other": "The «{{name}}» plan gives {{count}} slots and all are in use. Free one up or add more.",
+      "limitExplainedNoTopup_one": "The «{{name}}» plan gives {{count}} slot and it is in use. Free it up to continue.",
+      "limitExplainedNoTopup_other": "The «{{name}}» plan gives {{count}} slots and all are in use. Free up a slot to continue.",
       "noTopupHint": "Slots cannot be bought on a trial subscription — free one up or switch to a paid plan."
     },
     "delete": "Delete",
@@ -778,7 +812,31 @@
     "statusActive": "Active",
     "statusExpired": "Expired",
     "statusLimited": "Limited",
-    "statusTrial": "Trial"
+    "statusTrial": "Trial",
+    "casheraRecurring": {
+      "title": "Cashera auto-renewal",
+      "connect": "Connect",
+      "confirm": "Confirm auto-charges",
+      "cancel": "Turn off",
+      "confirmCancel": "Turn off Cashera auto-renewal? The subscription will no longer renew automatically.",
+      "cancelled": "Cashera auto-renewal turned off",
+      "enableError": "Could not connect Cashera auto-renewal",
+      "cancelError": "Could not cancel Cashera auto-renewal",
+      "statusPending": "Waiting for confirmation via the link",
+      "statusActive": "Active",
+      "statusPastDue": "Payment failed — please try again",
+      "nextCharge": "next charge {{date}}",
+      "amountPerInterval": "{{amount}} ₽ {{interval}}",
+      "interval": {
+        "daily": "daily",
+        "weekly": "weekly",
+        "monthly": "monthly",
+        "yearly": "yearly"
+      },
+      "autopayHint": "Your subscription will renew automatically via Cashera",
+      "purchaseButton": "⚡ Subscribe with Cashera auto-pay",
+      "purchaseHint": "Confirm auto-charges via the Cashera link; renewals are then charged automatically."
+    }
   },
   "balance": {
     "title": "Balance",
@@ -871,6 +929,9 @@
       },
       "apple_iap": {
         "description": "Pay via Apple In-App Purchase"
+      },
+      "cashera": {
+        "description": "SBP, cards, crypto (Cashera)"
       }
     },
     "transactionHistory": "Transaction History",
@@ -883,6 +944,11 @@
     "withdrawal": "Withdrawal",
     "subscriptionPayment": "Subscription Payment",
     "referralReward": "Referral Reward",
+    "refund": "Refund",
+    "failedRefund": "Failed refund",
+    "pollReward": "Poll reward",
+    "giftPayment": "Gift payment",
+    "otherOperation": "Operation",
     "minAmount": "Min.",
     "maxAmount": "Max.",
     "notAvailable": "Not available",
@@ -895,7 +961,7 @@
       "activate": "Activate",
       "activating": "Activating...",
       "success": "Promo code activated successfully!",
-      "balanceAdded": "Balance added: {{amount}} ₽",
+      "balanceAdded": "Balance added: {{amount}} ₽",
       "errors": {
         "not_found": "Promo code not found",
         "expired": "Promo code has expired",
@@ -916,8 +982,8 @@
       "daysLeft": "Days left: {{count}}",
       "selectSubscription": "Select a subscription"
     },
-    "minAmountError": "Minimum amount: {{amount}} ₽",
-    "maxAmountError": "Maximum amount: {{amount}} ₽",
+    "minAmountError": "Minimum amount: {{amount}} ₽",
+    "maxAmountError": "Maximum amount: {{amount}} ₽",
     "paymentOption": "Payment option",
     "selectPaymentOption": "Select payment option",
     "selectPaymentMethod": "Select payment method",
@@ -959,7 +1025,7 @@
       "rateLimit": "Please wait {{seconds}} sec.",
       "selectMethod": "Select a method",
       "enterAmount": "Enter an amount",
-      "amountRange": "Amount: {{min}} – {{max}} ₽"
+      "amountRange": "Amount: {{min}} – {{max}} ₽"
     },
     "paymentSuccess": {
       "title": "Payment Successful",
@@ -978,7 +1044,8 @@
       "goToBalance": "Go to Balance",
       "tryAgain": "Try Again"
     },
-    "top_up": "Top up balance"
+    "top_up": "Top up balance",
+    "scanQrToPay": "Scan the QR code in your banking app or open the payment page"
   },
   "referral": {
     "title": "Referral Program",
@@ -1201,6 +1268,7 @@
       "closed": "Closed"
     },
     "attachImage": "Attach image",
+    "downloadFile": "Download file",
     "invalidFileType": "Invalid file type. Use JPEG, PNG, GIF or WebP.",
     "fileTooLarge": "File is too large. Maximum size is 10MB.",
     "uploadFailed": "Failed to upload image",
@@ -1399,7 +1467,6 @@
       "title": "Admin",
       "dashboard": "Dashboard",
       "tickets": "Tickets",
-      "aiSupport": "AI Support",
       "settings": "Settings",
       "graceAccess": "Grace access",
       "apps": "Apps",
@@ -1422,6 +1489,7 @@
       "trafficUsage": "Traffic Usage",
       "updates": "Updates",
       "pinnedMessages": "Pinned Messages",
+      "reminders": "Reminders",
       "partners": "Partners",
       "referralLevels": "Reward levels",
       "withdrawals": "Withdrawals",
@@ -1437,7 +1505,9 @@
       "bulkActions": "Bulk Actions",
       "infoPages": "Info Pages",
       "legalPages": "System pages",
-      "systemErrors": "System errors"
+      "systemErrors": "System errors",
+      "dpichecker": "DPI//CHECKER",
+      "aiSupport": "AI Support"
     },
     "panel": {
       "title": "Admin Panel",
@@ -1474,6 +1544,7 @@
       "trafficUsageDesc": "Per-user traffic by nodes",
       "updatesDesc": "Bot & cabinet versions",
       "pinnedMessagesDesc": "Manage pinned messages for users",
+      "remindersDesc": "Condition-based user reminders",
       "partnersDesc": "Manage partner applications and commissions",
       "withdrawalsDesc": "Review and process withdrawal requests",
       "channelSubscriptionsDesc": "Manage required channel subscriptions",
@@ -1548,11 +1619,11 @@
         "previousPeriod": "Previous Period",
         "dailyChart": "Daily Renewals",
         "renewals": "Renewals",
+        "dailyBreakdownChart": "Daily Purchases & Renewals",
         "regularChart": "Regular",
         "trialsChart": "Trials",
-        "renewalsChart": "Renewals",
-        "dailyBreakdownChart": "Daily Purchases & Renewals",
-        "dailyPercentageChart": "Daily Renewal Rate (%)"
+        "dailyPercentageChart": "Daily Renewal Rate (%)",
+        "renewalsChart": "Renewals"
       },
       "addons": {
         "totalPurchases": "Total Purchases",
@@ -1848,12 +1919,12 @@
       "minAmount": "Min amount (kopeks)",
       "maxAmount": "Max amount (kopeks)",
       "quickAmounts": "Quick amounts (₽)",
-      "quickAmountsHint": "Quick top-up amount buttons. Empty — defaults are used: {{defaults}} ₽",
+      "quickAmountsHint": "Quick top-up amount buttons. Empty — defaults are used: {{defaults}} ₽",
       "quickAmountsPlaceholder": "Amount in rubles",
       "quickAmountsAdd": "Add",
       "quickAmountsInvalid": "Enter a positive amount in rubles",
       "quickAmountsLimit": "No more than 10 amounts",
-      "quickAmountsRemove": "Remove amount {{value}} ₽",
+      "quickAmountsRemove": "Remove amount {{value}} ₽",
       "overpayCertTitle": "mTLS certificate (Overpay)",
       "overpayCertValid": "✅ Valid until {{date}}",
       "overpayCertExpired": "⚠️ Expired {{date}}",
@@ -2689,7 +2760,13 @@
           "active": "Active",
           "worth": "Worth",
           "probability": "Manual probability (0–1)",
-          "probabilityHint": "Empty = auto by RTP"
+          "probabilityHint": "Empty = auto by RTP",
+          "displayNamePlaceholder": "e.g. 7 Days Free",
+          "valueUnits": {
+            "kopeks": "in kopeks",
+            "days": "in days",
+            "gb": "in GB"
+          }
         },
         "promo": {
           "title": "Promo Code Settings",
@@ -2753,6 +2830,65 @@
         "cancelled": "Cancelled",
         "cancelling": "Cancelling"
       },
+      "audience": {
+        "authType": "Registration method",
+        "join": "Condition connector",
+        "and": "AND",
+        "or": "OR",
+        "field": "Field",
+        "comparison": "Comparison",
+        "equals": "Equals",
+        "notEquals": "Does not equal",
+        "value": "Value",
+        "remove": "Remove condition",
+        "add": "Add condition",
+        "loadError": "Could not load recipients",
+        "recipientCount": "Recipients",
+        "showUsers": "View list",
+        "users": "Broadcast recipients",
+        "empty": "No recipients",
+        "conditions": "Conditions",
+        "noUsersPermission": "Requires permission to view users"
+      },
+      "atomic": {
+        "all": "All users",
+        "subscriptionStatus": "Subscription status",
+        "active": "Active",
+        "expired": "Expired",
+        "subscriptionType": "Subscription type",
+        "trial": "Trial",
+        "paid": "Paid",
+        "tariff": "Plan",
+        "trafficZero": "Used traffic equals 0",
+        "trafficGt": "Used traffic greater than",
+        "trafficLt": "Used traffic less than",
+        "endPreset": "Subscription end: quick period",
+        "next3Days": "Within the next 3 days",
+        "endDate": "Subscription end: date",
+        "registrationPreset": "Registration: quick period",
+        "today": "Today",
+        "last7Days": "Last 7 days",
+        "last30Days": "Last 30 days",
+        "registrationDate": "Registration date",
+        "activityPreset": "Activity: quick period",
+        "activeToday": "Active today",
+        "inactive7Days": "Inactive for 7+ days",
+        "inactive30Days": "Inactive for 30+ days",
+        "activityDate": "Last activity: date",
+        "source": "Registration source",
+        "referral": "Referral",
+        "direct": "Direct",
+        "paidHistory": "Paid before",
+        "telegramUsername": "Telegram username",
+        "searchUser": "Type to find and select a user",
+        "noUsers": "No users found",
+        "before": "Before date",
+        "after": "After date",
+        "between": "Between dates",
+        "dateFrom": "Date",
+        "dateTo": "To",
+        "gigabytes": "Gigabytes"
+      },
       "filterGroups": {
         "basic": "Basic",
         "subscription": "By subscription",
@@ -2761,7 +2897,9 @@
         "activity": "By activity",
         "source": "By source",
         "tariff": "By tariff",
-        "email": "Email users"
+        "email": "Email users",
+        "promo_group": "By promo group",
+        "recipient": "Recipient"
       },
       "channel": {
         "telegram": "Telegram",
@@ -2773,6 +2911,7 @@
       "emailSection": "Email broadcast",
       "selectEmailFilter": "Select email audience",
       "selectEmailFilterPlaceholder": "Select filter...",
+      "singleUser": "Only {{name}}",
       "emailSubject": "Email subject",
       "emailSubjectPlaceholder": "Enter email subject...",
       "emailContent": "Email content",
@@ -2849,6 +2988,87 @@
       "unpinnedCount": "Unpinned",
       "editMessage": "Edit",
       "cantDeleteActive": "Cannot delete active message"
+    },
+    "reminders": {
+      "title": "Reminders",
+      "description": "User reminders based on conditions: in the bot, in the cabinet, or both.",
+      "create": "Create",
+      "createTitle": "New reminder",
+      "editTitle": "Reminder",
+      "empty": "No reminders yet",
+      "active": "Enabled",
+      "inactive": "Disabled",
+      "builtin": "Built-in",
+      "enable": "Enable",
+      "disable": "Disable",
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirmDelete": "Delete reminder \"{{name}}\"?",
+      "stats": "Sent: {{sent}} · dismissed: {{dismissed}} · currently match: bot {{bot}}, cabinet {{cabinet}}",
+      "any": "Any",
+      "channels": {
+        "both": "Bot and cabinet",
+        "bot": "Bot only",
+        "cabinet": "Cabinet only"
+      },
+      "category": {
+        "service": "Service — for everyone",
+        "marketing": "Marketing — except those unsubscribed from promo"
+      },
+      "auth": {
+        "single_method": "Single sign-in method only",
+        "telegram_only": "Telegram sign-in only",
+        "email_only": "Email sign-in only"
+      },
+      "segment": {
+        "active": "Active subscription",
+        "trial": "Trial",
+        "expiring": "Expiring soon",
+        "expired": "Subscription expired",
+        "none": "No subscription",
+        "low_balance": "Low balance",
+        "tariff": "Tariff"
+      },
+      "button": {
+        "none": "No button",
+        "cabinet": "Cabinet section",
+        "url": "Link"
+      },
+      "form": {
+        "name": "Name (admin panel only)",
+        "channels": "Where to show",
+        "category": "Type",
+        "conditions": "Audience",
+        "auth": "Sign-in method",
+        "segment": "Subscription",
+        "segmentDays": "Days before expiry",
+        "tariffId": "Tariff ID",
+        "tariffRequired": "Specify the tariff ID",
+        "registeredDays": "No earlier than N days after registration",
+        "inactiveDays": "Inactive for N days",
+        "audience": "Currently match",
+        "repeatEvery": "Repeat in bot every N days",
+        "maxSends": "Max sends in bot",
+        "title": "Title",
+        "body": "Text",
+        "buttonKind": "Button",
+        "buttonTarget": "Target",
+        "buttonText": "Button text",
+        "buttonTextRequired": "Fill in the button text in Russian",
+        "partialLanguage": "Fill in both the title and text for {{lang}}, or clear both",
+        "httpsRequired": "The link must start with https://",
+        "preview": "Preview",
+        "save": "Save",
+        "sendTest": "Send to myself",
+        "testHint": "Sends the saved version, without checking conditions or limits",
+        "testSent": "Sent to you in the bot",
+        "testFailed": "Failed to send",
+        "testNoTelegram": "You don't have Telegram linked",
+        "testInvalidTexts": "Fix the texts and save",
+        "ruRequired": "Fill in the Russian title and text",
+        "saveFailed": "Failed to save — check the fields"
+      },
+      "loadFailed": "Failed to load reminders"
     },
     "channelSubscriptions": {
       "title": "Required Channels",
@@ -2945,6 +3165,8 @@
       "accentColor": "Accent color",
       "animatedBackground": "Animated background",
       "animatedBackgroundDesc": "Show animated background effects",
+      "liteMode": "Simple cabinet view",
+      "liteModeDesc": "One buyer screen instead of Home and Subscription",
       "autoFullscreen": "Auto fullscreen",
       "autoFullscreenDesc": "Auto expand in Telegram",
       "availableThemes": "Available themes",
@@ -3066,7 +3288,9 @@
         "iface_info": "Legal documents",
         "iface_menu": "Menu button",
         "sys_cabinet": "Cabinet",
-        "sys_other": "Other settings"
+        "sys_other": "Other settings",
+        "sys_dpichecker": "DPI//CHECKER",
+        "payments_cashera": "Cashera"
       },
       "categories": {
         "CABINET": "Cabinet",
@@ -3160,6 +3384,7 @@
         "external_squad_uuid": "External squad",
         "duration_hours": "Duration, hours",
         "traffic_gb": "Traffic, GB",
+        "reset_traffic_on_start": "Reset the traffic counter on grant",
         "reconcile_interval_seconds": "Reconcile interval, sec",
         "reconcile_batch_size": "Batch size",
         "candidate_lookback_minutes": "Lookback window, min",
@@ -3193,6 +3418,7 @@
         "title": "What the user gets",
         "durationDesc": "How many hours the temporary access lasts if the subscription is never renewed",
         "trafficDesc": "How many new gigabytes can be spent in that time: counted on top of what is already used, the old remainder is not carried over",
+        "resetTrafficDesc": "The panel and the app show “0 of 1 GB” instead of an almost exhausted “64.76 of 65.76 GiB”. Only expired subscriptions with unlimited traffic — there the counter is informational; usage before grace is lost. Exhausted-traffic subscriptions are never reset",
         "hint": "While grace lasts the panel account is active but reaches the network only through the grace squad.",
         "allowedDesc": "How the user will see it in the bot message and the email: “only this stays available: …”. What the grace squad really lets through is up to the nodes — the bot only says so.",
         "allowedPlaceholder": "Telegram and the dashboard"
@@ -3552,7 +3778,6 @@
       "reminderCooldownDesc": "Minimum time between reminders (1-120 minutes)",
       "settingsUpdateError": "Error saving settings",
       "copyTelegramId": "Click to copy Telegram ID",
-      "copyEmail": "Click to copy email",
       "viewUser": "User profile",
       "cabinetNotifications": "Cabinet Notifications",
       "userNotificationsEnabled": "User Notifications",
@@ -3564,7 +3789,14 @@
         "checkIntervalRange": "Check interval must be between 1 and 1440 minutes",
         "reminderCooldownRange": "Reminder cooldown must be between 0 and 1440 minutes",
         "slaMinutesRange": "SLA must be between 1 and 10080 minutes"
-      }
+      },
+      "priorities": {
+        "low": "Low",
+        "normal": "Normal",
+        "high": "High",
+        "urgent": "Urgent"
+      },
+      "copyEmail": "Click to copy email"
     },
     "tariffs": {
       "title": "Tariff Management",
@@ -3966,7 +4198,31 @@
         "rejectTitle": "Reject withdrawal?",
         "rejectDescription": "Optionally add a comment explaining the reason for rejection.",
         "commentPlaceholder": "Reason for rejection (optional)...",
-        "confirmReject": "Confirm Rejection"
+        "confirmReject": "Confirm Rejection",
+        "risk": {
+          "balance": {
+            "total_earned": "Earned from referrals",
+            "own_deposits": "Own top-ups",
+            "spending": "Spent",
+            "referral_spent": "Of which referral",
+            "withdrawn": "Already withdrawn",
+            "pending": "Under review",
+            "available_referral": "Referral balance available",
+            "available_total": "Total available to withdraw"
+          },
+          "deposits": {
+            "referral_count": "Referrals",
+            "paying_referrals": "Paying referrals",
+            "total_deposits": "Referral top-ups",
+            "total_amount": "Their top-ups total"
+          },
+          "recent": {
+            "week": "Earned this week"
+          },
+          "recentTitle": "Last 7 days",
+          "times_one": "· {{count}} time",
+          "times_other": "· {{count}} times"
+        }
       }
     },
     "partners": {
@@ -4307,7 +4563,7 @@
         "applyToAddons": "Apply to additional services",
         "default": "Default",
         "daysShort": "{{days}} d.",
-        "autoFrom": "Auto from {{amount}} RUB",
+        "autoFrom": "Auto from {{amount}}",
         "members_one": "{{count}} member",
         "members_other": "{{count}} members"
       },
@@ -4327,7 +4583,8 @@
         "discountPercentInvalid": "Discount percent must be between 1 and 100",
         "discountHoursRequired": "Specify the discount validity period in hours",
         "trafficRequired": "Traffic amount must be greater than 0"
-      }
+      },
+      "cannotSave": "Cannot save promo code:"
     },
     "promoGroups": {
       "title": "Discount Groups",
@@ -4339,8 +4596,14 @@
       "traffic": "Traffic",
       "devices": "Devices",
       "daysShort": "{{days}} days",
-      "autoFrom": "Auto from {{amount}} rub.",
+      "autoFrom": "Auto from {{amount}}",
       "members": "{{count}} members",
+      "recalculate": "Recalculate members",
+      "recalculateHint": "Assign groups by spending to everyone who has paid. This happens automatically after a group with a threshold is created, changed or deleted.",
+      "recalculating": "Recalculating members by spending…",
+      "recalculateStarted": "Recalculation started. Members will update within a minute.",
+      "recalculateDone": "Recalculation finished: {{checked}} checked, {{changed}} reassigned.",
+      "recalculateFailed": "Recalculation failed. Please try again.",
       "createTitle": "Create Discount Group",
       "editTitle": "Edit Group",
       "stats": {
@@ -4382,20 +4645,17 @@
     "users": {
       "title": "Users",
       "subtitle": "Bot user management",
-      "search": "Search by ID, name, username...",
-      "searchEmail": "Search by email...",
+      "search": "ID, name, @username or email",
+      "searchShort": "Name, ID, @user, email",
       "noData": "No users found",
-      "purchaseCount_one": "{{count}} purchase",
-      "purchaseCount_other": "{{count}} purchases",
-      "noPurchases": "No purchases",
       "stats": {
         "total": "Total",
         "active": "Active",
         "withSubscription": "With subscription",
-        "recurrentUsers": "With recurrent card",
         "newToday": "New today",
         "blocked": "Blocked",
-        "deleted": "Deleted"
+        "deleted": "Deleted",
+        "recurrentUsers": "With recurrent card"
       },
       "status": {
         "active": "Active",
@@ -4406,18 +4666,14 @@
         "expired": "Expired"
       },
       "filters": {
-        "allStatuses": "All statuses",
+        "title": "Filters",
+        "buttonApplied_one": "Filters: {{count}} applied",
+        "buttonApplied_other": "Filters: {{count}} applied",
+        "reset": "Reset",
+        "remove": "Remove filter “{{name}}”",
         "allCards": "All users",
         "hasCard": "With recurrent card",
-        "noCard": "Without recurrent card",
-        "byDate": "By date",
-        "byBalance": "By balance",
-        "byActivity": "By activity",
-        "bySpent": "By spending",
-        "byExpiry": "By expiry"
-      },
-      "pagination": {
-        "showing": "Showing {{from}}-{{to}} of {{total}}"
+        "noCard": "Without recurrent card"
       },
       "actions": {
         "block": "Block",
@@ -4442,32 +4698,17 @@
           "bad_request": "Telegram rejected the message. Check the text (HTML markup) and try again"
         }
       },
-      "recurringModal": {
-        "title": "Recurring Cancellation Report",
-        "user": "User",
-        "totalActions": "Total actions",
-        "succeeded": "Succeeded",
-        "failed": "Failed",
-        "detailsTitle": "Payment gateways details",
-        "emptyResults": "No recurring subscriptions or payment methods found for this user",
-        "targetId": "ID"
-      },
       "userActions": {
         "delete": "Delete user",
         "resetTrial": "Reset trial",
-        "resetSubscription": "Reset subscription",
-        "cancelAllRecurring": "Cancel all recurring (API)",
         "disable": "Disable user",
-        "resetPassword": "Reset password",
-        "generateLoginLink": "Generate login link",
         "error": "Failed to perform action",
         "success": {
           "delete": "User successfully deleted",
           "resetTrial": "Trial successfully reset",
-          "resetSubscription": "Subscription successfully reset",
           "disable": "User successfully disabled",
-          "resetPassword": "Password successfully reset",
-          "generateLoginLink": "Login link successfully generated"
+          "generateLoginLink": "Login link successfully generated",
+          "resetPassword": "Password successfully reset"
         },
         "confirmDelete": {
           "title": "Delete user?",
@@ -4477,33 +4718,29 @@
           "title": "Reset trial?",
           "message": "The user will be able to use the trial period again."
         },
-        "confirmResetSubscription": {
-          "title": "Reset subscription?",
-          "message": "The user's current subscription will be cancelled."
-        },
         "confirmDisable": {
           "title": "Disable user?",
           "message": "The user will not be able to use the service until reactivated."
         },
-        "confirmResetPassword": {
-          "title": "Reset password?",
-          "message": "Are you sure you want to reset the user's password? This will generate a new random password."
-        },
+        "generateLoginLink": "Generate login link",
+        "resetPassword": "Reset password",
         "confirmGenerateLoginLink": {
           "title": "Generate login link?",
           "message": "This will create a temporary token and generate a secure auto-login URL."
+        },
+        "cancelAllRecurring": "Cancel all recurring (API)",
+        "confirmResetPassword": {
+          "title": "Reset password?",
+          "message": "Are you sure you want to reset the user's password? This will generate a new random password."
         }
       },
       "detail": {
         "tabs": {
-          "info": "Information",
           "subscription": "Subscription",
           "balance": "Balance",
-          "sync": "Synchronization",
-          "tickets": "Tickets",
-          "gifts": "Gifts",
           "referrals": "Referrals",
-          "activity": "Activity"
+          "activity": "Activity",
+          "overview": "Overview"
         },
         "noTickets": "No tickets from this user",
         "ticketsCount": "tickets",
@@ -4518,7 +4755,6 @@
         "firstConnection": "First connection",
         "online": "Online",
         "noVpnData": "No connection data available",
-        "recurrentCards": "Linked recurrent cards",
         "requestHistory": "Subscription request history",
         "requestHistoryTotal": "Total requests",
         "requestAt": "Date",
@@ -4545,10 +4781,6 @@
         "lifetime": "Lifetime",
         "nodeUsage": "Node usage",
         "copied": "Copied",
-        "copy": "Copy",
-        "generatedCredentialsTitle": "Generated Credentials",
-        "tempPasswordLabel": "Temporary Password",
-        "loginLinkLabel": "Auto-Login Link",
         "panelNotFound": "User not found in panel",
         "devices": {
           "title": "Devices",
@@ -4632,23 +4864,76 @@
           "sbpStatus_PENDING": "Pending",
           "sbpStatus_ACTIVE": "Active",
           "sbpStatus_PAST_DUE": "Payment failed",
-          "cancelAllRecurringTitle": "Force cancel all auto-payments",
-          "cancelAllRecurringDesc": "Force-cancels all user recurring subscriptions via all payment gateway APIs (Platega, Lava, Antilopay, YooKassa) regardless of DB status and shows a detailed report.",
-          "cancelAllRecurring": "Cancel all recurring (API)",
           "deleteTitle": "Delete subscription",
           "deleteHint": "The subscription and its devices will be removed permanently",
           "deleteButton": "Delete subscription",
-          "deleted": "Subscription deleted"
+          "deleted": "Subscription deleted",
+          "extendBy": "by {{count}} d",
+          "customDays": "custom",
+          "shortenTitle": "Shorten",
+          "deviceLimitTitle": "Device limit",
+          "deviceLimitHint": "Plan maximum: {{max}}",
+          "removePackage": "Remove package",
+          "purchasedExtra": "{{gb}} GB purchased",
+          "periodDays": "{{count}}d",
+          "noNodeUsage": "No node traffic in this period",
+          "deviceSince": "since {{date}}",
+          "sbpShort": "SBP",
+          "cancelTitle": "Cancel subscription",
+          "cancelButton": "Cancel subscription",
+          "dangerZone": {
+            "title": "Danger zone",
+            "description": "Cancelling ends the subscription now; deleting erases it and its devices from the bot and the panel."
+          },
+          "support": {
+            "title": "For support",
+            "hint": "subscription link, keys, request history"
+          },
+          "confirm": {
+            "cancelSubscription": "Cancel the subscription? Time and traffic will not come back.",
+            "shorten": "Take {{count}} d off the subscription?",
+            "removePackage": "Remove the {{gb}} GB package? Its traffic will be gone.",
+            "deleteDevice": "Delete device “{{name}}”? It will have to reconnect.",
+            "resetDevices": "Reset all devices? Every client will have to reconnect.",
+            "cancelSbp": "Disable the SBP auto-payment?"
+          },
+          "lastPayment": "Last payment",
+          "autopay": "Auto-renewal",
+          "autopayOn": "on",
+          "autopayOff": "off",
+          "extendDays": "Extend by, days",
+          "shortenDays": "Take off, days",
+          "newTariff": "New plan",
+          "package": "Package",
+          "devicesLimit_one": "up to {{count}} device",
+          "devicesLimit_other": "up to {{count}} devices",
+          "cancelAllRecurring": "Cancel all recurring (API)",
+          "cancelAllRecurringDesc": "Force-cancels all user recurring subscriptions via all payment gateway APIs (Platega, Lava, Antilopay, YooKassa) regardless of DB status and shows a detailed report.",
+          "cancelAllRecurringTitle": "Force cancel all auto-payments"
         },
         "balance": {
           "current": "Current balance",
-          "amountPlaceholder": "Amount in rubles",
-          "descriptionPlaceholder": "Description (optional)",
+          "amountPlaceholder": "0",
+          "descriptionPlaceholder": "For example, compensation for downtime",
           "add": "Add",
           "subtract": "Deduct",
           "addByAdmin": "Added by admin",
           "subtractByAdmin": "Deducted by admin",
-          "recentTransactions": "Recent transactions"
+          "recentTransactions": "Recent transactions",
+          "title": "Balance",
+          "changeTitle": "Add or deduct",
+          "amountLabel": "Amount",
+          "commentLabel": "Comment for the log",
+          "confirmSubtract": "Take {{amount}} off the balance?",
+          "confirmDeactivate": "Turn off the {{percent}}% discount?",
+          "discountTitle": "Personal discount",
+          "noOffer": "no active offer",
+          "offerFormOpen": "Send an offer",
+          "noOperations": "No operations yet",
+          "added": "{{amount}} added",
+          "subtracted": "{{amount}} deducted",
+          "offerNow": "Now",
+          "offerValue": "−{{percent}}% until {{date}}"
         },
         "sync": {
           "selectSubscription": "Select subscription",
@@ -4698,13 +4983,17 @@
           "balance": "balance",
           "unknownUser": "Unknown",
           "totalSent": "Total sent",
-          "totalReceived": "Total received"
+          "totalReceived": "Total received",
+          "to": "to:",
+          "from": "from:",
+          "periodValue_one": "{{count}} day",
+          "periodValue_other": "{{count}} days"
         },
         "referrals": {
-          "referredBy": "Referred By",
+          "referredBy": "Invited by",
           "noReferrer": "No referrer assigned",
           "assignReferrer": "Assign Referrer",
-          "removeReferrer": "Remove",
+          "removeReferrer": "Unlink",
           "referrerAssigned": "Referrer assigned successfully",
           "referrerRemoved": "Referrer removed successfully",
           "totalReferrals": "Total Referrals",
@@ -4716,26 +5005,23 @@
           "noReferrals": "No referrals yet",
           "removeReferral": "Remove referral",
           "referralRemoved": "Referral removed successfully",
-          "addReferral": "Add Referral",
+          "add": "Add",
           "referralAdded": "Referral added successfully",
           "searchPlaceholder": "Search by name, email, or Telegram ID...",
           "alreadyReferred": "already has referrer",
-          "noUsersFound": "No users found"
+          "noUsersFound": "No users found",
+          "assign": "Assign",
+          "invited": "Invited",
+          "earned": "Earned",
+          "code": "Code",
+          "commissionPercent": "Commission, %",
+          "commissionSaved": "Commission saved",
+          "spentHint": "Spent in the service",
+          "confirmRemoveReferrer": "Unlink the referrer? They will stop earning from this user.",
+          "confirmRemoveReferral": "Remove {{name}} from referrals? Earnings from them will stop."
         },
         "activity": {
-          "total": "Total events",
           "empty": "No activity yet",
-          "filters": {
-            "all": "All",
-            "payments": "Payments",
-            "events": "Events",
-            "promo": "Promo",
-            "tickets": "Tickets",
-            "gifts": "Gifts",
-            "referrals": "Referrals",
-            "logins": "Logins",
-            "clicks": "Clicks"
-          },
           "types": {
             "transaction": "Transaction",
             "event": "Event",
@@ -4751,7 +5037,7 @@
             "withdrawal": "Withdrawal request",
             "button_click": "Bot button",
             "cabinet_action": "Cabinet action",
-            "miniapp_action": "Mini App action",
+            "miniapp_action": "Action in the cabinet",
             "screen": "Opened screen",
             "click": "Clicked",
             "message": "Message to bot"
@@ -4759,7 +5045,7 @@
           "sources": {
             "bot": "Bot",
             "cabinet": "Cabinet",
-            "miniapp": "Mini App"
+            "miniapp": "Cabinet"
           },
           "subtypes": {
             "deposit": "Deposit",
@@ -4874,11 +5160,329 @@
             "contact": "contact",
             "location": "location",
             "other": "message"
+          },
+          "views": {
+            "tickets": "Tickets",
+            "gifts": "Gifts",
+            "all": "All",
+            "payments": "Payments",
+            "subscription": "Subscription",
+            "actions": "Actions",
+            "logins": "Logins"
+          },
+          "fromBalance": "from balance",
+          "loadError": "Could not load activity"
+        },
+        "header": {
+          "copy": "Copy",
+          "emailVerified": "verified",
+          "emailUnverified": "not verified",
+          "onlineAt": "online · {{node}}",
+          "write": "Message",
+          "writeEmail": "Email",
+          "group": "Group: {{name}}"
+        },
+        "facts": {
+          "balance": "Balance",
+          "until": "Subscription until",
+          "days": "{{count}} d",
+          "traffic": "Traffic",
+          "devices": "Devices",
+          "devicesValue": "{{used}} of {{limit}}",
+          "spent": "Spent",
+          "noSubscription": "none",
+          "subscriptions": "Subscriptions",
+          "subscriptionsLive_one": "{{count}} active",
+          "subscriptionsLive_other": "{{count}} active",
+          "noLive": "none active",
+          "nearest": "next ends {{date}}",
+          "tariffUntil": "{{tariff}} · until {{date}}"
+        },
+        "menu": {
+          "more": "More actions"
+        },
+        "overview": {
+          "trafficPeriod": "Traffic",
+          "extend": "Extend",
+          "connection": "Connection",
+          "now": "Now",
+          "firstConnection": "Connected since",
+          "devices": "Devices",
+          "lifetimeTraffic": "All time",
+          "noDevices": "none",
+          "noPanelData": "The panel has not seen this person yet",
+          "origin": "Where they came from",
+          "registered": "Signed up",
+          "campaign": "Campaign",
+          "promoGroup": "Promo group",
+          "change": "Change",
+          "noPromoGroup": "no group",
+          "referrer": "Invited by",
+          "cabinetLogin": "Cabinet login",
+          "restrictionsAndSupport": "Restrictions and support",
+          "restrictions": "Restrictions",
+          "noRestrictions": "none",
+          "configure": "Configure",
+          "restrictTopup": "top-up blocked",
+          "restrictSubscription": "purchases blocked",
+          "restrictionReason": "Reason (admins only)",
+          "tickets": "Tickets",
+          "open": "Open",
+          "gifts": "Gifts",
+          "recent": "Recent events",
+          "allActivity": "All activity",
+          "noActivity": "Nothing has happened yet",
+          "assign": "Assign",
+          "none": "none",
+          "list": "List",
+          "promocodes": "Promo codes",
+          "restrictTopupFull": "Block balance top-ups",
+          "restrictSubscriptionFull": "Block subscription purchases",
+          "promocodesUsed_one": "{{count}} used",
+          "promocodesUsed_other": "{{count}} used",
+          "ticketsOpen_one": "{{count}} open",
+          "ticketsOpen_other": "{{count}} open",
+          "ticketsClosed_one": "{{count}} closed",
+          "ticketsClosed_other": "{{count}} closed",
+          "giftsSent_one": "{{count}} sent",
+          "giftsSent_other": "{{count}} sent",
+          "giftsReceived_one": "{{count}} received",
+          "giftsReceived_other": "{{count}} received",
+          "all": "All",
+          "lastActivity": "Last activity"
+        },
+        "restrictionsSaved": "Restrictions updated",
+        "panel": {
+          "title": "Remnawave panel",
+          "matches": "In sync",
+          "differs": "Differences found",
+          "unknown": "Not checked yet",
+          "checked": "Synced",
+          "pull": "Panel → bot",
+          "pushManual": "Bot → panel",
+          "confirmPull": "Pull data from the panel into the bot? Expiry and traffic in the bot database will be overwritten.",
+          "confirmPush": "Push bot data to the panel? Expiry, traffic and squads in the panel will be overwritten.",
+          "notLinked": "Not in panel",
+          "live": "active",
+          "notLive": "inactive",
+          "pullTitle": "Panel → bot",
+          "pushTitle": "Bot → panel",
+          "remnawaveId": "Remnawave panel ID",
+          "rows": {
+            "status": "Access",
+            "until": "Valid until",
+            "trafficLimit": "Traffic limit",
+            "trafficUsed": "Used",
+            "devices": "Devices",
+            "squads": "Squads"
+          },
+          "graceNote": "This person has temporary access until {{date}} — while it lasts, the panel holds its settings. That is not a mismatch, nothing needs syncing."
+        },
+        "loadError": "Could not load the user",
+        "done": {
+          "subscription": {
+            "extend": "Extended by {{count}} d — until {{date}}",
+            "shorten": "Shortened by {{count}} d — until {{date}}",
+            "change_tariff": "Plan changed",
+            "activate": "Subscription activated until {{date}}",
+            "cancel": "Subscription cancelled",
+            "create": "Subscription granted until {{date}}"
+          },
+          "pulled": "Data pulled from the panel",
+          "pushed": "Data pushed to the panel",
+          "promoGroup": "Promo group changed",
+          "blocked": "User blocked",
+          "unblocked": "User unblocked",
+          "pulledWithWarning": "The bot had a later end date than the panel — the panel date was applied. Check for an auto-renewal"
+        },
+        "operations": {
+          "title": "Transactions",
+          "operation": "Transaction",
+          "notCompleted": "not completed",
+          "filters": {
+            "all": "All",
+            "deposit": "Top-ups",
+            "withdrawal": "Withdrawals",
+            "subscription_payment": "Purchases"
           }
-        }
+        },
+        "messages_one": "{{count}} message",
+        "messages_other": "{{count}} messages",
+        "ticketLoadError": "Could not open the ticket",
+        "copy": "Copy",
+        "generatedCredentialsTitle": "Generated Credentials",
+        "recurrentCards": "Linked recurrent cards",
+        "loginLinkLabel": "Auto-Login Link",
+        "tempPasswordLabel": "Temporary Password"
       },
       "notFound": "User not found",
-      "purchaseCount": "Purchases: {{count}}"
+      "summary": {
+        "total_one": "{{value}} user",
+        "total_other": "{{value}} users",
+        "subscribed": "{{value}} with an active subscription",
+        "newToday_one": "{{value}} new today",
+        "newToday_other": "{{value}} new today",
+        "blocked_one": "{{value}} blocked",
+        "blocked_other": "{{value}} blocked"
+      },
+      "shown": "Showing {{shown}} of {{total}}",
+      "loadingMore": "Loading more",
+      "noneFound": "No one found — try another query or clear the filters",
+      "loadError": "Could not load the list",
+      "connectedNow": "connected now",
+      "onlineUnavailable": "The panel didn't respond — couldn't tell who is connected right now. Try again.",
+      "reset": "Clear all",
+      "toTop": "To top",
+      "unlimited": "unlimited",
+      "until": "until {{date}}",
+      "sort": {
+        "label": "Sort",
+        "expires": {
+          "asc": "Expiring soonest",
+          "desc": "Expiring latest"
+        },
+        "grace": {
+          "asc": "Grace ends soonest",
+          "desc": "Grace ends latest"
+        },
+        "activity": {
+          "asc": "Least recently active",
+          "desc": "Most recently active"
+        },
+        "created": {
+          "asc": "Oldest first",
+          "desc": "Newest first"
+        },
+        "balance": {
+          "asc": "Lowest balance",
+          "desc": "Highest balance"
+        },
+        "spent": {
+          "asc": "Least spent",
+          "desc": "Most spent"
+        },
+        "traffic": {
+          "asc": "Least traffic",
+          "desc": "Most traffic"
+        },
+        "purchases": {
+          "asc": "Fewest purchases",
+          "desc": "Most purchases"
+        }
+      },
+      "views": {
+        "all": "All",
+        "expiring": "Expiring in {{days}} days",
+        "grace": "In grace",
+        "traffic": "Traffic running out",
+        "nopay": "No purchases",
+        "online": "Online",
+        "blocked": "Blocked"
+      },
+      "viewsLabel": "View",
+      "filterLabels": {
+        "status": "Status",
+        "sub": "Subscription",
+        "tariff": "Plan",
+        "group": "Promo group",
+        "campaign": "Campaign"
+      },
+      "filterAny": {
+        "status": "any",
+        "sub": "any",
+        "tariff": "any",
+        "group": "any",
+        "campaign": "any"
+      },
+      "subFilters": {
+        "active": "active",
+        "trial": "trial",
+        "expiring": "expiring",
+        "expired": "expired",
+        "limited": "traffic exhausted",
+        "none": "no subscription"
+      },
+      "columns": {
+        "user": "User",
+        "subscription": "Subscription",
+        "activity": "Activity",
+        "balance": "Balance"
+      },
+      "statuses": {
+        "active": "Active",
+        "blocked": "Blocked",
+        "deleted": "Deleted",
+        "noSubscription": "No subscription",
+        "disabled": "Disabled",
+        "pending": "Awaiting payment",
+        "other": "Subscription"
+      },
+      "subscriptionChips": {
+        "trial": "Trial · {{count}} d",
+        "daysLeft": "{{count}} d",
+        "today": "expires today",
+        "expiredToday": "expired today",
+        "expiredAgo": "expired {{count}} d ago",
+        "limited": "traffic exhausted",
+        "graceUntil": "temporary until {{date}}"
+      },
+      "summaryShort": {
+        "total_one": "{{value}}",
+        "total_other": "{{value}}",
+        "subscribed": "{{value}} subscribed",
+        "newToday_one": "{{value}} new",
+        "newToday_other": "{{value}} new"
+      },
+      "endOfList_one": "That is everyone: {{total}} user",
+      "endOfList_other": "That is everyone: {{total}} users",
+      "subscriptionState": {
+        "active": "Active",
+        "trial": "Trial",
+        "limited": "Traffic exhausted",
+        "expired": "Expired",
+        "disabled": "Disabled",
+        "pending": "Awaiting payment",
+        "other": "Subscription"
+      },
+      "purchaseCount_one": "{{count}} purchase",
+      "purchaseCount_other": "{{count}} purchases",
+      "errors": {
+        "generic": "The action failed. Please try again",
+        "insufficientBalance": "Balance is {{current}}, but {{requested}} was requested",
+        "tariffTaken": "There is already a live subscription for this plan — extend it",
+        "singleTariff": "A subscription already exists. A second one needs multi-plan mode",
+        "graceActive": "Temporary access is active — wait for it to end or restore the subscription",
+        "badDays": "Enter a number of days above zero",
+        "selfReferrer": "A user cannot be their own referrer",
+        "circularReferral": "This would create a loop in the referral chain",
+        "noReferrer": "No referrer is assigned",
+        "notReferral": "This user is not a referral of the selected one",
+        "ownCommission": "You cannot change your own referral commission",
+        "adminProtected": "This is an administrator and cannot be blocked",
+        "notInPanel": "This user is not in the Remnawave panel",
+        "panelUnreachable": "Could not reach the panel. Try again later",
+        "resetNotFinished": "The panel did not disable the subscription — reset not finished",
+        "noSubscription": "There is no subscription",
+        "noDevices": "There are no devices",
+        "deviceNotFound": "The device is already gone",
+        "packageNotFound": "Traffic package not found",
+        "tariffNotFound": "Plan not found",
+        "promoGroupNotFound": "Promo group not found",
+        "subscriptionNotFound": "Subscription not found",
+        "userNotFound": "User not found",
+        "trialBlockedBySubscription": "The trial is still unavailable: this person has another subscription. Remove it first."
+      },
+      "moreTariffs": "{{count}} more",
+      "recurringModal": {
+        "title": "Recurring Cancellation Report",
+        "user": "User",
+        "totalActions": "Total actions",
+        "succeeded": "Succeeded",
+        "failed": "Failed",
+        "detailsTitle": "Payment gateways details",
+        "emptyResults": "No recurring subscriptions or payment methods found for this user",
+        "targetId": "ID"
+      }
     },
     "promoOffers": {
       "title": "Promo Offers",
@@ -5055,7 +5659,15 @@
           "email_templates": "Email templates",
           "pinned_messages": "Pinned messages",
           "landings": "Landing pages",
-          "updates": "Updates"
+          "updates": "Updates",
+          "bulk_actions": "Bulk actions",
+          "coupons": "Coupons",
+          "info_pages": "Info pages",
+          "news": "News",
+          "reachability": "Reachability",
+          "system_errors": "System errors",
+          "user": "User",
+          "dpichecker": "DPI//CHECKER"
         },
         "permissionActions": {
           "read": "Read",
@@ -5081,7 +5693,10 @@
           "balance": "Balance",
           "subscription": "Subscription",
           "send_offer": "Send offer",
-          "referral": "Referral %"
+          "referral": "Referral %",
+          "execute": "Execute",
+          "run": "Run",
+          "send_message": "Send message"
         },
         "toggleSection": "Toggle all {{section}} permissions",
         "selectedPermissions_one": "{{count}} permission selected",
@@ -5337,7 +5952,11 @@
         "loadFailed": "Failed to load audit log",
         "retry": "Try again"
       },
-      "totalEntries": "Total entries: {{count}}"
+      "totalEntries": "Total entries: {{count}}",
+      "actions": {
+        "phantom_claimed": "Placeholder account claimed",
+        "phantom_merged": "Placeholder account merged"
+      }
     },
     "landings": {
       "title": "Landing Pages",
@@ -5419,13 +6038,6 @@
         "regularPurchases": "Regular",
         "conversionRate": "Conversion",
         "avgPurchase": "Avg. Check",
-        "linkedCards": "Linked cards",
-        "trialCards": "Trial cards (10₽)",
-        "regularCards": "Regular cards",
-        "renewalsCount": "Renewals",
-        "renewalsRate": "Renewal Rate",
-        "renewalsRegularCount": "Regular renewals",
-        "renewalsTrialCount": "Trial renewals",
         "dailyChart": "Purchases & Revenue by Day",
         "tariffChart": "Tariff Distribution",
         "giftBreakdown": "Gifts vs Regular",
@@ -5447,13 +6059,20 @@
         "paid": "paid",
         "dailyPurchases": "Purchases per day",
         "dailyPurchaseTypes": "Purchases & renewals",
-        "dailyRenewalRate": "Renewal rate (%)",
-        "renewalRateLabel": "Renewal rate",
-        "regularLabelChart": "Regular",
-        "trialsLabelChart": "Trials",
-        "renewalsLabelChart": "Renewals",
+        "linkedCards": "Linked cards",
+        "trialCards": "Trial cards (10₽)",
+        "renewalsTrialLabelChart": "Renewals (trial)",
         "renewalsRegularLabelChart": "Renewals (regular)",
-        "renewalsTrialLabelChart": "Renewals (trial)"
+        "renewalsCount": "Renewals",
+        "renewalsLabelChart": "Renewals",
+        "renewalRateLabel": "Renewal rate",
+        "regularCards": "Regular cards",
+        "trialsLabelChart": "Trials",
+        "dailyRenewalRate": "Renewal rate (%)",
+        "regularLabelChart": "Regular",
+        "renewalsRate": "Renewal Rate",
+        "renewalsRegularCount": "Regular renewals",
+        "renewalsTrialCount": "Trial renewals"
       },
       "purchases": {
         "title": "Purchases",
@@ -5488,7 +6107,8 @@
       "methodMaxAmount": "Maximum amount",
       "methodMinAmount": "Minimum amount",
       "methodReturnUrl": "Return URL",
-      "stickyPayButton": "Sticky pay button"
+      "stickyPayButton": "Sticky pay button",
+      "stickyPayButtonHint": "Button pinned to bottom of screen on mobile"
     },
     "infoPages": {
       "title": "Information Pages",
@@ -5712,6 +6332,435 @@
         "retry": "Retry delivery",
         "retrySent": "Error sent to the admin chat",
         "retryFailed": "Could not send to the admin chat"
+      }
+    },
+    "dpichecker": {
+      "subtitle": "checks from networks in Russia, China, Iran and Turkmenistan",
+      "tabs": {
+        "label": "DPI//CHECKER sections",
+        "vpn": "VPN",
+        "ip": "IP / domain",
+        "mtproto": "MTProto",
+        "noisy": "Neighbours",
+        "probe": "Probe",
+        "cheremsha": "Cheremsha",
+        "monitors": "Monitors",
+        "history": "History"
+      },
+      "header": {
+        "noisyLeft": "Neighbours: {{left}} of {{limit}} left today",
+        "topup": "Top up",
+        "noisyShort": "Neighbours: {{left}} of {{limit}} today"
+      },
+      "money": {
+        "usd": "{{value}} USD"
+      },
+      "setup": {
+        "titleDisabled": "DPI//CHECKER is off",
+        "titleNotConfigured": "DPI//CHECKER is not set up",
+        "intro": "Checks VPN keys, addresses and MTProto proxies from home and mobile networks in Russia, China, Iran and Turkmenistan. To start:",
+        "key": "API key",
+        "keyHint": "Issued in the DPI//CHECKER bot (Main menu → API) or on dpichecker.st; requires a deposit of at least $1",
+        "enable": "Turn DPI//CHECKER on",
+        "enableHint": "The switch is in the same settings",
+        "rights": "Admin rights",
+        "rightsHint": "Who can view the section and who can run checks: they spend the DPI//CHECKER balance",
+        "openSettings": "Open DPI//CHECKER settings",
+        "openSite": "Get a key at dpichecker.st",
+        "envNote": "If the bot is configured via an environment file, its values override the cabinet settings: edit the file and restart the bot.",
+        "reference": "Default subscription, optional",
+        "referenceHint": "A subscription link or panel shortUuid: VPN “From panel” takes its keys without picking a user"
+      },
+      "locations": {
+        "russia": "Russia",
+        "china": "China",
+        "iran": "Iran",
+        "turkmenistan": "Turkmenistan"
+      },
+      "pops": {
+        "optimal": "Optimal set",
+        "all": "All available",
+        "random": "Random 10",
+        "clear": "clear",
+        "districts": "Districts",
+        "republics": "Republics",
+        "search": "Search by region or operator",
+        "loading": "Loading points of presence",
+        "loadFailed": "Could not load points.",
+        "nothingFound": "Nothing found.",
+        "wholeRegion": "Select the whole region",
+        "dead": "This point is down right now",
+        "anyOperator": "Any",
+        "optimalFailed": "Could not get the optimal set, try again.",
+        "groupEmpty": "No points are available in this district right now."
+      },
+      "form": {
+        "step1": "What to check",
+        "step2": "Where to check from",
+        "step3": "Total",
+        "paste": "Paste",
+        "fromPanel": "From panel",
+        "originLabel": "Where to take targets from",
+        "hint": {
+          "vpn": "VLESS / VMess / Trojan / Shadowsocks / Hysteria2 keys or subscription links — one per line.",
+          "ip": "Up to 50 IPs or domains, one per line. Links work too — only the domain is taken.",
+          "mtproto": "MTProto proxy links (tg://proxy… or t.me/proxy…) — one per line."
+        },
+        "placeholder": {
+          "vpn": "vless://… or https://…/subscription",
+          "ip": "example.com\n203.0.113.10",
+          "mtproto": "tg://proxy?server=…&port=…&secret=…"
+        },
+        "continue": "Continue",
+        "parsing": "Parsing…",
+        "failed": "That did not work — try again",
+        "fetchFailed": "Could not fetch the subscription. Try later.",
+        "accepted": "Accepted: {{count}}",
+        "nothingAccepted": "Nothing accepted.",
+        "udpOnly": "UDP only — not checked",
+        "notes": {
+          "invalid": "invalid: {{count}}",
+          "private": "local/private IPs (not checked): {{count}}",
+          "overflow": "over the line limit, dropped: {{count}}",
+          "duplicate": "duplicates: {{count}}",
+          "blacklisted": "blacklisted: {{items}}"
+        },
+        "panel": {
+          "label": "What to take from the panel",
+          "subscription": "Subscription",
+          "hosts": "Hosts",
+          "nodes": "Nodes",
+          "loading": "Loading from the panel…"
+        },
+        "total": {
+          "pops": "Points",
+          "resources": "Resources",
+          "cost": "Cost",
+          "balance": "Balance",
+          "tariff": "({{pop}} USD per point + {{resource}} USD per resource per point)"
+        },
+        "probeMode": {
+          "label": "Check mode",
+          "auto": "Auto — detect",
+          "server": "The target runs a web server",
+          "noserver": "No web server — look for blocking",
+          "hint": "If nothing runs on the address, no web server is needed: instead of “does it open” the check looks for blocking — name (SNI), DNS and port reachability."
+        },
+        "runMode": "How to run",
+        "once": "Once",
+        "scheduled": "On schedule",
+        "schedule": {
+          "interval": "Every, hours",
+          "alertAfter": "Alert after failures in a row",
+          "notifyOnSuccess": "Also report success",
+          "perRun": "each run costs as one such check",
+          "notify": "DPI//CHECKER bot alerts",
+          "notifyDm": "To my DMs",
+          "notifyGroup": "To a group",
+          "notifyHint": "For a group, a command appears after creation — send it in a group where the DPI//CHECKER bot is. Results reach the bot’s admin chat either way."
+        },
+        "pay": "Pay",
+        "createMonitor": "Create monitor",
+        "confirmPay": "Charge {{value}} USD",
+        "confirmMonitor": "Create monitor · run {{value}} USD",
+        "cancel": "Cancel",
+        "estimateFailed": "Could not price the check",
+        "pickSome": "Tick what to check"
+      },
+      "status": {
+        "submitting": "Sending to DPI//CHECKER…",
+        "pending": "Queued",
+        "active": "Checking",
+        "running": "Running",
+        "completed": "Done",
+        "done": "Done",
+        "failed": "Failed",
+        "cancelled": "Cancelled",
+        "rejected": "Refused",
+        "unknown": "DPI//CHECKER did not answer",
+        "up": "Up",
+        "down": "Down",
+        "paused": "Paused",
+        "active_monitor": "Active",
+        "deleted": "Off"
+      },
+      "result": {
+        "title": {
+          "vpn": "VPN key check",
+          "ip": "IP/domain check",
+          "mtproto": "MTProto check"
+        },
+        "points": "{{count}} points",
+        "points_one": "{{count}} point",
+        "points_other": "{{count}} points",
+        "resources": "{{count}} res.",
+        "charged": "charged {{value}} USD",
+        "cancel": "Cancel",
+        "refunded": "Refunded {{value}} USD",
+        "resubmit": "Ask again",
+        "unknownHint": "DPI//CHECKER did not answer the launch. Money may have been charged. Ask again — the request goes with the same key, it will not be charged twice.",
+        "rejected": "DPI//CHECKER refused the launch — nothing was charged.",
+        "progress": "{{done}} of {{total}} done",
+        "available": "Available",
+        "partial": "Partial",
+        "unavailable": "Unavailable",
+        "avgLatency": "Average latency",
+        "ms": "{{value}} ms",
+        "speed": "{{host}}: {{value}} Mbit/s",
+        "ok": "available",
+        "fail": "unavailable",
+        "okOf": "{{ok}} of {{total}} available",
+        "abroadOk": "From abroad: available · {{value}} ms",
+        "abroadFail": "From abroad: unavailable — likely not blocking",
+        "showAll": "Show all {{count}}",
+        "showLess": "Collapse",
+        "csv": "CSV",
+        "map": "Map",
+        "loadFailed": "Could not load the check",
+        "newCheck": "New check",
+        "notes": {
+          "noInternet": "the point has no internet — not blocking",
+          "httpsUpgradeStub": "port 80 only redirects to HTTPS that does not answer — the provider network answers",
+          "tlsHandshakeFailed": "TLS handshake failed",
+          "dnsFailed": "address does not resolve",
+          "timeout": "no answer",
+          "connectionRefused": "connection refused",
+          "connectionReset": "connection reset",
+          "proxyDead": "point does not answer",
+          "untestable": "cannot be checked"
+        },
+        "csvFailed": "Could not download the CSV",
+        "details": "Details",
+        "detailsFailed": "Could not load details",
+        "detailsEmpty": "No details for this point.",
+        "yes": "yes",
+        "no": "no",
+        "fields": {
+          "host": "Key",
+          "error": "Error",
+          "pop_name": "Point",
+          "connected": "Connected",
+          "server_ip": "Server IP",
+          "latency_ms": "Latency, ms",
+          "proxy_dead": "Point not responding",
+          "untestable": "Cannot be tested",
+          "proxy_exit_ip": "Point exit",
+          "untestable_reason": "Why it cannot be tested",
+          "control_check": "Point has internet",
+          "mode": "Mode",
+          "dns_ips": "DNS addresses",
+          "exit_ip": "Point exit",
+          "verdict": "Verdict",
+          "resource": "Address",
+          "cert_name": "Certificate",
+          "accessible": "Reachable",
+          "error_code": "Error code",
+          "port_story": "Ports",
+          "samples_ok": "Successful samples",
+          "ssh_status": "SSH",
+          "dns_verdict": "DNS",
+          "ping_avg_ms": "Ping, ms",
+          "scheme_used": "Protocol",
+          "sni_verdict": "SNI",
+          "status_code": "Site response code",
+          "port_80_open": "Port 80 open",
+          "port_443_open": "Port 443 open",
+          "samples_total": "Total samples",
+          "port_443_state": "Port 443",
+          "samples_tls_ok": "Successful TLS",
+          "throughput_kbps": "Speed, kbit/s",
+          "port_80_hijacked": "Port 80 hijacked",
+          "port_443_hijacked": "Port 443 hijacked",
+          "samples_throttled": "Throttled samples",
+          "port_control_state": "Control port",
+          "control_port_number": "Control port number",
+          "error_redirect_host": "Redirects to",
+          "dns_intercepted_ratio": "Share of spoofed DNS",
+          "tcp_latency_ms": "TCP latency, ms",
+          "baseline_unreliable": "Baseline unreliable",
+          "status": "Result",
+          "reached": "Reached",
+          "secret_kind": "Secret type"
+        }
+      },
+      "noisy": {
+        "intro": "TLS certificates (SNI) of hosts in the /24 subnet — how “noisy” your server’s neighbours are (SNI max.ru, vk.ru, google.com etc.). Free, up to 10 scans a day, used today: {{used}}.",
+        "placeholder": "/24 subnets, IPs or domains — one per line",
+        "run": "Scan",
+        "exhausted": "Today’s scan limit is used up.",
+        "found": "Hosts found: {{count}}",
+        "badRu": "Russian services nearby",
+        "vpnLike": "Look like VPN",
+        "badForeign": "Notable foreign services",
+        "quiet": "No noisy neighbours found."
+      },
+      "probe": {
+        "intro": "Checks whether the whole /24 subnet is blocked or the DPI hits single addresses (/32). The subnet is checked through its neighbours — nothing needs to be rented in it.",
+        "howTitle": "How it works",
+        "how1": "Scan the subnet and collect TLS certificates (SNI) of live hosts.",
+        "how2": "Drop everything that is not a domain and known “bad” SNIs.",
+        "how3": "Check via DNS that the domain still lives in this subnet.",
+        "how4": "Open each domain over HTTPS from abroad and look for a 48 KB+ response.",
+        "how5": "Fetch that response from 10 points in Russia and see whether it arrives in full.",
+        "why": "Why: on some ranges the DPI does not drop the connection but lets ~16–20 KB through and then cuts it. A page under 16 KB opens even through such blocking — so a response well above the threshold is needed.",
+        "price": "Cost: 1.00 USD fixed + 1.50 USD per GB of traffic (actual, after the check). The fixed fee is charged at once and refunded only if DPI//CHECKER infrastructure fails.",
+        "placeholder": "/24 subnet, IP or domain",
+        "confirm": "Charge {{value}} USD + traffic",
+        "cost": "Fixed {{fixed}} USD · Traffic {{traffic}} USD ({{mb}} MB)",
+        "stage": {
+          "queued": "Queued",
+          "scan": "Scanning the subnet…",
+          "foreign": "Checking from abroad…",
+          "russia": "Checking from Russia…",
+          "report": "Preparing the report…"
+        },
+        "verdict": {
+          "clean": "The subnet is not blocked",
+          "blocked": "The whole subnet is blocked",
+          "partial": "Single addresses are blocked",
+          "unknown": "Result unclear"
+        },
+        "blocked": "Blocked addresses: {{blocked}} of {{tested}} checked ({{percent}}%).",
+        "regions": "Regions blocking the whole subnet: {{whole}}, partially: {{part}}, clean: {{clean}}.",
+        "pipeline": "Pipeline: hosts {{scanned}} → domains {{kept}} → in subnet {{inSubnet}} → open from abroad {{foreign}} → checked from Russia {{tested}}.",
+        "byIp": "By address",
+        "byRegion": "By region",
+        "pops": "✅ / ⚠️ / ❌ {{green}} / {{yellow}} / {{red}} of {{total}}",
+        "regionLine": "{{name}}: blocked {{blocked}} of {{tested}}",
+        "state": {
+          "open": "✅ open",
+          "blocked": "❌ blocked",
+          "stalled": "⚠️ stalls"
+        },
+        "drops": "Filtered out on the way",
+        "drop": {
+          "bad_sni": "bad SNI",
+          "moved_away": "moved out of the subnet",
+          "dns_failed": "does not resolve",
+          "payload_too_small": "response below threshold",
+          "foreign_failed": "does not open from abroad"
+        }
+      },
+      "cheremsha": {
+        "intro": "Whether a domain or IP is in the RKN registry and CDN lists. Free, up to 20 at a time.",
+        "placeholder": "Domains or IPs — one per line",
+        "run": "Check",
+        "verdict": {
+          "blocked": "blocked",
+          "maybe": "possibly blocked",
+          "noResolve": "does not resolve to IP",
+          "notFound": "not in the registry"
+        },
+        "domainHit": "the domain is in the registry",
+        "subnet": "{{value}} — blocking by neighbourhood is possible",
+        "resolved": "Resolves to {{value}}",
+        "invalid": "Skipped (not a domain or IP): {{items}}",
+        "refreshed": "Lists updated: {{value}}"
+      },
+      "monitors": {
+        "foreign": "Created on the DPI//CHECKER site",
+        "every": "every {{hours}} h",
+        "active": "Monitor active",
+        "noRuns": "Not run yet",
+        "fails": "failures in a row: {{count}}",
+        "lastNext": "Last run: {{last}} · next: {{next}}",
+        "delete": "Turn off",
+        "deleteConfirm": "Turn off the monitor (history is kept)",
+        "empty": "No monitors yet — create one in the check form with “On schedule”.",
+        "paused": {
+          "insufficient_balance": "Paused: the DPI//CHECKER balance ran out",
+          "deleted_via_api": "Off",
+          "other": "Paused"
+        },
+        "howTitle": "How monitors work",
+        "how": {
+          "create": "Create: VPN, IP / domain or MTProto tab → targets and points → “On schedule” → interval.",
+          "runs": "The service checks the targets every N hours. The monitor itself is free; each run costs as one such check.",
+          "alerts": "Results go to the bot’s admin chat: an alert after the set number of failures in a row and a recovery message; every run if “Report successes too” is on. The DPI//CHECKER bot also sends alerts — to your DMs or to a group, chosen when the monitor is created.",
+          "manage": "Here you can pause, disable, adjust and see runs of any monitor, including ones created on the DPI//CHECKER website."
+        },
+        "untitled": "Monitor #{{id}}",
+        "deletedBlock": "Disabled · {{count}}",
+        "runs": "Runs",
+        "runsEmpty": "No runs yet.",
+        "runsFailed": "Could not load runs",
+        "runOpen": "Open run",
+        "runCost": "{{value}} USD",
+        "settings": "Settings",
+        "save": "Save",
+        "groupTitle": "DPI//CHECKER bot alerts — to a group",
+        "groupHow": "Add the DPI//CHECKER bot to the group and send this command there:",
+        "copy": "Copy command",
+        "copied": "Copied"
+      },
+      "history": {
+        "all": "All",
+        "filter": "What to show",
+        "mine": "Only mine",
+        "empty": "No launches yet.",
+        "more": "Show more",
+        "withCount": "{{name}} · {{count}}",
+        "columns": {
+          "what": "What",
+          "where": "Where",
+          "resources": "Res.",
+          "cost": "Charged",
+          "who": "Who",
+          "when": "When",
+          "status": "Result",
+          "source": "Source"
+        },
+        "scope": "Whose runs",
+        "scopeCabinet": "From the cabinet",
+        "scopeAccount": "Whole account",
+        "accountHint": "Every run of your DPI//CHECKER key: from the website, their bot, the API and monitor runs. Tap a row to open the result here.",
+        "allChecks": "All checks",
+        "openFailed": "Could not open the run",
+        "sources": {
+          "web": "Website",
+          "bot": "DPI//CHECKER bot",
+          "api": "API",
+          "watcher": "Monitor",
+          "inline": "Telegram inline"
+        }
+      },
+      "shortcuts": {
+        "checkSubscription": "Check in DPI//CHECKER",
+        "checkNode": "Check in DPI//CHECKER"
+      },
+      "map": {
+        "status": {
+          "green": "available",
+          "yellow": "partial",
+          "red": "unavailable",
+          "gray": "not checked",
+          "none": "not checked"
+        },
+        "any": "Any",
+        "okOf": "{{ok}}/{{total}} ok",
+        "proxyDead": "proxy down",
+        "deadExtra": "+{{count}} without proxy"
+      },
+      "deliveries": {
+        "title": "DPI//CHECKER notifications to the bot",
+        "hint": "When a check finishes, DPI//CHECKER notifies the bot. If a check still shows “running” here but is done on the website, see whether the notification arrived.",
+        "empty": "No notifications yet.",
+        "loadFailed": "Could not load the notification log",
+        "events": {
+          "check_completed": "Check finished",
+          "check_cancelled": "Check cancelled",
+          "probe_done": "Probe finished",
+          "noisy_done": "Neighbours finished",
+          "monitor_run": "Monitor run started"
+        },
+        "status": {
+          "delivered": "Delivered",
+          "pending": "Waiting to retry",
+          "failed": "Not delivered"
+        },
+        "object": "No. {{id}}",
+        "attempts": "attempts: {{count}}",
+        "response": "bot replied {{code}}"
       }
     }
   },
@@ -6245,7 +7294,8 @@
     "ru": "Русский",
     "en": "English",
     "zh": "中文",
-    "fa": "فارسی"
+    "fa": "فارسی",
+    "ua": "Ukrainian"
   },
   "contests": {
     "title": "Contests",
@@ -6457,7 +7507,7 @@
     "chooseSubscription": "Choose which subscription to keep",
     "afterMerge": "After merging",
     "allAuthMethodsMerged": "All sign-in methods will be combined",
-    "balanceSummed": "Balance: {{amount}} ₽ (combined)",
+    "balanceSummed": "Balance: {{amount}} ₽ (combined)",
     "unselectedSubscriptionDeleted": "The unselected subscription will be deleted",
     "historyPreserved": "Transaction history will be preserved",
     "confirm": "Merge Accounts",
@@ -6813,5 +7863,66 @@
     "offer": "Public Offer",
     "privacy": "Privacy Policy",
     "recurrent": "Recurring Payments"
+  },
+  "lite": {
+    "status": {
+      "none": "No subscription yet",
+      "active": "Subscription works until {{date}}",
+      "trial": "Trial until {{date}}",
+      "expiring": "Subscription ends on {{date}}",
+      "expired": "Subscription ended on {{date}}",
+      "limited": "Traffic ran out",
+      "paused": "Subscription is paused",
+      "legacy": "Choose a plan to continue",
+      "many": "Your subscriptions"
+    },
+    "action": {
+      "connect": "Connect a device",
+      "renew": "Renew subscription",
+      "buy": "Choose a plan",
+      "manage": "Open settings",
+      "tryFree": "Try it free",
+      "tryPaid": "Try it for {{price}}",
+      "chooseTariff": "Choose a plan"
+    },
+    "traffic": {
+      "label": "Traffic",
+      "used": "{{used}} of {{total}}",
+      "unlimited": "Unlimited traffic"
+    },
+    "rows": {
+      "devices": "Devices",
+      "devicesValue": "{{used}} of {{total}}",
+      "balance": "Balance",
+      "manage": "Manage subscription",
+      "buyAnother": "Buy another plan",
+      "buyTraffic": "Buy more traffic",
+      "buyDevices": "Buy more devices",
+      "reduceDevices": "Reduce device count",
+      "servers": "Servers",
+      "myDevices": "My devices",
+      "allSettings": "All subscription settings",
+      "delete": "Delete subscription",
+      "plans": "See plans",
+      "support": "Support",
+      "copyLink": "Copy subscription link",
+      "copied": "Copied"
+    },
+    "error": {
+      "load": "Could not load your data",
+      "hint": "Check the connection and try again",
+      "retry": "Try again"
+    },
+    "promo": {
+      "available": "You have an offer",
+      "discountActive": "Discount active"
+    },
+    "tariff": {
+      "current": "current",
+      "unlimitedDevices": "Unlimited devices"
+    },
+    "subscription": {
+      "untitled": "Subscription"
+    }
   }
 }

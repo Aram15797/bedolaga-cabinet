@@ -1,3 +1,4 @@
+import { getApiErrorMessage } from '@/utils/api-error';
 import { useState, useRef } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useTelegramSDK } from '@/hooks/useTelegramSDK';
@@ -59,8 +60,6 @@ export default function AdminAiSupport() {
     queryFn: aiSupportApi.getKnowledgeSummary,
   });
 
-
-
   // Local settings state
   const [formSettings, setFormSettings] = useState<Record<string, string>>({});
 
@@ -75,8 +74,8 @@ export default function AdminAiSupport() {
       setNotice('Настройки ИИ успешно сохранены');
       setError(null);
     },
-    onError: (err: any) => {
-      setError(err?.response?.data?.detail || 'Ошибка сохранения настроек');
+    onError: (err: unknown) => {
+      setError(getApiErrorMessage(err, 'Ошибка сохранения настроек'));
     },
   });
 
@@ -90,9 +89,8 @@ export default function AdminAiSupport() {
       setError(null);
       if (fileInputRef.current) fileInputRef.current.value = '';
     },
-    onError: (err: any) => {
-      const serverMsg = err?.response?.data?.detail;
-      setError(serverMsg ? `Ошибка: ${serverMsg}` : 'Ошибка загрузки файла базы знаний');
+    onError: (err: unknown) => {
+      setError(getApiErrorMessage(err, 'Ошибка загрузки файла базы знаний'));
     },
   });
 
@@ -177,13 +175,17 @@ export default function AdminAiSupport() {
           {/* Stats quick view */}
           <div className="flex items-center gap-2">
             <div className="rounded-xl border border-dark-700/50 bg-dark-800/40 px-3 py-1.5 light:border-champagne-300/50 light:bg-champagne-100/60">
-              <span className="block text-2xs text-dark-500 light:text-champagne-600">Источников RAG</span>
+              <span className="block text-2xs text-dark-500 light:text-champagne-600">
+                Источников RAG
+              </span>
               <span className="font-mono text-xs font-bold text-accent-400">
                 {knowledgeData?.sources?.length ?? 0}
               </span>
             </div>
             <div className="rounded-xl border border-dark-700/50 bg-dark-800/40 px-3 py-1.5 light:border-champagne-300/50 light:bg-champagne-100/60">
-              <span className="block text-2xs text-dark-500 light:text-champagne-600">Чанков в базе</span>
+              <span className="block text-2xs text-dark-500 light:text-champagne-600">
+                Чанков в базе
+              </span>
               <span className="font-mono text-xs font-bold text-success-400">
                 {knowledgeData?.chunk_total ?? 0}
               </span>
@@ -195,13 +197,17 @@ export default function AdminAiSupport() {
         {notice && (
           <div className="flex items-center justify-between rounded-xl border border-success-400/30 bg-success-400/10 px-4 py-2.5 text-xs font-medium text-success-400">
             <span>{notice}</span>
-            <button onClick={() => setNotice(null)} className="hover:opacity-80">✕</button>
+            <button onClick={() => setNotice(null)} className="hover:opacity-80">
+              ✕
+            </button>
           </div>
         )}
         {error && (
           <div className="flex items-center justify-between rounded-xl border border-error-400/30 bg-error-400/10 px-4 py-2.5 text-xs font-medium text-error-400">
             <span>{error}</span>
-            <button onClick={() => setError(null)} className="hover:opacity-80">✕</button>
+            <button onClick={() => setError(null)} className="hover:opacity-80">
+              ✕
+            </button>
           </div>
         )}
 
@@ -302,7 +308,8 @@ export default function AdminAiSupport() {
                   Загрузить знания (JSON)
                 </h3>
                 <p className="mb-3 text-2xs text-dark-400 light:text-champagne-600">
-                  Загрузите JSON файл с документацией или ответами саппорта. Файл будет разделен на чанки и проиндексирован векторной моделью.
+                  Загрузите JSON файл с документацией или ответами саппорта. Файл будет разделен на
+                  чанки и проиндексирован векторной моделью.
                 </p>
                 <div className="flex items-center gap-3">
                   <input
@@ -313,7 +320,9 @@ export default function AdminAiSupport() {
                     className="block w-full max-w-sm text-xs text-dark-300 file:mr-3 file:rounded-xl file:border-0 file:bg-accent-500/20 file:px-4 file:py-2 file:text-xs file:font-semibold file:text-accent-400 hover:file:bg-accent-500/30 light:text-champagne-700"
                   />
                   {uploadKnowledgeMutation.isPending && (
-                    <span className="text-2xs text-accent-400 animate-pulse">Обработка файла ИИ...</span>
+                    <span className="text-2xs text-accent-400 animate-pulse">
+                      Обработка файла ИИ...
+                    </span>
                   )}
                 </div>
               </div>
@@ -327,9 +336,13 @@ export default function AdminAiSupport() {
                 </div>
 
                 {isKnowledgeLoading ? (
-                  <div className="py-12 text-center text-xs text-dark-400">Загрузка источников...</div>
+                  <div className="py-12 text-center text-xs text-dark-400">
+                    Загрузка источников...
+                  </div>
                 ) : !knowledgeData?.sources?.length ? (
-                  <div className="py-12 text-center text-xs text-dark-400">База знаний пока пуста</div>
+                  <div className="py-12 text-center text-xs text-dark-400">
+                    База знаний пока пуста
+                  </div>
                 ) : (
                   <div className="overflow-x-auto">
                     <table className="w-full text-left text-xs text-dark-200 light:text-champagne-800">
@@ -345,13 +358,24 @@ export default function AdminAiSupport() {
                       </thead>
                       <tbody className="divide-y divide-dark-700/20 light:divide-champagne-300/30">
                         {knowledgeData.sources.map((src: KnowledgeSource) => (
-                          <tr key={src.id} className="hover:bg-dark-700/10 light:hover:bg-champagne-200/30">
+                          <tr
+                            key={src.id}
+                            className="hover:bg-dark-700/10 light:hover:bg-champagne-200/30"
+                          >
                             <td className="px-4 py-3 font-mono font-medium text-dark-100 light:text-champagne-900">
                               {src.filename}
-                              {src.title && <span className="block text-2xs font-sans text-dark-400">{src.title}</span>}
+                              {src.title && (
+                                <span className="block text-2xs font-sans text-dark-400">
+                                  {src.title}
+                                </span>
+                              )}
                             </td>
-                            <td className="px-4 py-3 font-mono text-accent-400">{src.chunk_count}</td>
-                            <td className="px-4 py-3 font-mono text-dark-300">{src.message_count}</td>
+                            <td className="px-4 py-3 font-mono text-accent-400">
+                              {src.chunk_count}
+                            </td>
+                            <td className="px-4 py-3 font-mono text-dark-300">
+                              {src.message_count}
+                            </td>
                             <td className="px-4 py-3">
                               <span
                                 className={cn(
@@ -424,7 +448,9 @@ export default function AdminAiSupport() {
 
                 <div className="divide-y divide-dark-700/20 overflow-y-auto max-h-[600px] light:divide-champagne-300/30">
                   {isConversationsLoading ? (
-                    <div className="py-8 text-center text-xs text-dark-400">Загрузка диалогов...</div>
+                    <div className="py-8 text-center text-xs text-dark-400">
+                      Загрузка диалогов...
+                    </div>
                   ) : !conversationsData?.conversations?.length ? (
                     <div className="py-8 text-center text-xs text-dark-400">Диалогов пока нет</div>
                   ) : (
@@ -454,7 +480,12 @@ export default function AdminAiSupport() {
                             )}
                           </div>
                           <span className="text-2xs text-dark-500">
-                            {conv.last_message_at ? new Date(conv.last_message_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}
+                            {conv.last_message_at
+                              ? new Date(conv.last_message_at).toLocaleTimeString([], {
+                                  hour: '2-digit',
+                                  minute: '2-digit',
+                                })
+                              : ''}
                           </span>
                         </div>
 
@@ -465,7 +496,9 @@ export default function AdminAiSupport() {
 
                         <div className="flex items-center justify-between text-2xs text-dark-500">
                           <span>Сообщений: {conv.message_count}</span>
-                          <span>{conv.updated_at ? new Date(conv.updated_at).toLocaleDateString() : ''}</span>
+                          <span>
+                            {conv.updated_at ? new Date(conv.updated_at).toLocaleDateString() : ''}
+                          </span>
                         </div>
                       </div>
                     ))
@@ -499,10 +532,14 @@ export default function AdminAiSupport() {
                 <div className="p-3.5 border-b border-dark-700/30 flex items-center justify-between light:border-champagne-300/30">
                   <div>
                     <h3 className="text-xs font-bold text-dark-100 light:text-champagne-900">
-                      {selectedTelegramId ? `Чат с пользователем TG ID: ${selectedTelegramId}` : 'Все сообщения (общий лог)'}
+                      {selectedTelegramId
+                        ? `Чат с пользователем TG ID: ${selectedTelegramId}`
+                        : 'Все сообщения (общий лог)'}
                     </h3>
                     <p className="text-2xs text-dark-400">
-                      {selectedTelegramId ? 'История вопросов и ответов ИИ в реальном времени' : 'Общий поток всех сообщений сервиса'}
+                      {selectedTelegramId
+                        ? 'История вопросов и ответов ИИ в реальном времени'
+                        : 'Общий поток всех сообщений сервиса'}
                     </p>
                   </div>
 
@@ -529,9 +566,13 @@ export default function AdminAiSupport() {
 
                 <div className="p-4 space-y-4 overflow-y-auto max-h-[600px]">
                   {isHistoryLoading ? (
-                    <div className="py-12 text-center text-xs text-dark-400">Загрузка сообщений...</div>
+                    <div className="py-12 text-center text-xs text-dark-400">
+                      Загрузка сообщений...
+                    </div>
                   ) : !historyData?.messages?.length ? (
-                    <div className="py-12 text-center text-xs text-dark-400">Сообщения отсутствуют</div>
+                    <div className="py-12 text-center text-xs text-dark-400">
+                      Сообщения отсутствуют
+                    </div>
                   ) : (
                     historyData.messages.map((msg: AiMessageItem) => (
                       <div
@@ -544,7 +585,9 @@ export default function AdminAiSupport() {
                         {/* Message Bubble Header */}
                         <div className="flex items-center gap-2 mb-1 px-1">
                           <span className="font-mono text-2xs font-bold text-dark-400">
-                            {msg.role === 'user' ? `👤 Пользователь (${msg.telegram_id})` : '🤖 ИИ Бот'}
+                            {msg.role === 'user'
+                              ? `👤 Пользователь (${msg.telegram_id})`
+                              : '🤖 ИИ Бот'}
                           </span>
                           <span className="text-2xs text-dark-500">
                             {msg.created_at ? new Date(msg.created_at).toLocaleString() : ''}
@@ -564,22 +607,31 @@ export default function AdminAiSupport() {
                         </div>
 
                         {/* Metadata Footer for Assistant */}
-                        {msg.role === 'assistant' && (msg.tokens_prompt || msg.tokens_completion || msg.used_context) && (
-                          <div className="mt-1 flex flex-wrap items-center gap-2.5 px-1 text-2xs text-dark-400 light:text-champagne-600">
-                            {msg.model && <span className="font-mono text-dark-500">{msg.model}</span>}
-                            {msg.tokens_prompt !== null && (
-                              <span>Промпт: <strong className="text-dark-300">{msg.tokens_prompt}</strong></span>
-                            )}
-                            {msg.tokens_completion !== null && (
-                              <span>Ответ: <strong className="text-dark-300">{msg.tokens_completion}</strong></span>
-                            )}
-                            {msg.used_context && msg.used_context.length > 0 && (
-                              <span className="text-accent-400 font-semibold">
-                                RAG чанков: {msg.used_context.length}
-                              </span>
-                            )}
-                          </div>
-                        )}
+                        {msg.role === 'assistant' &&
+                          (msg.tokens_prompt || msg.tokens_completion || msg.used_context) && (
+                            <div className="mt-1 flex flex-wrap items-center gap-2.5 px-1 text-2xs text-dark-400 light:text-champagne-600">
+                              {msg.model && (
+                                <span className="font-mono text-dark-500">{msg.model}</span>
+                              )}
+                              {msg.tokens_prompt !== null && (
+                                <span>
+                                  Промпт:{' '}
+                                  <strong className="text-dark-300">{msg.tokens_prompt}</strong>
+                                </span>
+                              )}
+                              {msg.tokens_completion !== null && (
+                                <span>
+                                  Ответ:{' '}
+                                  <strong className="text-dark-300">{msg.tokens_completion}</strong>
+                                </span>
+                              )}
+                              {msg.used_context && msg.used_context.length > 0 && (
+                                <span className="text-accent-400 font-semibold">
+                                  RAG чанков: {msg.used_context.length}
+                                </span>
+                              )}
+                            </div>
+                          )}
                       </div>
                     ))
                   )}
@@ -592,4 +644,3 @@ export default function AdminAiSupport() {
     </div>
   );
 }
-

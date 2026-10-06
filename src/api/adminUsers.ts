@@ -25,6 +25,8 @@ export interface UserSubscriptionInfo {
   sbp_recurring_id: number | null;
   is_active: boolean;
   days_remaining: number;
+  /** Открыт временный доступ (грейс) до этого числа; null — обычная подписка. */
+  grace_until?: string | null;
   purchased_traffic_gb: number;
   traffic_purchases: TrafficPurchaseInfo[];
 }
@@ -68,6 +70,8 @@ export interface UserListItemSubscription {
   traffic_used_gb: number;
   traffic_limit_gb: number;
   device_limit: number;
+  /** Открыт временный доступ (грейс) до этого числа; null — обычная подписка. */
+  grace_until?: string | null;
 }
 
 export interface UserListItem {
@@ -82,6 +86,12 @@ export interface UserListItem {
   balance_rubles: number;
   created_at: string;
   last_activity: string | null;
+  /** Подключён к VPN прямо сейчас (по панели); null/нет поля — панель не ответила или бот старый. */
+  is_online?: boolean | null;
+  /** Отметка последнего подключения из панели: по ней строка сама гасит точку «в сети». */
+  online_at?: string | null;
+  /** Открыт временный доступ (грейс) до этого числа — подписка истекла, а VPN ещё работает. */
+  grace_until?: string | null;
   has_subscription: boolean;
   subscription_status: string | null;
   subscription_is_trial: boolean;
@@ -99,7 +109,7 @@ export interface UserListItem {
   has_restrictions: boolean;
   restriction_topup: boolean;
   restriction_subscription: boolean;
-  is_recurrent: boolean;
+  is_recurrent?: boolean;
   subscriptions?: UserListItemSubscription[];
 }
 
@@ -167,6 +177,9 @@ export interface UserDetailResponse {
   recent_transactions: UserTransactionItem[];
   remnawave_id: number | null;
   recurrent_cards?: string[];
+  /** Режим продаж бота; старый бот не присылает — см. `salesModeOf`. */
+  sales_mode?: 'classic' | 'tariffs';
+  multi_tariff_enabled?: boolean;
 }
 
 export interface UserPanelInfo {
@@ -345,6 +358,9 @@ export interface PanelSyncStatusResponse {
   panel_traffic_used_gb: number;
   panel_device_limit: number;
   panel_squads: string[];
+  /** Открыт временный доступ (грейс): панель намеренно держит его настройки. */
+  grace_open?: boolean;
+  grace_until?: string | null;
   has_differences: boolean;
   differences: string[];
 }
@@ -461,31 +477,50 @@ export interface AdminUserGiftsResponse {
   received_total: number;
 }
 
+export interface UsersListParams {
+  is_recurrent?: boolean;
+  offset?: number;
+  limit?: number;
+  search?: string;
+  email?: string;
+  status?: 'active' | 'blocked' | 'deleted';
+  subscription_status?: string;
+  tariff_id?: string;
+  promo_group_id?: number;
+  campaign_id?: number;
+  partner_id?: number;
+  /** Подписка со статусом active истекает в ближайшие N дней (сегмент «истекают»). */
+  expires_within_days?: number;
+  /** Была активность в боте или кабинете за последние N минут. */
+  active_within_minutes?: number;
+  /** Только подключённые к VPN прямо сейчас — по панели (сегмент «онлайн»). */
+  online?: boolean;
+  /** Есть запрет пополнения или покупки. */
+  has_restrictions?: boolean;
+  /** false — ни одной подписки. */
+  has_subscription?: boolean;
+  /** Живая подписка израсходовала от N % лимита (сегмент «трафик на исходе»). */
+  traffic_used_percent_min?: number;
+  /** 0 — ни одной покупки (сегмент «без покупок»). */
+  purchase_count?: number;
+  /** Только с открытым временным доступом (сегмент «в грейсе»). */
+  in_grace?: boolean;
+  sort_by?:
+    | 'created_at'
+    | 'balance'
+    | 'traffic'
+    | 'last_activity'
+    | 'total_spent'
+    | 'purchase_count'
+    | 'subscription_end_date'
+    | 'grace_until';
+  /** Не задано — привычное направление ключа (истечение и грейс с ближайших, остальное с больших). */
+  sort_order?: 'asc' | 'desc';
+}
+
 export const adminUsersApi = {
   // List users
-  getUsers: async (
-    params: {
-      offset?: number;
-      limit?: number;
-      search?: string;
-      email?: string;
-      status?: 'active' | 'blocked' | 'deleted';
-      subscription_status?: string;
-      tariff_id?: string;
-      promo_group_id?: number;
-      campaign_id?: number;
-      partner_id?: number;
-      is_recurrent?: boolean;
-      sort_by?:
-        | 'created_at'
-        | 'balance'
-        | 'traffic'
-        | 'last_activity'
-        | 'total_spent'
-        | 'purchase_count'
-        | 'subscription_end_date';
-    } = {},
-  ): Promise<UsersListResponse> => {
+  getUsers: async (params: UsersListParams = {}): Promise<UsersListResponse> => {
     const response = await apiClient.get('/cabinet/admin/users', { params });
     return response.data;
   },
